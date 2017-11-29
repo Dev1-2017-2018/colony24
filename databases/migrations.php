@@ -8,7 +8,7 @@ $default = [
 	PDO::ATTR_DEFAULT_FETCH_MODE	=> PDO::FETCH_ASSOC
 ];
 
-$pdo = new PDO('mysql:host=DB_HOST;dbname=DB_DBNAME', 'DB_USER', 'DB_PASSWORD', $defaults);
+$pdo = new PDO('mysql:host=DB_HOST;dbname=DB_DBNAME', 'DB_USER', 'DB_PASSWORD', $default);
 
 $users = "
 	CREATE TABLE `users` (

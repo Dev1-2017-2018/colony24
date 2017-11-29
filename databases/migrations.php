@@ -8,7 +8,9 @@ $default = [
 	PDO::ATTR_DEFAULT_FETCH_MODE	=> PDO::FETCH_ASSOC
 ];
 
-$pdo = new PDO('mysql:host=DB_HOST;dbname=DB_DBNAME', 'DB_USER', 'DB_PASSWORD', $defaults);
+$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', '', $default);
+
+print_r($pdo);
 
 $users = "
 	CREATE TABLE `users` (
@@ -26,7 +28,7 @@ $pdo->exec("DROP TABLE IF EXISTS users");
 
 $pdo->exec($users);
 
-$prepare = $pdo->prepare("INSERT INTO `users` (`pseudo`, `password`, `score`, `or`, `argent`) VALUES (?, ?)");
+$prepare = $pdo->prepare("INSERT INTO `users` (`pseudo`, `password`) VALUES (?, ?)");
 
 for($i = 0; $i < 5; $i++) {
 	$prepare->bindValue(1, $faker->name);

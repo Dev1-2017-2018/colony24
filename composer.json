@@ -1,0 +1,16 @@
+{
+    "name": "yannis/colony24",
+    "description": "Colony24",
+    "type": "PHP",
+    "require": {
+        "fzaninotto/faker": "^1.7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yannis",
+            "email": "yannis1403@hotmail.fr"
+        }
+    ],
+    "minimum-stability": "dev"
+}

@@ -8,13 +8,11 @@ $default = [
 	PDO::ATTR_DEFAULT_FETCH_MODE	=> PDO::FETCH_ASSOC
 ];
 
-<<<<<<< HEAD
 $pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', '', $default);
 
 print_r($pdo);
 =======
 $pdo = new PDO('mysql:host=DB_HOST;dbname=DB_DBNAME', 'DB_USER', 'DB_PASSWORD', $default);
->>>>>>> f776ea42359fb64a96c0077a790f0b27756c3c97
 
 $users = "
 	CREATE TABLE `users` (

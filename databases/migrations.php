@@ -8,7 +8,7 @@ $default = [
 	PDO::ATTR_DEFAULT_FETCH_MODE	=> PDO::FETCH_ASSOC
 ];
 
-$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', '', $default);
+$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', 'root', $default);
 
 print_r($pdo);
 
@@ -17,16 +17,26 @@ $users = "
 		`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 		`pseudo` VARCHAR (100) NOT NULL,
 		`password` VARCHAR (100) NOT NULL,
-		`score` BIGINT UNSIGNED NULL DEFAULT 0,
-		`or` BIGINT UNSIGNED NULL DEFAULT 0,
-		`argent` BIGINT UNSIGNED NULL DEFAULT 0,
 		PRIMARY KEY (`id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 ";
 
+$userScore = "
+    CREATE TABLE `user_score` (
+        `user_id`INT UNSIGNED NOT NULL AUTO_INCREMENT,
+      	`score` BIGINT UNSIGNED NULL DEFAULT 0,
+		`gold` BIGINT UNSIGNED NULL DEFAULT 0,
+		`silver` BIGINT UNSIGNED NULL DEFAULT 0,
+		KEY `user_score_user_id_foreign` (`user_id`),
+		CONSTRAINT `user_score_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE 
+    )  ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+";
+
+$pdo->exec("DROP TABLE IF EXISTS user_score");
 $pdo->exec("DROP TABLE IF EXISTS users");
 
 $pdo->exec($users);
+$pdo->exec($userScore);
 
 $prepare = $pdo->prepare("INSERT INTO `users` (`pseudo`, `password`) VALUES (?, ?)");
 
@@ -38,3 +48,5 @@ for($i = 0; $i < 5; $i++) {
 }
 
 $prepare = NULL;
+
+

@@ -1,1 +1,4 @@
-/vendor/
+/vendor/composer
+/vendor/fzaninotto
+/vendor/node_modules
+/vendor/autoload.php

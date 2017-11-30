@@ -11,8 +11,11 @@ $default = [
 $pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', '', $default);
 
 print_r($pdo);
+<<<<<<< HEAD
 =======
 $pdo = new PDO('mysql:host=DB_HOST;dbname=DB_DBNAME', 'DB_USER', 'DB_PASSWORD', $default);
+=======
+>>>>>>> 4393293ca619b3665ba363174cee667005244fa8
 
 $users = "
 	CREATE TABLE `users` (

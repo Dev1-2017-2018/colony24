@@ -1,5 +1,5 @@
 {
-    "name": "yannis/colony24",
+    "name": "DEV1/colony24",
     "description": "Colony24",
     "type": "PHP",
     "require": {
@@ -8,8 +8,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Yannis",
-            "email": "yannis1403@hotmail.fr"
+            "name": "Dev1",
+            "email": "#"
         }
     ],
     "minimum-stability": "dev"

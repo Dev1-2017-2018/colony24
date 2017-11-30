@@ -1,40 +1,32 @@
 <?php
-
 require_once __DIR__.'/../vendor/fzaninotto/faker/src/autoload.php';
 $faker = Faker\Factory::create(); // faker la dépendance sous forme d'un objet PHP
-
 $default = [
 	PDO::ATTR_ERRMODE				=> PDO::ERRMODE_EXCEPTION,
 	PDO::ATTR_DEFAULT_FETCH_MODE	=> PDO::FETCH_ASSOC
 ];
-
 $pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', '', $default);
-
 print_r($pdo);
-
 $users = "
 	CREATE TABLE `users` (
 		`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 		`pseudo` VARCHAR (100) NOT NULL,
+		`email` VARCHAR(100) NOT NULL,
 		`password` VARCHAR (100) NOT NULL,
 		`score` BIGINT UNSIGNED NULL DEFAULT 0,
 		`or` BIGINT UNSIGNED NULL DEFAULT 0,
 		`argent` BIGINT UNSIGNED NULL DEFAULT 0,
+		UNIQUE KEY `users_email_unique` (`email`),
 		PRIMARY KEY (`id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 ";
-
 $pdo->exec("DROP TABLE IF EXISTS users");
-
 $pdo->exec($users);
-
-$prepare = $pdo->prepare("INSERT INTO `users` (`pseudo`, `password`) VALUES (?, ?)");
-
-for($i = 0; $i < 5; $i++) {
+$prepare = $pdo->prepare("INSERT INTO `users` (`pseudo`,`email`, `password`) VALUES (?, ?, ?)");
+for($i = 0; $i < 15; $i++) {
 	$prepare->bindValue(1, $faker->name);
-	$prepare->bindValue(2, 'admin');
-
+	$prepare->bindValue(2, $faker->unique()->email);
+	$prepare->bindValue(3, 'admin');
 	$prepare->execute();
 }
-
 $prepare = NULL;

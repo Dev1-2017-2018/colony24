@@ -1,1 +1,5 @@
-back_controller.php
+<?php 
+
+function main(){
+    include __DIR__ . '/../views/back/main.php';  
+}

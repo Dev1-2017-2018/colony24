@@ -50,13 +50,11 @@ for($i = 0; $i < 5; $i++) {
 $prepareUser = NULL;
 
 
-$prepareUserScore = $pdo->prepare("INSERT INTO `user_score` (`score`, `gold`,`silver`) VALUES (?, ?, ?)");
+$prepareUserScore = $pdo->prepare("INSERT INTO `user_score` (`silver`,`score`) VALUES (?,?)");
 
 for($i = 0; $i < 5; $i++) {
-	$prepareUserScore->bindValue(1, $faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 3000));
+	$prepareUserScore->bindValue(1, 3000);
 	$prepareUserScore->bindValue(2, $faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 3000));
-	$prepareUserScore->bindValue(3, $faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 3000));
-
 	$prepareUserScore->execute();
 }
 

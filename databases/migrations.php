@@ -55,6 +55,7 @@ for($i = 0; $i < 5; $i++) {
     $prepareUserScore->bindValue(1, 3000);
     $prepareUserScore->bindValue(2, $faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 3000));
     $prepareUserScore->execute();
+
 }
 
 $prepareUserScore = NULL;

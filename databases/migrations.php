@@ -8,7 +8,7 @@ $default = [
 	PDO::ATTR_DEFAULT_FETCH_MODE	=> PDO::FETCH_ASSOC
 ];
 
-$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', 'root', $default);
+$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', '', $default);
 
 print_r($pdo);
 
@@ -16,6 +16,7 @@ $users = "
 	CREATE TABLE `users` (
 		`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 		`pseudo` VARCHAR (100) NOT NULL,
+		`email` VARCHAR(100) NOT NULL,
 		`password` VARCHAR (100) NOT NULL,
 		PRIMARY KEY (`id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -38,11 +39,12 @@ $pdo->exec("DROP TABLE IF EXISTS users");
 $pdo->exec($users);
 $pdo->exec($userScore);
 
-$prepareUser = $pdo->prepare("INSERT INTO `users` (`pseudo`, `password`) VALUES (?, ?)");
+$prepareUser = $pdo->prepare("INSERT INTO `users` (`pseudo`,`email`, `password`) VALUES (?,?,?)");
 
 for($i = 0; $i < 5; $i++) {
 	$prepareUser->bindValue(1, $faker->name);
-	$prepareUser->bindValue(2, 'admin');
+	$prepareUser->bindValue(2, $faker->unique()->email);
+	$prepareUser->bindValue(3, 'admin');
 
 	$prepareUser->execute();
 }

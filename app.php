@@ -1,13 +1,20 @@
 <?php
 
+session_start();
+
+define('SALT', 'pU1TIYoa6f3Gmqkg0UviAewPvkCLc9mCxKJsVFUX2cU9CiasvsLei');
+define('TOKEN_TIME', 5);
 define("DB_HOST", "localhost");
 define("DB_USER", "root");
 define("DB_PASSWORD", "");
 define("DB_DBNAME", "colony24"); // A DEFINIR
 
+require __DIR__.'/library/helpers.php';
+require __DIR__.'/model/add_user_model.php';
+require __DIR__.'/model/user_score_model.php';
+require __DIR__.'/controllers/front_controller.php';
+require __DIR__ .'/controllers/back_controller.php';
+
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-# autoloader
-require_once __DIR__ . '/library/helpers.php';
-require_once __DIR__ . '/controllers/back_controller.php';
-require_once __DIR__ . '/model/user_score_model.php';
+$method = $_SERVER['REQUEST_METHOD'];

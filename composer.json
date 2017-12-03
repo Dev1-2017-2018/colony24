@@ -6,11 +6,5 @@
         "fzaninotto/faker": "^1.7"
     },
     "license": "MIT",
-    // "authors": [
-    //     {
-    //         "name": "Dev1",
-    //         "email": "#"
-    //     }
-    // ],
     "minimum-stability": "dev"
 }

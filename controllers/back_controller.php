@@ -2,7 +2,6 @@
 
 function score ()
 {
-
     #Pagination
     $nbDep = getIdScore();
 
@@ -22,5 +21,9 @@ function score ()
 
     $datas = getUserScore(( $cPage - 1 ) * $perPage, $perPage);
     include __DIR__ . '/../views/back/score.php';
+}
 
+function main ()
+{
+    include __DIR__ . '/../views/back/main.php';
 }

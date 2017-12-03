@@ -16,3 +16,56 @@ function getPDO ()
     return $pdo;
 
 }
+
+function getFlashMessage(){
+
+    if( !isset($_SESSION) )
+    {
+    
+        throw new Exception("Attention getFlashMessage les sessions ne sont pas activées");
+    
+    }
+
+    if(!empty($_SESSION['flash']) )
+    {
+        
+        $message = sprintf('<div class="%s"><strong>%s</strong></div>',
+            $_SESSION['flash']['type'],
+            $_SESSION['flash']['message']
+        );
+            
+            
+        unset($_SESSION['flash']);
+        
+        return $message ;
+    
+    }
+
+}
+
+
+function setFlashMessage($message, $type = 'success'){
+
+    if( !isset($_SESSION) )
+    {
+        throw new Exception("Attention getFlashMessage les sessions ne sont pas activées");
+    }
+    
+    $_SESSION['flash'] = [
+    
+        'message' => $message,
+        'type' => $type
+    ];
+
+}
+
+
+function hasFlashMessage(){
+
+
+    if( isset($_SESSION['flash']) ) return true;
+    
+    
+    return false;
+
+}

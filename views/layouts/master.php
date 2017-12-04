@@ -4,10 +4,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width-device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie-edge">
-	<link rel="stylesheet" type="text/css" href="assets/css/knacss.min.css">
-	<title>Sheep</title>
+	<title>Colony 24</title>
 </head>
 <body>
-	<?php echo $content; ?>
+    <?php echo $content; ?>
+    <script src = "js/bundle.js"></script>
 </body>
 </html>

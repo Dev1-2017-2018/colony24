@@ -1,21 +1,22 @@
 <?php
 
-require_once __DIR__.'/../vendor/fzaninotto/faker/src/autoload.php';
-$faker = Faker\Factory::create(); // faker la dépendance sous forme d'un objet PHP
+require_once __DIR__ . '/../vendor/fzaninotto/faker/src/autoload.php';
+$faker = Faker\Factory::create (); // faker la dépendance sous forme d'un objet PHP
 
 $default = [
-	PDO::ATTR_ERRMODE				=> PDO::ERRMODE_EXCEPTION,
-	PDO::ATTR_DEFAULT_FETCH_MODE	=> PDO::FETCH_ASSOC
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ];
 
-$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', 'root', $default);
+$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', '', $default);
 
-print_r($pdo);
+print_r ($pdo);
 
 $users = "
 	CREATE TABLE `users` (
 		`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 		`pseudo` VARCHAR (100) NOT NULL,
+		`email` VARCHAR(100) NOT NULL,
 		`password` VARCHAR (100) NOT NULL,
 		PRIMARY KEY (`id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -32,29 +33,30 @@ $userScore = "
     )  ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 ";
 
-$pdo->exec("DROP TABLE IF EXISTS user_score");
-$pdo->exec("DROP TABLE IF EXISTS users");
+$pdo->exec ("DROP TABLE IF EXISTS user_score");
+$pdo->exec ("DROP TABLE IF EXISTS users");
 
-$pdo->exec($users);
-$pdo->exec($userScore);
+$pdo->exec ($users);
+$pdo->exec ($userScore);
 
-$prepareUser = $pdo->prepare("INSERT INTO `users` (`pseudo`, `password`) VALUES (?, ?)");
+$prepareUser = $pdo->prepare("INSERT INTO `users` (`pseudo`,`email`, `password`) VALUES (?,?,?)");
 
 for($i = 0; $i < 5; $i++) {
 	$prepareUser->bindValue(1, $faker->name);
-	$prepareUser->bindValue(2, 'admin');
+	$prepareUser->bindValue(2, $faker->unique()->email);
+	$prepareUser->bindValue(3, 'admin');
 
-	$prepareUser->execute();
+    $prepareUser->execute ();
 }
 
 $prepareUser = NULL;
 
-$prepareUserScore = $pdo->prepare("INSERT INTO `user_score` (`silver`,`score`) VALUES (?,?)");
+$prepareUserScore = $pdo->prepare ("INSERT INTO `user_score` (`silver`,`score`) VALUES (?,?)");
 
-for($i = 0; $i < 5; $i++) {
-    $prepareUserScore->bindValue(1, 3000);
-    $prepareUserScore->bindValue(2, $faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 3000));
-    $prepareUserScore->execute();
+for ( $i = 0; $i < 5; $i++ ) {
+    $prepareUserScore->bindValue (1, 3000);
+    $prepareUserScore->bindValue (2, $faker->randomFloat ($nbMaxDecimals = NULL, $min = 0, $max = 3000));
+    $prepareUserScore->execute ();
 
 }
 

@@ -42,33 +42,36 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _logger = __webpack_require__(1);
-
-	var _logger2 = _interopRequireDefault(_logger);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	document.write('Welcome to my application.');
-	(0, _logger2.default)(); // yes
-	console.log('app loaded');
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports) {
 
-	'use strict';
+	"use strict";
 
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
+	// Gestion de la position du bateau
+	// Position de départ à changer selon vos envies
+	var positionY = 0;
+	var positionX = 0;
+	var boat = [positionY, positionX];
+	console.log("Votre bateau est en " + boat[positionY] + " - " + boat[positionX]);
 
-	exports.default = function () {
-		console.log('logger.js is RUNNING!!');
-	};
+	// Function de déplacement en rentrant les Coordonnées
+	function movement(positionY, positionX) {
+		if (positionY >= 0 && positionX >= 0 && positionY <= 9 && positionX <= 9) {
+			// Ici, I correspond à une île, à modifier selon la vraie map
+			if (map[positionY][positionX] != "I") {
+				// Modification de la position du bateau
+				boat[0] = positionY;
+				boat[1] = positionX;
+				console.log("Votre bateau est maintenant en " + boat[0] + " - " + boat[1]);
+				goldMining();
+			} else {
+				console.log("Colision avec une île");
+			}
+		} else {
+			// Empêche de sortir de la map - ici défini en 10x10
+			console.log("Votre bateau ne peut s'aventurer aussi loin");
+		}
+		// displayMap(map);
+	}
 
 /***/ })
 /******/ ]);

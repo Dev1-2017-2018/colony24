@@ -27,12 +27,14 @@ export default class Game
             }
         }
 
+        // Creation de main Harbor
+        this.mainHarbor = {};
+
         // Creation du shop
+        this.mainHarbor.shop = {};
 
-        this.shop = {};
-
-        for (let i = 0; i < 5; i++){
-            this.shop[`button ${i}`] = new Shop(i);
+        for (let i = 0; i < 1; i++){
+            this.mainHarbor.shop[`button ${i}`] = new Shop(i);
         }
 
 		//this.inventory = new Inventory();
@@ -45,7 +47,9 @@ export default class Game
 
         this.setShopParent(this);
 
-        this.boats["Bateau"].movement(this.map.map, 1, 1);
+        console.log(this.mainHarbor);
+
+        this.boats.Bateau.movement(this.map.map, 1, 1);
 	}
 
 	// crée une référence au parent dans tous les enfants de bateau
@@ -70,14 +74,18 @@ export default class Game
     }
 
     setShopParent(o){
-        if (o.shop != undefined){
+        if (o.mainHarbor.shop != undefined){
 
             let n = null;
-            for(n in o.shop){
+            for(n in o.mainHarbor.shop){
                 console.log(n);
-                o.shop[n].parent = o;
-                this.setBoatParent(o.shop[n]);
+                o.mainHarbor.shop[n].parent = o;
+                this.setBoatParent(o.mainHarbor.shop[n]);
             }
         }
+    }
+
+    setBoatMovement(){
+
     }
 }

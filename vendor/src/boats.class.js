@@ -1,6 +1,6 @@
 export default class Boats
 {
-  constructor(boat = {name: "Bateau", blindage: 50, capacite: 50, poids: 10, stockage: 0, x: 0, y: 0})
+  constructor(boat = {name: "bateau", structure: 100, blindage: 50, capacite: 50, poids: 10, stockage: 0, x: 0, y: 0})
   {
       // Boats
       let property = null;

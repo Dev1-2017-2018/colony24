@@ -6,7 +6,7 @@ export default class BuyBoat extends Shop
     {
         super(id);
         this.id = id;
-        this.$el = $("ul");
+        this.$el = $("ul#shop");
 
         this.create_button();
 

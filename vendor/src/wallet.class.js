@@ -1,4 +1,5 @@
-class Wallet
+
+export default class Wallet
 {
     constructor(gold, ecu)
     {

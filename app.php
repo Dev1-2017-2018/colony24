@@ -12,6 +12,9 @@ define("DB_DBNAME", "colony24"); // A DEFINIR
 require __DIR__ . '/library/helpers.php';
 require __DIR__ . '/model/add_user_model.php';
 require __DIR__ . '/model/user_score_model.php';
+require __DIR__ . '/model/create_folder_model.php';
+require __DIR__ . '/model/send_json_model.php';
+require __DIR__ . '/model/update_json_model.php';
 require __DIR__ . '/controllers/front_controller.php';
 require __DIR__ . '/controllers/back_controller.php';
 

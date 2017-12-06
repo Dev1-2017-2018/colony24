@@ -61,47 +61,14 @@
 	$(function () {
 	    var colony24 = void 0;
 
-	    //JSON TABLE A MODIF
-	    var config = {
-	        "boats": {
-	            "Sous_marin": {
-	                "name": "Sous_marin",
-	                "structure": 100, //Structure (Sante du Bateau)
-	                "blindage": 50, //Blindage (Bouclier)
-	                "capacite": 50, //Capacite (Nb Equipements Embarquables)
-	                "poids": 10, //Poids (Poids du bataeau et equipement)
-	                "stockage": 0,
-	                "x": 0,
-	                "y": 0
-	            },
+	    // ajaxSetup est la propriété ajax de jQuery, la propriéré async permet de préciser si l'on veut
+	    // que les requêtes HTTP style post ou get soient synchrones ou asynchrones
+	    // ici je désactive l'asynchrone ceci est nécessaire puisque l'éxecution de mon script doit se faire
+	    // dans un certain ordre
 
-	            "Plateforme": {
-	                "name": "Plateforme",
-	                "structure": 100, //Structure (Sante du Bateau)
-	                "blindage": 50, //Blindage (Bouclier)
-	                "capacite": 50, //Capacite (Nb Equipements Embarquables)
-	                "poids": 10, //Poids (Poids du bataeau et equipement)
-	                "stockage": 0,
-	                "x": 0,
-	                "y": 0
-	            },
-	            "Bateau": {
-	                "name": "Bateau",
-	                "structure": 100, //Structure (Sante du Bateau)
-	                "blindage": 50, //Blindage (Bouclier)
-	                "capacite": 50, //Capacite (Nb Equipements Embarquables)
-	                "poids": 10, //Poids (Poids du bataeau et equipement)
-	                "stockage": 0,
-	                "x": 0,
-	                "y": 0
-	            }
-	        },
+	    // Initialisation du jeu
 
-	        "gold": 100,
-	        "ecu": 300
-	    };
-
-	    colony24 = new _game2.default(config);
+	    colony24 = new _game2.default(userData);
 	});
 	console.log('app loaded');
 
@@ -155,11 +122,13 @@
 	    function Game(config) {
 	        _classCallCheck(this, Game);
 
+	        this.name = config.name;
+
 	        // Launch map
 	        this.map = new _map2.default();
 
 	        // Creation de la wallet
-	        this.wallet = new _wallet2.default(config.gold, config.ecu);
+	        this.wallet = new _wallet2.default(Number(config.wallet.gold), Number(config.wallet.ecu));
 
 	        // Creation des bateaux
 	        this.boats = {};
@@ -192,9 +161,11 @@
 
 	        this.setShopParent(this);
 
-	        console.log(this.mainHarbor);
-
 	        this.boats.Bateau.movement(this.map.map, 1, 1);
+
+	        this.saveDataJson(this);
+
+	        console.log(this);
 	    }
 
 	    // crée une référence au parent dans tous les enfants de bateau
@@ -207,7 +178,7 @@
 
 	                var n = null;
 	                for (n in o.boats) {
-	                    console.log(n);
+
 	                    o.boats[n].parent = o;
 	                    this.setBoatParent(o.boats[n]);
 	                }
@@ -224,6 +195,9 @@
 	                o.wallet.parent = o;
 	            }
 	        }
+
+	        // crée une référence au parent dans tous les enfants de shop
+
 	    }, {
 	        key: 'setShopParent',
 	        value: function setShopParent(o) {
@@ -231,15 +205,65 @@
 
 	                var n = null;
 	                for (n in o.mainHarbor.shop) {
-	                    console.log(n);
+
 	                    o.mainHarbor.shop[n].parent = o;
 	                    this.setBoatParent(o.mainHarbor.shop[n]);
 	                }
 	            }
 	        }
+
+	        // fonction pour sauvegarder l'objet du joueur dans son json aproprié
+
 	    }, {
-	        key: 'setBoatMovement',
-	        value: function setBoatMovement() {}
+	        key: 'saveDataJson',
+	        value: function saveDataJson(o) {
+
+	            // premièrement dans cette fonction on va devoir enlever toutes les références au parent dans les enfants
+	            // donc on fait la même chose que dans les setParent, sauf qu'on delete les propriétés au lieu de les crées
+
+	            if (o.boats != undefined) {
+
+	                var n = null;
+	                for (n in o.boats) {
+
+	                    delete o.boats[n].parent;
+	                    delete o.boats[n].$el;
+	                }
+	            }
+	            if (o.wallet != undefined) {
+
+	                delete o.wallet.parent;
+	            }
+	            if (o.mainHarbor.shop != undefined) {
+
+	                var _n = null;
+	                for (_n in o.mainHarbor.shop) {
+
+	                    delete o.mainHarbor.shop[_n].parent;
+	                    delete o.mainHarbor.shop[_n].$el;
+	                }
+	            }
+
+	            // ensuite on peut lancer la requete du fichier update_json_model.php
+
+	            $.ajaxSetup({
+	                async: false
+	            });
+
+	            $.post('', {
+	                player: o
+	            });
+
+	            $.ajaxSetup({
+	                async: true
+	            });
+
+	            this.setBoatParent(this);
+
+	            this.setWalletParent(this);
+
+	            this.setShopParent(this);
+	        }
 	    }]);
 
 	    return Game;
@@ -361,11 +385,18 @@
 
 	        _classCallCheck(this, Boats);
 
-	        // Boats
+	        // Boats ici on crée automatiquement les propriétés de notre objet bateau et on vérifie si le type
+	        // des propriétés doit être un number ou non
 	        var property = null;
 	        for (property in boat) {
 	            if (boat.hasOwnProperty(property)) {
-	                this[property] = boat[property];
+	                if (!Number.isNaN(Number(boat[property]))) {
+
+	                    this[property] = Number(boat[property]);
+	                } else {
+
+	                    this[property] = boat[property];
+	                }
 	            }
 	        }
 	    }
@@ -441,6 +472,7 @@
 	        _classCallCheck(this, Map);
 
 	        this.map = [["_", "_", "_", "_", "_", "_", "_", "_", "_", "_"], ["_", "G", "_", "_", "G", "_", "_", "_", "_", "_"], ["_", "_", "_", "I", "_", "_", "_", "_", "I", "_"], ["_", "_", "_", "_", "_", "_", "_", "G", "_", "_"], ["_", "_", "I", "_", "_", "_", "_", "_", "_", "_"], ["_", "_", "_", "_", "_", "_", "_", "I", "_", "_"], ["I", "_", "_", "_", "_", "_", "_", "_", "_", "G"], ["_", "G", "_", "G", "_", "I", "_", "_", "_", "I"], ["_", "_", "_", "_", "_", "_", "_", "G", "_", "_"], ["_", "_", "I", "_", "_", "_", "_", "_", "I", "_"]];
+
 	        this.displayMap(this.map);
 	    }
 
@@ -585,7 +617,7 @@
 
 	                parent.wallet.ecu -= 100;
 
-	                console.log(parent);
+	                parent.saveDataJson(parent);
 	            }
 	        }
 	    }]);

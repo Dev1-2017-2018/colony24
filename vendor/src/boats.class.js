@@ -2,11 +2,19 @@ export default class Boats
 {
   constructor(boat = {name: "bateau", structure: 100, blindage: 50, capacite: 50, poids: 10, stockage: 0, x: 0, y: 0})
   {
-      // Boats
+      // Boats ici on crée automatiquement les propriétés de notre objet bateau et on vérifie si le type
+      // des propriétés doit être un number ou non
       let property = null;
       for (property in boat) {
           if (boat.hasOwnProperty(property)) {
-              this[property] = boat[property];
+              if ( !Number.isNaN( Number( boat[property] ) ) ){
+
+                  this[property] = Number(boat[property]);
+
+              } else {
+
+                  this[property] = boat[property];
+              }
           }
       }
   }

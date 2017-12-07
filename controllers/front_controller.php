@@ -19,14 +19,19 @@ function add_user(){
 			$emailIns = htmlspecialchars($_POST['email']);
 
 			$prepare = $pdo->prepare("INSERT INTO `users` (`pseudo`, `password`, `email`) VALUES (?,?,?) ;");
-
 	        $prepare->bindValue(1, $pseudo);
 	        $prepare->bindValue(2, $password);
 	        $prepare->bindValue(3, $emailIns);
 
 	        $prepare->execute();
+            create_folder(htmlspecialchars($_POST['pseudo']));
 
-	        create_folder(htmlspecialchars($_POST['pseudo']));
+            $prepare_score = $pdo->prepare("INSERT INTO `user_score` (`score`, `gold`,`silver`) VALUES (?,?,?)");
+            $prepare_score->bindValue(1, 0);
+            $prepare_score->bindValue(2, 0);
+            $prepare_score->bindValue(3, 300);
+
+            $prepare_score->execute();
 
 	        header('Location: /');
 	        exit;

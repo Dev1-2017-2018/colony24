@@ -20,7 +20,9 @@ export default class Shop
 
         } else {
 
-            parent.boats[`bateau${data.id}`] = new data.class;
+            parent.boats[parent.id] = new data.class();
+            parent.boats[parent.id].id = parent.id;
+            parent.id++;
 
             parent.wallet.ecu -= 100;
 

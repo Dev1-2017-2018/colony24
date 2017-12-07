@@ -13,7 +13,7 @@ export default class Game
 	    this.name = config.name;
 
         // Launch map
-	    this.map = new Map();
+	    this.map = new Map(1000);
 
 		// Creation de la wallet
 		this.wallet = new Wallet(Number(config.wallet.gold), Number(config.wallet.ecu));
@@ -49,7 +49,7 @@ export default class Game
 
         this.setShopParent(this);
 
-        this.boats.Bateau.movement(this.map.map, 1, 1);
+        // this.boats.Bateau.movement(this.map.map, 1, 1);
 
         this.saveDataJson(this);
 

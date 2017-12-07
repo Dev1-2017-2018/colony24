@@ -17,25 +17,26 @@ export default class Boats
               }
           }
       }
+
   }
 
-  movement(map, positionY, positionX) {
-    if(positionY >= 0 && positionX >= 0 && positionY <= 9 && positionX <= 9) {
-        // Ici, I correspond à une île, à modifier selon la vraie map
-        if (map[positionY][positionX]  != "I") {
-            // Modification de la position du bateau
-            this.y = positionY;
-            this.x = positionX;
-            console.log("Votre bateau est maintenant en " + this.y + " - " + this.x);
-            this.goldMining(map);
-        }else{
-            console.log("Colision avec une île");
-        }
-        }else{
-          // Empêche de sortir de la map - ici défini en 10x10
-          console.log("Votre bateau ne peut s'aventurer aussi loin");
-        }
-    }
+//   movement(map, positionY, positionX) {
+//     if(positionY >= 0 && positionX >= 0 && positionY <= 9 && positionX <= 9) {
+//         // Ici, I correspond à une île, à modifier selon la vraie map
+//         if (map[positionY][positionX]  != "I") {
+//             // Modification de la position du bateau
+//             this.y = positionY;
+//             this.x = positionX;
+//             console.log("Votre bateau est maintenant en " + this.y + " - " + this.x);
+//             this.goldMining(map);
+//         }else{
+//             console.log("Colision avec une île");
+//         }
+//         }else{
+//           // Empêche de sortir de la map - ici défini en 10x10
+//           console.log("Votre bateau ne peut s'aventurer aussi loin");
+//         }
+//     }
 
     goldMining(map){
         // Ici, G correspond à de l'or, à modifier selon la vraie map

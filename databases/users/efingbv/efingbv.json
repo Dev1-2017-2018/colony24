@@ -126,8 +126,8 @@
     },
     "wallet": {
         "goldValue": "1.2",
-        "gold": "106",
-        "ecu": "100"
+        "gold": "102",
+        "ecu": "0"
     },
     "boats": {
         "Bateau": {

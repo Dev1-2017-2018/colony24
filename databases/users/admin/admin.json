@@ -1,0 +1,31 @@
+{
+    "name": "admin",
+    "map": {
+        "sizeMapY": "708",
+        "sizeMapX": "1440",
+        "sizeTotal": "2148"
+    },
+    "wallet": {
+        "goldValue": "1.2",
+        "gold": "108",
+        "ecu": "300"
+    },
+    "boats": {
+        "Bateau": {
+            "name": "Bateau",
+            "structure": "100",
+            "blindage": "50",
+            "capacite": "50",
+            "stockage": "1",
+            "x": "1",
+            "y": "1"
+        }
+    },
+    "mainHarbor": {
+        "shop": {
+            "button 0": {
+                "id": "0"
+            }
+        }
+    }
+}

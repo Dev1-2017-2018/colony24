@@ -32,7 +32,6 @@ export default class Map {
         let ilePosition = [];
 
         function drawWater(Map, i, j) {
-            console.log(Map);
             Map.zonesWater.push(new Water(j, i, 50, 50));
             let draw = paper.path("M" + j + "," + i + "  l50,0  0,50  -50,0  0,-50");
             draw.attr({

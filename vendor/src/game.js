@@ -52,7 +52,6 @@ export default class Game
         // this.boats.Bateau.movement(this.map.map, 1, 1);
 
         this.saveDataJson(this);
-
         console.log(this);
 	}
 

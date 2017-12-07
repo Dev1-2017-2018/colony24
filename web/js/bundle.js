@@ -61,11 +61,6 @@
 	$(function () {
 	    var colony24 = void 0;
 
-	    // ajaxSetup est la propriété ajax de jQuery, la propriéré async permet de préciser si l'on veut
-	    // que les requêtes HTTP style post ou get soient synchrones ou asynchrones
-	    // ici je désactive l'asynchrone ceci est nécessaire puisque l'éxecution de mon script doit se faire
-	    // dans un certain ordre
-
 	    // Initialisation du jeu
 
 	    colony24 = new _game2.default(userData);
@@ -168,7 +163,6 @@
 	        // this.boats.Bateau.movement(this.map.map, 1, 1);
 
 	        this.saveDataJson(this);
-
 	        console.log(this);
 	    }
 
@@ -327,10 +321,8 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-								value: true
+		value: true
 	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _boats = __webpack_require__(5);
 
@@ -345,26 +337,15 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Boat = function (_Boats) {
-								_inherits(Boat, _Boats);
+		_inherits(Boat, _Boats);
 
-								function Boat(boat) {
-															_classCallCheck(this, Boat);
+		function Boat(boat) {
+			_classCallCheck(this, Boat);
 
-															var _this = _possibleConstructorReturn(this, (Boat.__proto__ || Object.getPrototypeOf(Boat)).call(this, boat));
+			return _possibleConstructorReturn(this, (Boat.__proto__ || Object.getPrototypeOf(Boat)).call(this, boat));
+		}
 
-															_this.$el = $('ul#boats');
-															_this.render_boats();
-															return _this;
-								}
-
-								_createClass(Boat, [{
-															key: 'render_boats',
-															value: function render_boats() {
-																						this.$el.append('<input type=\'button\' value="' + this.name + '"/>');
-															}
-								}]);
-
-								return Boat;
+		return Boat;
 	}(_boats2.default);
 
 	exports.default = Boat;

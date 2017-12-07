@@ -9,7 +9,7 @@ function add_user(){
 	$pdo = getPDO();
 	$email = checkEmail();
 
-	if (!empty($_POST) && empty($email) == false) {	
+	if (!empty($_POST) && empty($email) == false) {
 		echo "Votre email est invalide";
 	}elseif(!empty($_POST) && empty($email) == true){
 		if( !empty($_POST) && $_POST['password'] == $_POST['passcheck']) {
@@ -19,12 +19,14 @@ function add_user(){
 			$emailIns = htmlspecialchars($_POST['email']);
 
 			$prepare = $pdo->prepare("INSERT INTO `users` (`pseudo`, `password`, `email`) VALUES (?,?,?) ;");
-	    
+
 	        $prepare->bindValue(1, $pseudo);
 	        $prepare->bindValue(2, $password);
 	        $prepare->bindValue(3, $emailIns);
 
 	        $prepare->execute();
+
+	        create_folder(htmlspecialchars($_POST['pseudo']));
 
 	        header('Location: /');
 	        exit;
@@ -83,7 +85,7 @@ function auth(){
     
     $sanitize = filter_input_array(INPUT_POST, $rules);
     
-    $prepare = $pdo->prepare('SELECT id, password FROM users WHERE email = ?');
+    $prepare = $pdo->prepare('SELECT id, pseudo, password FROM users WHERE email = ?');
     
     $prepare->bindValue(1,$sanitize['email']);
 
@@ -97,6 +99,8 @@ function auth(){
         session_regenerate_id(true); 
     
     	$_SESSION['auth'] = $stmt['id'];
+
+    	$_SESSION['user'] = $stmt['pseudo'];
         
         // redirection vers la page d'administration sécuriser cette page 
         

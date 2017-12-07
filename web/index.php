@@ -2,7 +2,6 @@
 
 require_once __DIR__ . "/../app.php";
 if ( $uri == '/' ) {
-
     index();
 
 }elseif ( $uri === '/add_user' ) {
@@ -20,6 +19,7 @@ if ( $uri == '/' ) {
         header('Location: /');
         exit;
     }
+
 
     main();
 

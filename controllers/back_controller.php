@@ -25,5 +25,5 @@ function score ()
 
 function main ()
 {
-    include __DIR__ . '/../views/back/main.php';
+    include __DIR__ . '/../views/front/game.php';
 }

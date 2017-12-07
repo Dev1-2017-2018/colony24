@@ -1,5 +1,20 @@
 import logger from './logger';
 
-document.write('Welcome to my application.');
+import Game from './game.js';
+
 logger(); // yes
-console.log('app loaded');
+
+$(function () {
+    let colony24;
+
+    // ajaxSetup est la propriété ajax de jQuery, la propriéré async permet de préciser si l'on veut
+    // que les requêtes HTTP style post ou get soient synchrones ou asynchrones
+    // ici je désactive l'asynchrone ceci est nécessaire puisque l'éxecution de mon script doit se faire
+    // dans un certain ordre
+
+    // Initialisation du jeu
+
+    colony24 = new Game(userData);
+
+})
+console.log( 'app loaded' );

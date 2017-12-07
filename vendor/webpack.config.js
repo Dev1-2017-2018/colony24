@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./src/movement.js",
+  entry: "./src/app.js",
   output: {
   	path: "./../web/js",
   	publicPath: './../web/js',

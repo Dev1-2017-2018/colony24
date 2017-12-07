@@ -15,6 +15,7 @@ export default class Map
             ["_", "_", "_", "_", "_", "_", "_", "G", "_", "_"],
             ["_", "_", "I", "_", "_", "_", "_", "_", "I", "_"]
         ];
+
         this.displayMap(this.map);
     }
 

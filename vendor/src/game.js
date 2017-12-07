@@ -2,7 +2,7 @@ import Wallet from './wallet.class';
 
 import Boat from './boat.class';
 
-import Map from './map.class'
+import Map from './map.class';
 
 import Shop from './boat.shop.class';
 

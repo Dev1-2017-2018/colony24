@@ -20,6 +20,7 @@ if ( $uri == '/' ) {
         exit;
     }
 
+
     main();
 
 }elseif ( $uri == '/score' ) {

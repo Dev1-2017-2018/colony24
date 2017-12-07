@@ -2,54 +2,19 @@ import logger from './logger';
 
 import Game from './game.js';
 
-
 logger(); // yes
 
 $(function () {
     let colony24;
 
-    //JSON TABLE A MODIF
-    let config =
-        {
-            "boats": {
-                "Sous_marin": {
-                    "name": "Sous_marin",
-                    "structure": 100,//Structure (Sante du Bateau)
-                    "blindage": 50,//Blindage (Bouclier)
-                    "capacite": 50,//Capacite (Nb Equipements Embarquables)
-                    "poids": 10,//Poids (Poids du bataeau et equipement)
-                    "stockage": 0,
-                    "x": 0,
-                    "y": 0
-                },
+    // ajaxSetup est la propriété ajax de jQuery, la propriéré async permet de préciser si l'on veut
+    // que les requêtes HTTP style post ou get soient synchrones ou asynchrones
+    // ici je désactive l'asynchrone ceci est nécessaire puisque l'éxecution de mon script doit se faire
+    // dans un certain ordre
 
-                "Plateforme": {
-                    "name": "Plateforme",
-                    "structure": 100,//Structure (Sante du Bateau)
-                    "blindage": 50,//Blindage (Bouclier)
-                    "capacite": 50,//Capacite (Nb Equipements Embarquables)
-                    "poids": 10,//Poids (Poids du bataeau et equipement)
-                    "stockage": 0,
-                    "x": 0,
-                    "y": 0
-                },
-                "Bateau": {
-                    "name": "Bateau",
-                    "structure": 100,//Structure (Sante du Bateau)
-                    "blindage": 50,//Blindage (Bouclier)
-                    "capacite": 50,//Capacite (Nb Equipements Embarquables)
-                    "poids": 10,//Poids (Poids du bataeau et equipement)
-                    "stockage": 0,
-                    "x": 0,
-                    "y": 0
-                }
-            },
+    // Initialisation du jeu
 
-            "gold" : 100,
-            "ecu" : 300
-        };
-
-    colony24 = new Game(config);
+    colony24 = new Game(userData);
 
 })
 console.log( 'app loaded' );

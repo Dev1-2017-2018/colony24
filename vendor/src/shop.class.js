@@ -24,7 +24,8 @@ export default class Shop
 
             parent.wallet.ecu -= 100;
 
-            console.log(parent);
+            parent.saveDataJson(parent);
+
         }
 
     }

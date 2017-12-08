@@ -1,4 +1,4 @@
-import Boats from './boats.class'
+import Boats from './boats.class';
 
 export default class Boat extends Boats {
 	constructor(boat, id) {
@@ -11,6 +11,8 @@ export default class Boat extends Boats {
         $(`li#li${id}`).on('click', `input[type='button']`, { that: this}, function (e) {
 
             let context = e.data.that;
+
+            console.log(context);
 
             let inputX = $(`#li${context.id} > div > input:nth-child(2)`).val();
             let inputY = $(`#li${context.id} > div > input:nth-child(3)`).val();

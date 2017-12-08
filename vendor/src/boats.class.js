@@ -54,7 +54,6 @@ export default class Boats
             if(this.stockage <= 2){
                 this.stockage++;
                 console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
-                console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
                 if(this.stockage == 2) {
                     this.returnHome();
                 }
@@ -67,8 +66,9 @@ export default class Boats
     returnHome(){
         this.y = 0;
         this.x = 0;
-        console.log("Votre bateau est retourner à Main Harbor ");
+        console.log("Votre bateau est retourner à Main Harbor pour vider son stockage ");
         this.parent.wallet.gold += this.stockage;
+        console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
         this.stockage = 0;
         this.parent.saveDataJson(this.parent);
     }

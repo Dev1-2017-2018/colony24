@@ -23,7 +23,10 @@ function score ()
     include __DIR__ . '/../views/back/score.php';
 }
 
+
 function main ()
 {
+    $datas = getShop();
+
     include __DIR__ . '/../views/front/game.php';
 }

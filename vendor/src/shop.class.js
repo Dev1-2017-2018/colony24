@@ -25,8 +25,6 @@ export default class Shop
                 }
             }
         });
-            parent.boats[parent.id] = new data.class(undefined, parent.id);
-            parent.id++;
 
     }
     create_button(){

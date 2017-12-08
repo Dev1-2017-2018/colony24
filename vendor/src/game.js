@@ -36,8 +36,6 @@ export default class Game
         // Creation de main Harbor
         this.mainHarbor = {};
 
-
-
         // Creation du shop
         this.mainHarbor.shop = {};
 

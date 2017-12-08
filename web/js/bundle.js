@@ -88,7 +88,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	        value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -114,154 +114,154 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Game = function () {
-	    function Game(config) {
-	        _classCallCheck(this, Game);
+	        function Game(config) {
+	                _classCallCheck(this, Game);
 
-	        this.name = config.name;
+	                this.name = config.name;
 
-	        // Launch map
-	        this.map = new _map2.default();
+	                // Launch map
+	                this.map = new _map2.default();
 
-	        // Creation de la wallet
-	        this.wallet = new _wallet2.default(Number(config.wallet.gold), Number(config.wallet.ecu));
+	                // Creation de la wallet
+	                this.wallet = new _wallet2.default(Number(config.wallet.gold), Number(config.wallet.ecu));
 
-	        // Creation des bateaux
-	        this.boats = {};
+	                // Creation des bateaux
+	                this.boats = {};
 
-	        var boat = null;
+	                var boat = null;
 
-	        this.id = 0;
+	                this.id = 0;
 
-	        for (boat in config.boats) {
-	            if (config.boats.hasOwnProperty(boat)) {
-	                this.boats[this.id] = new _boat2.default(config.boats[boat], this.id);
-	                this.id = this.boats[this.id].id;
-	                this.id++;
-	            }
-	        }
-
-	        // Creation de main Harbor
-	        this.mainHarbor = {};
-
-	        // Creation du shop
-	        this.mainHarbor.shop = {};
-
-	        for (var i = 0; i < 1; i++) {
-	            this.mainHarbor.shop['button ' + i] = new _boatShop2.default(this.id);
-	        }
-
-	        //this.inventory = new Inventory();
-
-	        // Creation des références au parent dans les enfants
-
-	        this.setBoatParent(this);
-
-	        this.setWalletParent(this);
-
-	        this.setShopParent(this);
-
-	        this.saveDataJson(this);
-	    }
-
-	    // crée une référence au parent dans tous les enfants de bateau
-
-
-	    _createClass(Game, [{
-	        key: 'setBoatParent',
-	        value: function setBoatParent(o) {
-	            if (o.boats != undefined) {
-
-	                var n = null;
-	                for (n in o.boats) {
-
-	                    o.boats[n].parent = o;
-	                    this.setBoatParent(o.boats[n]);
+	                for (boat in config.boats) {
+	                        if (config.boats.hasOwnProperty(boat)) {
+	                                this.boats[this.id] = new _boat2.default(config.boats[boat], this.id);
+	                                this.id = this.boats[this.id].id;
+	                                this.id++;
+	                        }
 	                }
-	            }
-	        }
 
-	        // crée une référence au parent dans tous les enfants de wallet
+	                // Creation de main Harbor
+	                this.mainHarbor = {};
 
-	    }, {
-	        key: 'setWalletParent',
-	        value: function setWalletParent(o) {
-	            if (o.wallet != undefined) {
+	                // Creation du shop
+	                this.mainHarbor.shop = {};
 
-	                o.wallet.parent = o;
-	            }
-	        }
-
-	        // crée une référence au parent dans tous les enfants de shop
-
-	    }, {
-	        key: 'setShopParent',
-	        value: function setShopParent(o) {
-	            if (o.mainHarbor.shop != undefined) {
-
-	                var n = null;
-	                for (n in o.mainHarbor.shop) {
-
-	                    o.mainHarbor.shop[n].parent = o;
-	                    this.setBoatParent(o.mainHarbor.shop[n]);
+	                for (var i = 0; i < 1; i++) {
+	                        this.mainHarbor.shop['button ' + i] = new _boatShop2.default(this.id);
 	                }
-	            }
+
+	                //this.inventory = new Inventory();
+
+	                // Creation des références au parent dans les enfants
+
+	                this.setBoatParent(this);
+
+	                this.setWalletParent(this);
+
+	                this.setShopParent(this);
+
+	                this.saveDataJson(this);
 	        }
 
-	        // fonction pour sauvegarder l'objet du joueur dans son json aproprié
+	        // crée une référence au parent dans tous les enfants de bateau
 
-	    }, {
-	        key: 'saveDataJson',
-	        value: function saveDataJson(o) {
 
-	            // premièrement dans cette fonction on va devoir enlever toutes les références au parent dans les enfants
-	            // donc on fait la même chose que dans les setParent, sauf qu'on delete les propriétés au lieu de les crées
+	        _createClass(Game, [{
+	                key: 'setBoatParent',
+	                value: function setBoatParent(o) {
+	                        if (o.boats != undefined) {
 
-	            if (o.boats != undefined) {
+	                                var n = null;
+	                                for (n in o.boats) {
 
-	                var n = null;
-	                for (n in o.boats) {
-
-	                    delete o.boats[n].parent;
-	                    delete o.boats[n].$el;
+	                                        o.boats[n].parent = o;
+	                                        this.setBoatParent(o.boats[n]);
+	                                }
+	                        }
 	                }
-	            }
-	            if (o.wallet != undefined) {
 
-	                delete o.wallet.parent;
-	            }
-	            if (o.mainHarbor.shop != undefined) {
+	                // crée une référence au parent dans tous les enfants de wallet
 
-	                var _n = null;
-	                for (_n in o.mainHarbor.shop) {
+	        }, {
+	                key: 'setWalletParent',
+	                value: function setWalletParent(o) {
+	                        if (o.wallet != undefined) {
 
-	                    delete o.mainHarbor.shop[_n].parent;
-	                    delete o.mainHarbor.shop[_n].$el;
+	                                o.wallet.parent = o;
+	                        }
 	                }
-	            }
 
-	            // ensuite on peut lancer la requete du fichier update_json_model.php
+	                // crée une référence au parent dans tous les enfants de shop
 
-	            $.ajaxSetup({
-	                async: false
-	            });
+	        }, {
+	                key: 'setShopParent',
+	                value: function setShopParent(o) {
+	                        if (o.mainHarbor.shop != undefined) {
 
-	            $.post('', {
-	                player: o
-	            });
+	                                var n = null;
+	                                for (n in o.mainHarbor.shop) {
 
-	            $.ajaxSetup({
-	                async: true
-	            });
+	                                        o.mainHarbor.shop[n].parent = o;
+	                                        this.setBoatParent(o.mainHarbor.shop[n]);
+	                                }
+	                        }
+	                }
 
-	            this.setBoatParent(this);
+	                // fonction pour sauvegarder l'objet du joueur dans son json aproprié
 
-	            this.setWalletParent(this);
+	        }, {
+	                key: 'saveDataJson',
+	                value: function saveDataJson(o) {
 
-	            this.setShopParent(this);
-	        }
-	    }]);
+	                        // premièrement dans cette fonction on va devoir enlever toutes les références au parent dans les enfants
+	                        // donc on fait la même chose que dans les setParent, sauf qu'on delete les propriétés au lieu de les crées
 
-	    return Game;
+	                        if (o.boats != undefined) {
+
+	                                var n = null;
+	                                for (n in o.boats) {
+
+	                                        delete o.boats[n].parent;
+	                                        delete o.boats[n].$el;
+	                                }
+	                        }
+	                        if (o.wallet != undefined) {
+
+	                                delete o.wallet.parent;
+	                        }
+	                        if (o.mainHarbor.shop != undefined) {
+
+	                                var _n = null;
+	                                for (_n in o.mainHarbor.shop) {
+
+	                                        delete o.mainHarbor.shop[_n].parent;
+	                                        delete o.mainHarbor.shop[_n].$el;
+	                                }
+	                        }
+
+	                        // ensuite on peut lancer la requete du fichier update_json_model.php
+
+	                        $.ajaxSetup({
+	                                async: false
+	                        });
+
+	                        $.post('', {
+	                                player: o
+	                        });
+
+	                        $.ajaxSetup({
+	                                async: true
+	                        });
+
+	                        this.setBoatParent(this);
+
+	                        this.setWalletParent(this);
+
+	                        this.setShopParent(this);
+	                }
+	        }]);
+
+	        return Game;
 	}();
 
 	exports.default = Game;
@@ -350,6 +350,8 @@
 	        $('li#li' + id).on('click', 'input[type=\'button\']', { that: _this }, function (e) {
 
 	            var context = e.data.that;
+
+	            console.log(context);
 
 	            var inputX = $('#li' + context.id + ' > div > input:nth-child(2)').val();
 	            var inputY = $('#li' + context.id + ' > div > input:nth-child(3)').val();
@@ -552,7 +554,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	        value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -574,45 +576,45 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var BuyBoat = function (_Shop) {
-	    _inherits(BuyBoat, _Shop);
+	        _inherits(BuyBoat, _Shop);
 
-	    function BuyBoat(id) {
-	        _classCallCheck(this, BuyBoat);
+	        function BuyBoat(id) {
+	                _classCallCheck(this, BuyBoat);
 
-	        var _this = _possibleConstructorReturn(this, (BuyBoat.__proto__ || Object.getPrototypeOf(BuyBoat)).call(this, id));
+	                var _this = _possibleConstructorReturn(this, (BuyBoat.__proto__ || Object.getPrototypeOf(BuyBoat)).call(this, id));
 
-	        _this.id = id;
-	        _this.$el = $("ul#shop");
+	                _this.id = id;
+	                _this.$el = $("ul#shop");
 
-	        _this.create_button();
+	                _this.create_button();
 
-	        _this.$el.on('click', 'input[data-id=' + id + ']', { class: _boat2.default, that: _this, id: id }, _this.buy_boat);
-	        return _this;
-	    }
-
-	    _createClass(BuyBoat, [{
-	        key: 'buy_boat',
-	        value: function buy_boat(e) {
-
-	            var data = e.data;
-	            var parent = data.that.parent;
-
-	            if (parent.wallet.ecu < 100) {
-
-	                return console.log("Vous n'avez pas assez d'écu");
-	            } else {
-
-	                parent.boats[parent.id] = new data.class(undefined, parent.id);
-	                parent.id++;
-
-	                parent.wallet.ecu -= 100;
-
-	                parent.saveDataJson(parent);
-	            }
+	                _this.$el.on('click', 'input[data-id=' + id + ']', { class: _boat2.default, that: _this, id: id }, _this.buy_boat);
+	                return _this;
 	        }
-	    }]);
 
-	    return BuyBoat;
+	        _createClass(BuyBoat, [{
+	                key: 'buy_boat',
+	                value: function buy_boat(e) {
+
+	                        var data = e.data;
+	                        var parent = data.that.parent;
+
+	                        if (parent.wallet.ecu < 100) {
+
+	                                return console.log("Vous n'avez pas assez d'écu");
+	                        } else {
+
+	                                parent.boats[parent.id] = new data.class(undefined, parent.id);
+	                                parent.id++;
+
+	                                parent.wallet.ecu -= 100;
+
+	                                parent.saveDataJson(parent);
+	                        }
+	                }
+	        }]);
+
+	        return BuyBoat;
 	}(_shop2.default);
 
 	exports.default = BuyBoat;
@@ -655,7 +657,6 @@
 	            span.onclick = function () {
 	                modal.style.display = "none";
 	            };
-
 	            // Quand l'utilisateur clique en dehors de la popup, elle se ferme
 	            window.onclick = function (event) {
 	                if (event.target === modal) {
@@ -663,6 +664,8 @@
 	                }
 	            };
 	        });
+	        parent.boats[parent.id] = new data.class(undefined, parent.id);
+	        parent.id++;
 	    }
 
 	    _createClass(Shop, [{

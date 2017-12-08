@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/colony24.iml" filepath="$PROJECT_DIR$/.idea/colony24.iml" />
-      <module fileurl="file://$USER_HOME$/Desktop/DEV1/JavaScript/Workshop correction/pixel_studio/.idea/pixel_studio.iml" filepath="$USER_HOME$/Desktop/DEV1/JavaScript/Workshop correction/pixel_studio/.idea/pixel_studio.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../test_dossier/.idea/test_dossier.iml" filepath="$PROJECT_DIR$/../test_dossier/.idea/test_dossier.iml" />
     </modules>
   </component>
 </project>

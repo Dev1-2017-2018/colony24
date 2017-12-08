@@ -4,7 +4,5 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="test_dossier" />
-    <orderEntry type="module" module-name="pixel_studio" />
   </component>
 </module>

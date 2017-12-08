@@ -1,32 +1,39 @@
-import Boat from './boat.class'
+import Boat from './boat.class';
 
 export default class Shop
 {
     constructor(id)
     {
         this.$el = $('ul#shop');
-        this.$el.on('click', `input[data-id=${id}]`, { class: Boat, that: this, id: id }, this.buy_boat);
+
+        this.$el.on('click', `input[data-type=Equipement]`, function(){
+
+            let modal = document.getElementById('myModal');
+            let span  = document.getElementsByClassName("close")[0];
+
+            //  Affiche la popup
+            modal.style.display = "block";
+
+            // Croix pour fermer la popup
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            // Quand l'utilisateur clique en dehors de la popup, elle se ferme
+            window.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+            parent.boats[parent.id] = new data.class(undefined, parent.id);
+            parent.id++;
 
     }
+    create_button(){
+        let button = `<input type='button' data-id='${this.id}' value='buy a boat'/>`;
+        this.$el.append(button);
 
-    buy_boat(e){
-
-        let data = e.data;
-        let parent = data.that.parent;
-
-        if (parent.wallet.ecu < 100){
-
-            return console.log("Vous n'avez pas assez d'écu");
-
-        } else {
-
-            parent.boats[`bateau${data.id}`] = new data.class;
-
-            parent.wallet.ecu -= 100;
-
-            parent.saveDataJson(parent);
-
-        }
-
+        let button_shop = `<input type='button' data-type='Equipement' id="myBtn" value='Shop'/>`;
+        this.$el.append(button_shop);
     }
 }

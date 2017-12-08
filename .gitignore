@@ -2,3 +2,7 @@
 /vendor/fzaninotto
 /vendor/node_modules
 /vendor/autoload.php
+databases/migrations.php
+/web/js/bundle.js
+.idea
+app.php

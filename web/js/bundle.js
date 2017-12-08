@@ -130,9 +130,13 @@
 
 	        var boat = null;
 
+	        this.id = 0;
+
 	        for (boat in config.boats) {
 	            if (config.boats.hasOwnProperty(boat)) {
-	                this.boats[boat] = new _boat2.default(config.boats[boat]);
+	                this.boats[this.id] = new _boat2.default(config.boats[boat], this.id);
+	                this.id = this.boats[this.id].id;
+	                this.id++;
 	            }
 	        }
 
@@ -143,7 +147,7 @@
 	        this.mainHarbor.shop = {};
 
 	        for (var i = 0; i < 1; i++) {
-	            this.mainHarbor.shop['button ' + i] = new _boatShop2.default(i);
+	            this.mainHarbor.shop['button ' + i] = new _boatShop2.default(this.id);
 	        }
 
 	        //this.inventory = new Inventory();
@@ -156,10 +160,7 @@
 
 	        this.setShopParent(this);
 
-	        this.boats.Bateau.movement(this.map.map, 1, 1);
-
 	        this.saveDataJson(this);
-	        console.log(this);
 	    }
 
 	    // crée une référence au parent dans tous les enfants de bateau
@@ -272,7 +273,7 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -280,32 +281,32 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Wallet = function () {
-	  function Wallet(gold, ecu) {
-	    _classCallCheck(this, Wallet);
+	    function Wallet(gold, ecu) {
+	        _classCallCheck(this, Wallet);
 
-	    this.goldValue = 1.2; //SQL GOLD VALUE A INTEGRER
-	    this.gold = gold;
-	    this.ecu = ecu;
-	    console.log("[[WALLET]] goldValue is " + this.goldValue + " \n[[[WALLET]] gold is " + this.gold + " \n[[WALLET]] ecu is " + this.ecu + " \n");
-	  }
-
-	  //Gold convert to Ecu
-
-
-	  _createClass(Wallet, [{
-	    key: "convertGoldEcu",
-	    value: function convertGoldEcu(goldChange) {
-	      console.log("[[WALLET convertGoldToEcu()]] In Wallet > " + this.ecu + " ecu & " + this.gold + " gold & " + this.goldValue + " goldValue\n");
-	      if (this.gold >= goldChange) {
-	        console.log("[[WALLET convertGoldToEcu()]] You convert " + goldChange + " gold to ecu with a " + this.goldValue + " Value Gold \n");
-	        this.gold -= goldChange;
-	        this.ecu += goldChange * this.goldValue;
-	        console.log("[[WALLET convertGoldToEcu()]] You have now " + this.ecu + " ecu and " + this.gold + " gold\n");
-	      } else console.log("[[WALLET convertGoldToEcu()]] you are missing " + (goldChange - this.gold) + " to complete this transaction\n");
+	        this.goldValue = 1.2; //SQL GOLD VALUE A INTEGRER
+	        this.gold = gold;
+	        this.ecu = ecu;
+	        console.log("[[WALLET]] goldValue is " + this.goldValue + " \n[[WALLET]] gold is " + this.gold + " \n[[WALLET]] ecu is " + this.ecu + " \n");
 	    }
-	  }]);
 
-	  return Wallet;
+	    //Gold convert to Ecu
+
+
+	    _createClass(Wallet, [{
+	        key: "convertGoldEcu",
+	        value: function convertGoldEcu(goldChange) {
+	            console.log("[[WALLET convertGoldToEcu()]] In Wallet > " + this.ecu + " ecu & " + this.gold + " gold & " + this.goldValue + " goldValue\n");
+	            if (this.gold >= goldChange) {
+	                console.log("[[WALLET convertGoldToEcu()]] You convert " + goldChange + " gold to ecu with a " + this.goldValue + " Value Gold \n");
+	                this.gold -= goldChange;
+	                this.ecu += goldChange * this.goldValue;
+	                console.log("[[WALLET convertGoldToEcu()]] You have now " + this.ecu + " ecu and " + this.gold + " gold\n");
+	            } else console.log("[[WALLET convertGoldToEcu()]] you are missing " + (goldChange - this.gold) + " to complete this transaction\n");
+	        }
+	    }]);
+
+	    return Wallet;
 	}();
 
 	exports.default = Wallet;
@@ -317,8 +318,10 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _boats = __webpack_require__(5);
 
@@ -333,15 +336,40 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Boat = function (_Boats) {
-		_inherits(Boat, _Boats);
+	    _inherits(Boat, _Boats);
 
-		function Boat(boat) {
-			_classCallCheck(this, Boat);
+	    function Boat(boat, id) {
+	        _classCallCheck(this, Boat);
 
-			return _possibleConstructorReturn(this, (Boat.__proto__ || Object.getPrototypeOf(Boat)).call(this, boat));
-		}
+	        var _this = _possibleConstructorReturn(this, (Boat.__proto__ || Object.getPrototypeOf(Boat)).call(this, boat, id));
 
-		return Boat;
+	        _this.$el = $("ul#boats");
+
+	        _this.create_boat_button();
+
+	        $('li#li' + id).on('click', 'input[type=\'button\']', { that: _this }, function (e) {
+
+	            var context = e.data.that;
+
+	            var inputX = $('#li' + context.id + ' > div > input:nth-child(2)').val();
+	            var inputY = $('#li' + context.id + ' > div > input:nth-child(3)').val();
+
+	            if (inputX != 0 || inputY != 0) {
+	                e.data.that.movement(inputY, inputX);
+	                $('#li' + context.id + ' > div > p').html(context.name + ' x:' + context.x + ' y:' + context.y);
+	            }
+	        });
+	        return _this;
+	    }
+
+	    _createClass(Boat, [{
+	        key: 'create_boat_button',
+	        value: function create_boat_button() {
+	            this.$el.append('<li id="li' + this.id + '" style="display: inline-block">\n                            <div>\n                                <p style="width: 30%; margin: 0 auto">' + this.name + ' x:' + this.x + ' y:' + this.y + '</p>\n                                <input style="width: 45%; margin: 0 auto" type="number" placeholder="x"/>\n                                <input style="width: 45%; margin: 0 auto" type="number" placeholder="y"/>\n                                <input type="button" value="Move"/>\n                            </div>\n                         </li>');
+	        }
+	    }]);
+
+	    return Boat;
 	}(_boats2.default);
 
 	exports.default = Boat;
@@ -350,7 +378,7 @@
 /* 5 */
 /***/ (function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -362,7 +390,8 @@
 
 	var Boats = function () {
 	    function Boats() {
-	        var boat = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { name: "bateau", structure: 100, blindage: 50, capacite: 50, poids: 10, stockage: 0, x: 0, y: 0 };
+	        var boat = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { name: "Bateau", structure: 100, blindage: 50, capacite: 50, poids: 10, stockage: 0, x: 0, y: 0 };
+	        var id = arguments[1];
 
 	        _classCallCheck(this, Boats);
 
@@ -380,11 +409,25 @@
 	                }
 	            }
 	        }
+	        this.id = id;
 	    }
 
 	    _createClass(Boats, [{
-	        key: "movement",
-	        value: function movement(map, positionY, positionX) {
+	        key: 'movement',
+	        value: function movement() {
+	            var positionY = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+	            var positionX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+
+	            var map = this.parent.map.map;
+
+	            if (typeof positionY == 'string') {
+	                positionY = Number(positionY);
+	            }
+	            if (typeof positionX == 'string') {
+	                positionX = Number(positionX);
+	            }
+
 	            if (positionY >= 0 && positionX >= 0 && positionY <= 9 && positionX <= 9) {
 	                // Ici, I correspond à une île, à modifier selon la vraie map
 	                if (map[positionY][positionX] != "I") {
@@ -402,30 +445,32 @@
 	            }
 	        }
 	    }, {
-	        key: "goldMining",
+	        key: 'goldMining',
 	        value: function goldMining(map) {
 	            // Ici, G correspond à de l'or, à modifier selon la vraie map
 	            if (map[this.y][this.x] == "G") {
 	                if (this.stockage <= 2) {
 	                    this.stockage++;
 	                    console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
-	                    console.log("Vous avez maintenant : " + this.stockage + " d'Or");
 	                    if (this.stockage == 2) {
 	                        this.returnHome();
 	                    }
 	                }
 	            } else {
 	                console.log("Il n'y a pas d'Or en : " + this.y + " - " + this.x);
+	                this.parent.saveDataJson(this.parent);
 	            }
 	        }
 	    }, {
-	        key: "returnHome",
+	        key: 'returnHome',
 	        value: function returnHome() {
 	            this.y = 0;
 	            this.x = 0;
-	            console.log("Votre bateau est retourner à Main Harbor ");
+	            console.log("Votre bateau est retourner à Main Harbor pour vider son stockage ");
 	            this.parent.wallet.gold += this.stockage;
+	            console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
 	            this.stockage = 0;
+	            this.parent.saveDataJson(this.parent);
 	        }
 	    }]);
 
@@ -454,7 +499,7 @@
 
 	        this.map = [["_", "_", "_", "_", "_", "_", "_", "_", "_", "_"], ["_", "G", "_", "_", "G", "_", "_", "_", "_", "_"], ["_", "_", "_", "I", "_", "_", "_", "_", "I", "_"], ["_", "_", "_", "_", "_", "_", "_", "G", "_", "_"], ["_", "_", "I", "_", "_", "_", "_", "_", "_", "_"], ["_", "_", "_", "_", "_", "_", "_", "I", "_", "_"], ["I", "_", "_", "_", "_", "_", "_", "_", "_", "G"], ["_", "G", "_", "G", "_", "I", "_", "_", "_", "I"], ["_", "_", "_", "_", "_", "_", "_", "G", "_", "_"], ["_", "_", "I", "_", "_", "_", "_", "_", "I", "_"]];
 
-	        this.displayMap(this.map);
+	        /*this.displayMap(this.map);*/
 	    }
 
 	    _createClass(Map, [{
@@ -504,7 +549,7 @@
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -515,6 +560,10 @@
 	var _shop = __webpack_require__(8);
 
 	var _shop2 = _interopRequireDefault(_shop);
+
+	var _boat = __webpack_require__(4);
+
+	var _boat2 = _interopRequireDefault(_boat);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -537,15 +586,29 @@
 
 	        _this.create_button();
 
+	        _this.$el.on('click', 'input[data-id=' + id + ']', { class: _boat2.default, that: _this, id: id }, _this.buy_boat);
 	        return _this;
 	    }
 
 	    _createClass(BuyBoat, [{
-	        key: "create_button",
-	        value: function create_button() {
+	        key: 'buy_boat',
+	        value: function buy_boat(e) {
 
-	            var button = "<input type='button' data-id='" + this.id + "' value='buy a boat " + this.id + "'/>";
-	            this.$el.append(button);
+	            var data = e.data;
+	            var parent = data.that.parent;
+
+	            if (parent.wallet.ecu < 100) {
+
+	                return console.log("Vous n'avez pas assez d'écu");
+	            } else {
+
+	                parent.boats[parent.id] = new data.class(undefined, parent.id);
+	                parent.id++;
+
+	                parent.wallet.ecu -= 100;
+
+	                parent.saveDataJson(parent);
+	            }
 	        }
 	    }]);
 
@@ -579,27 +642,37 @@
 	        _classCallCheck(this, Shop);
 
 	        this.$el = $('ul#shop');
-	        this.$el.on('click', 'input[data-id=' + id + ']', { class: _boat2.default, that: this, id: id }, this.buy_boat);
+
+	        this.$el.on('click', 'input[data-type=Equipement]', function () {
+
+	            var modal = document.getElementById('myModal');
+	            var span = document.getElementsByClassName("close")[0];
+
+	            //  Affiche la popup
+	            modal.style.display = "block";
+
+	            // Croix pour fermer la popup
+	            span.onclick = function () {
+	                modal.style.display = "none";
+	            };
+
+	            // Quand l'utilisateur clique en dehors de la popup, elle se ferme
+	            window.onclick = function (event) {
+	                if (event.target === modal) {
+	                    modal.style.display = "none";
+	                }
+	            };
+	        });
 	    }
 
 	    _createClass(Shop, [{
-	        key: 'buy_boat',
-	        value: function buy_boat(e) {
+	        key: 'create_button',
+	        value: function create_button() {
+	            var button = '<input type=\'button\' data-id=\'' + this.id + '\' value=\'buy a boat\'/>';
+	            this.$el.append(button);
 
-	            var data = e.data;
-	            var parent = data.that.parent;
-
-	            if (parent.wallet.ecu < 100) {
-
-	                return console.log("Vous n'avez pas assez d'écu");
-	            } else {
-
-	                parent.boats['bateau' + data.id] = new data.class();
-
-	                parent.wallet.ecu -= 100;
-
-	                parent.saveDataJson(parent);
-	            }
+	            var button_shop = '<input type=\'button\' data-type=\'Equipement\' id="myBtn" value=\'Shop\'/>';
+	            this.$el.append(button_shop);
 	        }
 	    }]);
 

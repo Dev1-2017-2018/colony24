@@ -19,7 +19,7 @@ function create_json($user){
          'name' => $user,
          'boats' => array(
              'Bateau' => array(
-                 'id'   => 1,
+                 'id'   => 0,
                  'name' => "Bateau",
                  'structure' => 100,
                  'blindage' => 50,

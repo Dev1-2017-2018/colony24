@@ -452,7 +452,6 @@
 	                if (this.stockage <= 2) {
 	                    this.stockage++;
 	                    console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
-	                    console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
 	                    if (this.stockage == 2) {
 	                        this.returnHome();
 	                    }
@@ -467,8 +466,9 @@
 	        value: function returnHome() {
 	            this.y = 0;
 	            this.x = 0;
-	            console.log("Votre bateau est retourner à Main Harbor ");
+	            console.log("Votre bateau est retourner à Main Harbor pour vider son stockage ");
 	            this.parent.wallet.gold += this.stockage;
+	            console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
 	            this.stockage = 0;
 	            this.parent.saveDataJson(this.parent);
 	        }
@@ -499,7 +499,7 @@
 
 	        this.map = [["_", "_", "_", "_", "_", "_", "_", "_", "_", "_"], ["_", "G", "_", "_", "G", "_", "_", "_", "_", "_"], ["_", "_", "_", "I", "_", "_", "_", "_", "I", "_"], ["_", "_", "_", "_", "_", "_", "_", "G", "_", "_"], ["_", "_", "I", "_", "_", "_", "_", "_", "_", "_"], ["_", "_", "_", "_", "_", "_", "_", "I", "_", "_"], ["I", "_", "_", "_", "_", "_", "_", "_", "_", "G"], ["_", "G", "_", "G", "_", "I", "_", "_", "_", "I"], ["_", "_", "_", "_", "_", "_", "_", "G", "_", "_"], ["_", "_", "I", "_", "_", "_", "_", "_", "I", "_"]];
 
-	        this.displayMap(this.map);
+	        /*this.displayMap(this.map);*/
 	    }
 
 	    _createClass(Map, [{
@@ -549,7 +549,7 @@
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -560,6 +560,10 @@
 	var _shop = __webpack_require__(8);
 
 	var _shop2 = _interopRequireDefault(_shop);
+
+	var _boat = __webpack_require__(4);
+
+	var _boat2 = _interopRequireDefault(_boat);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -582,15 +586,29 @@
 
 	        _this.create_button();
 
+	        _this.$el.on('click', 'input[data-id=' + id + ']', { class: _boat2.default, that: _this, id: id }, _this.buy_boat);
 	        return _this;
 	    }
 
 	    _createClass(BuyBoat, [{
-	        key: "create_button",
-	        value: function create_button() {
+	        key: 'buy_boat',
+	        value: function buy_boat(e) {
 
-	            var button = "<input type='button' data-id='" + this.id + "' value='buy a boat'/>";
-	            this.$el.append(button);
+	            var data = e.data;
+	            var parent = data.that.parent;
+
+	            if (parent.wallet.ecu < 100) {
+
+	                return console.log("Vous n'avez pas assez d'écu");
+	            } else {
+
+	                parent.boats[parent.id] = new data.class(undefined, parent.id);
+	                parent.id++;
+
+	                parent.wallet.ecu -= 100;
+
+	                parent.saveDataJson(parent);
+	            }
 	        }
 	    }]);
 
@@ -624,29 +642,37 @@
 	        _classCallCheck(this, Shop);
 
 	        this.$el = $('ul#shop');
-	        this.$el.on('click', 'input[data-id=' + id + ']', { class: _boat2.default, that: this, id: id }, this.buy_boat);
+
+	        this.$el.on('click', 'input[data-type=Equipement]', function () {
+
+	            var modal = document.getElementById('myModal');
+	            var span = document.getElementsByClassName("close")[0];
+
+	            //  Affiche la popup
+	            modal.style.display = "block";
+
+	            // Croix pour fermer la popup
+	            span.onclick = function () {
+	                modal.style.display = "none";
+	            };
+
+	            // Quand l'utilisateur clique en dehors de la popup, elle se ferme
+	            window.onclick = function (event) {
+	                if (event.target === modal) {
+	                    modal.style.display = "none";
+	                }
+	            };
+	        });
 	    }
 
 	    _createClass(Shop, [{
-	        key: 'buy_boat',
-	        value: function buy_boat(e) {
+	        key: 'create_button',
+	        value: function create_button() {
+	            var button = '<input type=\'button\' data-id=\'' + this.id + '\' value=\'buy a boat\'/>';
+	            this.$el.append(button);
 
-	            var data = e.data;
-	            var parent = data.that.parent;
-
-	            if (parent.wallet.ecu < 100) {
-
-	                return console.log("Vous n'avez pas assez d'écu");
-	            } else {
-
-	                parent.boats[parent.id] = new data.class();
-	                parent.boats[parent.id].id = parent.id;
-	                parent.id++;
-
-	                parent.wallet.ecu -= 100;
-
-	                parent.saveDataJson(parent);
-	            }
+	            var button_shop = '<input type=\'button\' data-type=\'Equipement\' id="myBtn" value=\'Shop\'/>';
+	            this.$el.append(button_shop);
 	        }
 	    }]);
 

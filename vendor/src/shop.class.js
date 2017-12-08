@@ -1,4 +1,4 @@
-import Boat from './boat.class'
+import Boat from './boat.class';
 
 export default class Shop
 {
@@ -20,8 +20,7 @@ export default class Shop
 
         } else {
 
-            parent.boats[parent.id] = new data.class();
-            parent.boats[parent.id].id = parent.id;
+            parent.boats[parent.id] = new data.class(undefined, parent.id);
             parent.id++;
 
             parent.wallet.ecu -= 100;

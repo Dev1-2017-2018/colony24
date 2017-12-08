@@ -3,7 +3,7 @@
 /**
  * @return pdo Connect to mysql
  */
-function getPDO ()
+function getPDO()
 {
 
     $defaults = [
@@ -17,42 +17,41 @@ function getPDO ()
 
 }
 
-function getFlashMessage(){
+function getFlashMessage()
+{
 
-    if( !isset($_SESSION) )
-    {
-    
+    if ( !isset($_SESSION) ) {
+
         throw new Exception("Attention getFlashMessage les sessions ne sont pas activées");
-    
+
     }
 
-    if(!empty($_SESSION['flash']) )
-    {
-        
+    if ( !empty($_SESSION['flash']) ) {
+
         $message = sprintf('<div class="%s"><strong>%s</strong></div>',
-            $_SESSION['flash']['type'],
-            $_SESSION['flash']['message']
+                           $_SESSION['flash']['type'],
+                           $_SESSION['flash']['message']
         );
-            
-            
+
+
         unset($_SESSION['flash']);
-        
-        return $message ;
-    
+
+        return $message;
+
     }
 
 }
 
 
-function setFlashMessage($message, $type = 'success'){
+function setFlashMessage( $message, $type = 'success' )
+{
 
-    if( !isset($_SESSION) )
-    {
+    if ( !isset($_SESSION) ) {
         throw new Exception("Attention getFlashMessage les sessions ne sont pas activées");
     }
-    
+
     $_SESSION['flash'] = [
-    
+
         'message' => $message,
         'type' => $type
     ];
@@ -60,12 +59,13 @@ function setFlashMessage($message, $type = 'success'){
 }
 
 
-function hasFlashMessage(){
+function hasFlashMessage()
+{
 
 
-    if( isset($_SESSION['flash']) ) return true;
-    
-    
+    if ( isset($_SESSION['flash']) ) return true;
+
+
     return false;
 
 }

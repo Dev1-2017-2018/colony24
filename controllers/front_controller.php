@@ -26,6 +26,9 @@ function add_user(){
 	        $prepare->execute();
             create_folder(htmlspecialchars($_POST['pseudo']));
 
+            /**
+             * Insert aussi le score du joueur dans la table user_score
+             */
             $prepare_score = $pdo->prepare("INSERT INTO `user_score` (`score`, `gold`,`silver`) VALUES (?,?,?)");
             $prepare_score->bindValue(1, 0);
             $prepare_score->bindValue(2, 0);

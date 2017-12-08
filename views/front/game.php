@@ -33,6 +33,31 @@
         $data = send_json($user);
 
     ?>
+
+<!--<ul>
+    <?php /*foreach($datas as $val):*/?>
+        <li style="margin-bottom: 30px;">
+            <?php
+/*            echo 'Marque : '.$val['brand'].'<br>'.
+                'Nom : '.$val['name'].'<br>';
+            if (isset($val['energy'])){
+                echo 'Energie disponible : '.$val['energy'].'<br>';
+            }elseif(isset($val['power']) && isset($val['speed'])){
+                echo 'Puissance : '.$val['power'].'<br>'.
+                    'Vitesse : '.$val['speed'].'<br>';
+            }elseif (isset($val['propulsion'])){
+                echo 'Propulsion : '.$val['propulsion'].'<br>';
+            }elseif (isset($val['power'])){
+                echo 'Puissance : '.$val['power'].'<br>';
+            }else{
+                echo 'Réparation : '.$val['repair'].'<br>';
+            }
+            echo 'Prix : '.$val['price'];
+            */?>
+        </li>
+    <?php /*endforeach; */?>
+</ul>-->
+
 <script id="myScript">
     var userData = <?php echo $data; ?>;
 </script>

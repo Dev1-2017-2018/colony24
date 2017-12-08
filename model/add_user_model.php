@@ -1,20 +1,21 @@
-<?php 
+<?php
 
-function checkEmail(){
-	$pdo = getPDO();
+    function checkEmail()
+    {
+        $pdo = getPDO();
 
-	if (!empty($_POST)) {
-		$prepare = $pdo->prepare("
-		SELECT email
-		FROM users
-		WHERE email = ?;
-	");
+        if ( !empty($_POST) ) {
+            $prepare = $pdo->prepare("
+                SELECT email
+                FROM users
+                WHERE email = ?;
+            ");
 
-	$prepare->bindValue(1, $_POST['email']);
+            $prepare->bindValue(1, $_POST['email']);
 
-	$prepare->execute();
+            $prepare->execute();
 
-	return $prepare->fetch();
-	}
-	
-}
+            return $prepare->fetch();
+        }
+
+    }

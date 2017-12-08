@@ -1,4 +1,5 @@
 import Shop from './shop.class';
+import Boat from './boat.class';
 
 export default class BuyBoat extends Shop
 {
@@ -11,11 +12,28 @@ export default class BuyBoat extends Shop
 
         this.create_button();
 
+        this.$el.on('click', `input[data-id=${id}]`, { class: Boat, that: this, id: id }, this.buy_boat);
     }
 
-    create_button(){
+    buy_boat(e){
 
-        let button = `<input type='button' data-id='${this.id}' value='buy a boat'/>`;
-        this.$el.append(button);
+        let data = e.data;
+        let parent = data.that.parent;
+
+        if (parent.wallet.ecu < 100){
+
+            return console.log("Vous n'avez pas assez d'écu");
+
+        } else {
+
+            parent.boats[parent.id] = new data.class(undefined,parent.id);
+            parent.id++;
+
+            parent.wallet.ecu -= 100;
+
+            parent.saveDataJson(parent);
+
+        }
+
     }
 }

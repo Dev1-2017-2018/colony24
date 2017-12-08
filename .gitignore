@@ -4,4 +4,5 @@
 /vendor/autoload.php
 databases/migrations.php
 /web/js/bundle.js
+.idea
 app.php

@@ -8,8 +8,7 @@
 
 function create_folder($user){
 
-    exec( 'mkdir ../databases/users/'.$user);
-    exec('chmod 775 ../databases/users/'.$user);
+    mkdir ('../databases/users/'.$user);
 
     create_json($user);
 }
@@ -20,6 +19,7 @@ function create_json($user){
          'name' => $user,
          'boats' => array(
              'Bateau' => array(
+                 'id'   => 0,
                  'name' => "Bateau",
                  'structure' => 100,
                  'blindage' => 50,

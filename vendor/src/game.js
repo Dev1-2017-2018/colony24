@@ -23,20 +23,26 @@ export default class Game
 
         let boat = null;
 
+        this.id = 0;
+
         for (boat in config.boats) {
             if (config.boats.hasOwnProperty(boat)) {
-                this.boats[boat] = new Boat(config.boats[boat]);
+                this.boats[this.id] = new Boat(config.boats[boat], this.id);
+                this.id = this.boats[this.id].id;
+                this.id++;
             }
         }
 
         // Creation de main Harbor
         this.mainHarbor = {};
 
+
+
         // Creation du shop
         this.mainHarbor.shop = {};
 
         for (let i = 0; i < 1; i++){
-            this.mainHarbor.shop[`button ${i}`] = new Shop(i);
+            this.mainHarbor.shop[`button ${i}`] = new Shop(this.id);
         }
 
 		//this.inventory = new Inventory();
@@ -49,11 +55,8 @@ export default class Game
 
         this.setShopParent(this);
 
-        this.boats.Bateau.movement(this.map.map, 1, 1);
-
         this.saveDataJson(this);
 
-        console.log(this);
 	}
 
 	// crée une référence au parent dans tous les enfants de bateau

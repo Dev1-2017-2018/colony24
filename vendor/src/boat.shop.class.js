@@ -5,6 +5,7 @@ export default class BuyBoat extends Shop
     constructor(id)
     {
         super(id);
+
         this.id = id;
         this.$el = $("ul#shop");
 
@@ -14,7 +15,7 @@ export default class BuyBoat extends Shop
 
     create_button(){
 
-        let button = `<input type='button' data-id='${this.id}' value='buy a boat ${this.id}'/>`;
+        let button = `<input type='button' data-id='${this.id}' value='buy a boat'/>`;
         this.$el.append(button);
     }
 }

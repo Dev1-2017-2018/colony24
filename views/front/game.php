@@ -5,11 +5,9 @@
     <input type="hidden" id="user" data-name='<?php echo $_SESSION["user"]; ?>'/>
 	<p id="demo"></p>
 
-    <ul id="boats"></ul>
+    <ul style="list-style: none" id="boats"></ul>
 
-    <input type="number" placeholder="x"/>
-    <input type="number" placeholder="y"/>
-    <input id="déplacement" type="button" value="se déplacer"/>
+
 
     <ul id="shop"></ul>
 

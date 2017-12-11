@@ -146,26 +146,6 @@ p.button
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*POP UP*/
 /* The Modal (background) */
 .modal {
@@ -288,11 +268,6 @@ div.player-info div
 }
 
 
-
-
-
-
-
 /*MAIN*/
 div.main
 {
@@ -301,8 +276,6 @@ div.main
   grid-row-start: 1;
   grid-row-end: 6;
 }
-
-
 
 /********************** ASIDE *************************/
 /*titre intro*/

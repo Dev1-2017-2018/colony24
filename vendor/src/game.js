@@ -4,7 +4,7 @@ import Boat from './boat.class';
 
 import Map from './map.class'
 
-import Shop from './boat.shop.class';
+import Buy_boat from './boat.shop.class';
 
 export default class Game
 {
@@ -39,9 +39,7 @@ export default class Game
         // Creation du shop
         this.mainHarbor.shop = {};
 
-        for (let i = 0; i < 1; i++){
-            this.mainHarbor.shop[`button ${i}`] = new Shop(this.id);
-        }
+        this.mainHarbor.shop[`button_boat_shop`] = new Buy_boat(this.id, );
 
 		//this.inventory = new Inventory();
 

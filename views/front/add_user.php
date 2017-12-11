@@ -2,7 +2,7 @@
 
 <section class="login-page">
 	<div class="form reg">
-		<form action="/auth" method="POST">
+		<form action="" method="POST">
 			<input type="text" name="pseudo" placeholder="Pseudo">
 			<input type="email" name="email" placeholder="Email">
 			<input type="password" name="password" placeholder="Mot de passe">
@@ -12,11 +12,6 @@
 		</form>
 	</div>
 </section>
-
-
-
-
-
 
 
 

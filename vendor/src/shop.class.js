@@ -1,10 +1,9 @@
-import Boat from './boat.class';
 
 export default class Shop
 {
     constructor(id)
     {
-        this.$el = $('ul#shop');
+        this.$el = $('div#button-shop');
 
         this.$el.on('click', `input[data-type=Equipement]`, function(){
 
@@ -27,6 +26,9 @@ export default class Shop
         });
 
     }
+
+    // propriété appelée dans boats.shop.class.js
+    // On crée deux boutons shop pour l'instant on laisse comme ça mais c'est nul il faut refactoriser
     create_button(){
         let button = `<input type='button' data-id='${this.id}' value='buy a boat'/>`;
         this.$el.append(button);

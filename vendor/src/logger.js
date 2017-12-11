@@ -1,4 +1,5 @@
 
-export default function() {
-	console.log('logger.js is RUNNING!!');
+export default function () {
+    console.log( 'logger.js is RUNNING!!' );
+
 }

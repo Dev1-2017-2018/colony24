@@ -1,5 +1,15 @@
 import logger from './logger';
 
-document.write('Welcome to my application.');
+import Game from './game.js';
+
 logger(); // yes
-console.log('app loaded');
+
+$(function () {
+    let colony24;
+
+    // Initialisation du jeu
+
+    colony24 = new Game(userData);
+
+})
+console.log( 'app loaded' );

@@ -1,15 +1,14 @@
 <?php ob_start() ; ?>
 
-<section>
-	<form action="" method="POST">
-	    <p><input type="text" name="pseudo" placeholder="Pseudo"></p>
-	    <p><input type="email" name="email" placeholder="Email"></p>
-	    <p><input type="password" name="password" placeholder="Password"></p>
-	    <p><input type="password" name="passcheck" placeholder="Check password" ></p>
-	    <p><input type="submit" value="Ajouter"></p>
-	</form>
+<section class="login-page">
+	<div class="form reg">
+		<form action="" method="POST">
+			<input type="text" name="pseudo" placeholder="Pseudo">
+			<input type="email" name="email" placeholder="Email">
+			<input type="password" name="password" placeholder="Mot de passe">
+			<input type="password" name="passcheck" placeholder="Vérification Mot de Passe" >
+			<p><input class="logreg_button" type="submit" value="Ajouter"></p>
+			<p class="message">Deja compte ? <a href="/">Connectez vous !</a></p>
+		</form>
+	</div>
 </section>
-
-<?php $content = ob_get_clean() ; ?>
-
-<?php include __DIR__ . '/../layouts/master.php' ?>

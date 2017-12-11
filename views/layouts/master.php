@@ -22,7 +22,7 @@
 
 	<!-- ***** CSS UNIVERSAL ***** -->
 	<link type="text/css" rel="stylesheet" href="/../css/global.css"/>
-	<link type="text/css" rel="stylesheet" href="/../css/global_responsive.css"/>
+	<link type="text/css" rel="stylesheet" href="/../css/log_reg.css"/>
 
 	</head>
 <body>

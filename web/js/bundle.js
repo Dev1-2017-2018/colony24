@@ -88,7 +88,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	        value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -114,154 +114,152 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Game = function () {
-	        function Game(config) {
-	                _classCallCheck(this, Game);
+	    function Game(config) {
+	        _classCallCheck(this, Game);
 
-	                this.name = config.name;
+	        this.name = config.name;
 
-	                // Launch map
-	                this.map = new _map2.default();
+	        // Launch map
+	        this.map = new _map2.default();
 
-	                // Creation de la wallet
-	                this.wallet = new _wallet2.default(Number(config.wallet.gold), Number(config.wallet.ecu));
+	        // Creation de la wallet
+	        this.wallet = new _wallet2.default(Number(config.wallet.gold), Number(config.wallet.ecu));
 
-	                // Creation des bateaux
-	                this.boats = {};
+	        // Creation des bateaux
+	        this.boats = {};
 
-	                var boat = null;
+	        var boat = null;
 
-	                this.id = 0;
+	        this.id = 0;
 
-	                for (boat in config.boats) {
-	                        if (config.boats.hasOwnProperty(boat)) {
-	                                this.boats[this.id] = new _boat2.default(config.boats[boat], this.id);
-	                                this.id = this.boats[this.id].id;
-	                                this.id++;
-	                        }
-	                }
-
-	                // Creation de main Harbor
-	                this.mainHarbor = {};
-
-	                // Creation du shop
-	                this.mainHarbor.shop = {};
-
-	                for (var i = 0; i < 1; i++) {
-	                        this.mainHarbor.shop['button ' + i] = new _boatShop2.default(this.id);
-	                }
-
-	                //this.inventory = new Inventory();
-
-	                // Creation des références au parent dans les enfants
-
-	                this.setBoatParent(this);
-
-	                this.setWalletParent(this);
-
-	                this.setShopParent(this);
-
-	                this.saveDataJson(this);
+	        for (boat in config.boats) {
+	            if (config.boats.hasOwnProperty(boat)) {
+	                this.boats[this.id] = new _boat2.default(config.boats[boat], this.id);
+	                this.id = this.boats[this.id].id;
+	                this.id++;
+	            }
 	        }
 
-	        // crée une référence au parent dans tous les enfants de bateau
+	        // Creation de main Harbor
+	        this.mainHarbor = {};
+
+	        // Creation du shop
+	        this.mainHarbor.shop = {};
+
+	        this.mainHarbor.shop['button_boat_shop'] = new _boatShop2.default(this.id);
+
+	        //this.inventory = new Inventory();
+
+	        // Creation des références au parent dans les enfants
+
+	        this.setBoatParent(this);
+
+	        this.setWalletParent(this);
+
+	        this.setShopParent(this);
+
+	        this.saveDataJson(this);
+	    }
+
+	    // crée une référence au parent dans tous les enfants de bateau
 
 
-	        _createClass(Game, [{
-	                key: 'setBoatParent',
-	                value: function setBoatParent(o) {
-	                        if (o.boats != undefined) {
+	    _createClass(Game, [{
+	        key: 'setBoatParent',
+	        value: function setBoatParent(o) {
+	            if (o.boats != undefined) {
 
-	                                var n = null;
-	                                for (n in o.boats) {
+	                var n = null;
+	                for (n in o.boats) {
 
-	                                        o.boats[n].parent = o;
-	                                        this.setBoatParent(o.boats[n]);
-	                                }
-	                        }
+	                    o.boats[n].parent = o;
+	                    this.setBoatParent(o.boats[n]);
 	                }
+	            }
+	        }
 
-	                // crée une référence au parent dans tous les enfants de wallet
+	        // crée une référence au parent dans tous les enfants de wallet
 
-	        }, {
-	                key: 'setWalletParent',
-	                value: function setWalletParent(o) {
-	                        if (o.wallet != undefined) {
+	    }, {
+	        key: 'setWalletParent',
+	        value: function setWalletParent(o) {
+	            if (o.wallet != undefined) {
 
-	                                o.wallet.parent = o;
-	                        }
+	                o.wallet.parent = o;
+	            }
+	        }
+
+	        // crée une référence au parent dans tous les enfants de shop
+
+	    }, {
+	        key: 'setShopParent',
+	        value: function setShopParent(o) {
+	            if (o.mainHarbor.shop != undefined) {
+
+	                var n = null;
+	                for (n in o.mainHarbor.shop) {
+
+	                    o.mainHarbor.shop[n].parent = o;
+	                    this.setBoatParent(o.mainHarbor.shop[n]);
 	                }
+	            }
+	        }
 
-	                // crée une référence au parent dans tous les enfants de shop
+	        // fonction pour sauvegarder l'objet du joueur dans son json aproprié
 
-	        }, {
-	                key: 'setShopParent',
-	                value: function setShopParent(o) {
-	                        if (o.mainHarbor.shop != undefined) {
+	    }, {
+	        key: 'saveDataJson',
+	        value: function saveDataJson(o) {
 
-	                                var n = null;
-	                                for (n in o.mainHarbor.shop) {
+	            // premièrement dans cette fonction on va devoir enlever toutes les références au parent dans les enfants
+	            // donc on fait la même chose que dans les setParent, sauf qu'on delete les propriétés au lieu de les crées
 
-	                                        o.mainHarbor.shop[n].parent = o;
-	                                        this.setBoatParent(o.mainHarbor.shop[n]);
-	                                }
-	                        }
+	            if (o.boats != undefined) {
+
+	                var n = null;
+	                for (n in o.boats) {
+
+	                    delete o.boats[n].parent;
+	                    delete o.boats[n].$el;
 	                }
+	            }
+	            if (o.wallet != undefined) {
 
-	                // fonction pour sauvegarder l'objet du joueur dans son json aproprié
+	                delete o.wallet.parent;
+	            }
+	            if (o.mainHarbor.shop != undefined) {
 
-	        }, {
-	                key: 'saveDataJson',
-	                value: function saveDataJson(o) {
+	                var _n = null;
+	                for (_n in o.mainHarbor.shop) {
 
-	                        // premièrement dans cette fonction on va devoir enlever toutes les références au parent dans les enfants
-	                        // donc on fait la même chose que dans les setParent, sauf qu'on delete les propriétés au lieu de les crées
-
-	                        if (o.boats != undefined) {
-
-	                                var n = null;
-	                                for (n in o.boats) {
-
-	                                        delete o.boats[n].parent;
-	                                        delete o.boats[n].$el;
-	                                }
-	                        }
-	                        if (o.wallet != undefined) {
-
-	                                delete o.wallet.parent;
-	                        }
-	                        if (o.mainHarbor.shop != undefined) {
-
-	                                var _n = null;
-	                                for (_n in o.mainHarbor.shop) {
-
-	                                        delete o.mainHarbor.shop[_n].parent;
-	                                        delete o.mainHarbor.shop[_n].$el;
-	                                }
-	                        }
-
-	                        // ensuite on peut lancer la requete du fichier update_json_model.php
-
-	                        $.ajaxSetup({
-	                                async: false
-	                        });
-
-	                        $.post('', {
-	                                player: o
-	                        });
-
-	                        $.ajaxSetup({
-	                                async: true
-	                        });
-
-	                        this.setBoatParent(this);
-
-	                        this.setWalletParent(this);
-
-	                        this.setShopParent(this);
+	                    delete o.mainHarbor.shop[_n].parent;
+	                    delete o.mainHarbor.shop[_n].$el;
 	                }
-	        }]);
+	            }
 
-	        return Game;
+	            // ensuite on peut lancer la requete du fichier update_json_model.php
+
+	            $.ajaxSetup({
+	                async: false
+	            });
+
+	            $.post('', {
+	                player: o
+	            });
+
+	            $.ajaxSetup({
+	                async: true
+	            });
+
+	            this.setBoatParent(this);
+
+	            this.setWalletParent(this);
+
+	            this.setShopParent(this);
+	        }
+	    }]);
+
+	    return Game;
 	}();
 
 	exports.default = Game;
@@ -270,7 +268,7 @@
 /* 3 */
 /***/ (function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -287,22 +285,38 @@
 	        this.goldValue = 1.2; //SQL GOLD VALUE A INTEGRER
 	        this.gold = gold;
 	        this.ecu = ecu;
-	        console.log("[[WALLET]] goldValue is " + this.goldValue + " \n[[WALLET]] gold is " + this.gold + " \n[[WALLET]] ecu is " + this.ecu + " \n");
+
+	        // Selection des <p> pour render les golds et écus
+	        this.$gold = document.getElementById.bind(document, 'gold');
+	        this.$ecu = document.getElementById.bind(document, 'ecu');
+
+	        this.renderWallet();
+
+	        console.log('[[WALLET]] goldValue is ' + this.goldValue + ' \n[[WALLET]] gold is ' + this.gold + ' \n[[WALLET]] ecu is ' + this.ecu + ' \n');
 	    }
 
 	    //Gold convert to Ecu
 
 
 	    _createClass(Wallet, [{
-	        key: "convertGoldEcu",
+	        key: 'convertGoldEcu',
 	        value: function convertGoldEcu(goldChange) {
-	            console.log("[[WALLET convertGoldToEcu()]] In Wallet > " + this.ecu + " ecu & " + this.gold + " gold & " + this.goldValue + " goldValue\n");
+	            console.log('[[WALLET convertGoldToEcu()]] In Wallet > ' + this.ecu + ' ecu & ' + this.gold + ' gold & ' + this.goldValue + ' goldValue\n');
 	            if (this.gold >= goldChange) {
-	                console.log("[[WALLET convertGoldToEcu()]] You convert " + goldChange + " gold to ecu with a " + this.goldValue + " Value Gold \n");
+	                console.log('[[WALLET convertGoldToEcu()]] You convert ' + goldChange + ' gold to ecu with a ' + this.goldValue + ' Value Gold \n');
 	                this.gold -= goldChange;
 	                this.ecu += goldChange * this.goldValue;
-	                console.log("[[WALLET convertGoldToEcu()]] You have now " + this.ecu + " ecu and " + this.gold + " gold\n");
-	            } else console.log("[[WALLET convertGoldToEcu()]] you are missing " + (goldChange - this.gold) + " to complete this transaction\n");
+	                console.log('[[WALLET convertGoldToEcu()]] You have now ' + this.ecu + ' ecu and ' + this.gold + ' gold\n');
+	            } else console.log('[[WALLET convertGoldToEcu()]] you are missing ' + (goldChange - this.gold) + ' to complete this transaction\n');
+	        }
+
+	        // actualise l'affichage des golds et écus dans le DOM
+
+	    }, {
+	        key: 'renderWallet',
+	        value: function renderWallet() {
+	            this.$gold().innerHTML = this.gold;
+	            this.$ecu().innerHTML = this.ecu;
 	        }
 	    }]);
 
@@ -454,7 +468,9 @@
 	                if (this.stockage <= 2) {
 	                    this.stockage++;
 	                    console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
+	                    this.parent.saveDataJson(this.parent);
 	                    if (this.stockage == 2) {
+	                        this.parent.saveDataJson(this.parent);
 	                        this.returnHome();
 	                    }
 	                }
@@ -470,6 +486,7 @@
 	            this.x = 0;
 	            console.log("Votre bateau est retourner à Main Harbor pour vider son stockage ");
 	            this.parent.wallet.gold += this.stockage;
+	            this.parent.wallet.renderWallet();
 	            console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
 	            this.stockage = 0;
 	            this.parent.saveDataJson(this.parent);
@@ -554,7 +571,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	        value: true
+	    value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -576,52 +593,69 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var BuyBoat = function (_Shop) {
-	        _inherits(BuyBoat, _Shop);
+	    _inherits(BuyBoat, _Shop);
 
-	        function BuyBoat(id) {
-	                _classCallCheck(this, BuyBoat);
+	    function BuyBoat(id) {
+	        _classCallCheck(this, BuyBoat);
 
-	                var _this = _possibleConstructorReturn(this, (BuyBoat.__proto__ || Object.getPrototypeOf(BuyBoat)).call(this, id));
+	        var _this = _possibleConstructorReturn(this, (BuyBoat.__proto__ || Object.getPrototypeOf(BuyBoat)).call(this, id));
 
-	                _this.id = id;
-	                _this.$el = $("ul#shop");
+	        _this.id = id;
+	        _this.$el = $("div#button-shop");
 
-	                _this.create_button();
+	        // On lance la propriété crée dans le parent shop.class.js
+	        _this.create_button();
 
-	                _this.$el.on('click', 'input[data-id=' + id + ']', { class: _boat2.default, that: _this, id: id }, _this.buy_boat);
-	                return _this;
+	        // On accroche un événement on click sur la div button-shop en passant en paramètre Boat,
+	        // le context de la class BuyBoat et l'id du constructor
+	        // On met ensuite en callback this.buy_boat
+	        _this.$el.on('click', 'input[data-id=' + id + ']', { class: _boat2.default, that: _this, id: id }, _this.buy_boat);
+	        return _this;
+	    }
+
+	    _createClass(BuyBoat, [{
+	        key: 'buy_boat',
+	        value: function buy_boat(e) {
+
+	            // e correspond à l'object événement renvoyé par jQuery, il contient donc toutes les informations
+	            // du DOM dont la position de la souris la touche préssée etc..
+	            // jQuery nous crée un objet data dans tout ça qui contient nos paramètre
+	            // class that et id
+	            // Si j'envoie this en paramètre c'est pour une bonne raison
+	            // le context this d'un événement jQuery est l'élément du DOM
+	            // donc dans ce cas ci la div avec l'id button-shop
+	            // j'avais donc ici besoin de pouvoir accéder a la référence au parent contenue dans l'objet BuyBoat
+
+	            var data = e.data;
+	            var parent = data.that.parent;
+
+	            if (parent.wallet.ecu < 100) {
+
+	                return console.log("Vous n'avez pas assez d'écu");
+	            } else {
+
+	                parent.boats[parent.id] = new data.class(undefined, parent.id);
+	                parent.id++;
+
+	                parent.wallet.ecu -= 100;
+
+	                parent.saveDataJson(parent);
+
+	                parent.wallet.renderWallet();
+
+	                console.log(parent);
+	            }
 	        }
+	    }]);
 
-	        _createClass(BuyBoat, [{
-	                key: 'buy_boat',
-	                value: function buy_boat(e) {
-
-	                        var data = e.data;
-	                        var parent = data.that.parent;
-
-	                        if (parent.wallet.ecu < 100) {
-
-	                                return console.log("Vous n'avez pas assez d'écu");
-	                        } else {
-
-	                                parent.boats[parent.id] = new data.class(undefined, parent.id);
-	                                parent.id++;
-
-	                                parent.wallet.ecu -= 100;
-
-	                                parent.saveDataJson(parent);
-	                        }
-	                }
-	        }]);
-
-	        return BuyBoat;
+	    return BuyBoat;
 	}(_shop2.default);
 
 	exports.default = BuyBoat;
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -631,19 +665,13 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _boat = __webpack_require__(4);
-
-	var _boat2 = _interopRequireDefault(_boat);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Shop = function () {
 	    function Shop(id) {
 	        _classCallCheck(this, Shop);
 
-	        this.$el = $('ul#shop');
+	        this.$el = $('div#button-shop');
 
 	        this.$el.on('click', 'input[data-type=Equipement]', function () {
 
@@ -664,9 +692,11 @@
 	                }
 	            };
 	        });
-	        parent.boats[parent.id] = new data.class(undefined, parent.id);
-	        parent.id++;
 	    }
+
+	    // propriété appelée dans boats.shop.class.js
+	    // On crée deux boutons shop pour l'instant on laisse comme ça mais c'est nul il faut refactoriser
+
 
 	    _createClass(Shop, [{
 	        key: 'create_button',

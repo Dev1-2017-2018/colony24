@@ -50,7 +50,6 @@
 	</div>
 	<div class="aside buttons">
 		<div id="button-shop">
-			<p class="button">Shop</p>
 		</div>
 		<div id="button-classment">
 			<p class="button">Classment</p>
@@ -68,7 +67,7 @@
 						<path d="M437,319.13H410.36L360.68,220.7H330.11l-45.7-90.55H207.19l-45.7,90.55H130.93L81.25,319.13H54.66L1,425.44H490.6ZM169.53,393.76,135.84,327h67.38Zm76.27-98.43-29.71-58.88h59.43Zm76.27,98.43L288.38,327h67.39ZM262.86,71.09H227.43V14h35.43Zm63.54,28L296.2,80.56,327.29,29.9l30.2,18.54Zm49.18,55.53-18-30.52,44.91-26.49,18,30.53ZM166.09,99.1,135,48.44,165.2,29.9l31.09,50.67Zm-49.17,55.52L72,128.13,90,97.61l44.91,26.49Zm0,0" transform="translate(-1 -14)"/>
 					</svg>
 					<p>GOLD :</p>
-					<p>250</p>
+					<p id="gold">250</p>
 				</div>
 				<div>
 					<svg version="1.1" id="gold_colony24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 310 410" style="enable-background:new 0 0 310 410;" xml:space="preserve">
@@ -103,7 +102,7 @@
 						</g>
 					</svg>
 					<p>ECU :</p>
-					<p>360</p>
+					<p id="ecu">360</p>
 				</div>
 			</div>
 
@@ -111,13 +110,39 @@
 
 	<!-- MAIN -->
 	<div class="main">
-
-
-
+        <div id="player-boats">
+            <p> ici on va append nos div </p>
+        </div>
 	</div>
 </section>
 
+<?php
+    // récupére le username du joueur
+    $user = $_SESSION["user"];
 
+    if (isset($_POST['player'])){
+        get_json();
+    }
+
+    function get_json(){
+        $player = $_POST['player'];
+        update_json_data($player);
+    }
+
+    function send_json($user){
+        $monJson =  send_json_data($user);
+
+        return $monJson;
+    }
+
+    $data = send_json($user);
+?>
+
+<script id="myScript">
+    let userData = <?php echo $data; ?>;
+</script>
+
+<script src ="js/bundle.js"></script>
 
 <?php $content = ob_get_clean(); ?>
 <?php include __DIR__ . '/../layouts/master.php' ?>

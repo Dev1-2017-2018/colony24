@@ -16,7 +16,7 @@ body {
 * {
 	font-family: 'Bungee', sans-serif;
 	font-weight: 400;
-	color: #fff;
+	color: #a42fff;
 }
 
 p {
@@ -286,8 +286,19 @@ div.player-info div
   letter-spacing: .025em;
 }
 
-
-
+#player-boats div p
+{
+    justify-content: flex-end;
+    display: inline-block;
+    text-align: end;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #ffffff;
+    text-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+    font-size: 1.4em;
+    line-height: 1.1;
+    letter-spacing: .025em;
+}
 
 
 
@@ -297,7 +308,7 @@ div.main
 {
   grid-column-start: 3;
   grid-column-end: 4;
-  grid-row-start: 1;
+  grid-row-start: 2;
   grid-row-end: 6;
 }
 

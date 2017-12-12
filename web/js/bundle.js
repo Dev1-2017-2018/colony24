@@ -63,7 +63,7 @@
 
 	    // Initialisation du jeu
 
-	    colony24 = new _game2.default(userData);
+	    colony24 = new _game2.default(userData, shop_equipement);
 	});
 	console.log('app loaded');
 
@@ -105,20 +105,31 @@
 
 	var _map2 = _interopRequireDefault(_map);
 
+	var _ranking = __webpack_require__(12);
+
+	var _ranking2 = _interopRequireDefault(_ranking);
+
 	var _boatShop = __webpack_require__(7);
 
 	var _boatShop2 = _interopRequireDefault(_boatShop);
+
+	var _equipementShop = __webpack_require__(9);
+
+	var _equipementShop2 = _interopRequireDefault(_equipementShop);
+
+	var _inventory = __webpack_require__(11);
+
+	var _inventory2 = _interopRequireDefault(_inventory);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Game = function () {
-	    function Game(config) {
+	    function Game(config, shop_equipement) {
 	        _classCallCheck(this, Game);
 
 	        this.name = config.name;
-
 	        // Launch map
 	        this.map = new _map2.default();
 
@@ -145,10 +156,16 @@
 
 	        // Creation du shop
 	        this.mainHarbor.shop = {};
+	        this.mainHarbor.shop.equipement = {};
 
-	        this.mainHarbor.shop['button_boat_shop'] = new _boatShop2.default(this.id);
+	        for (var i = 0; i < 1; i++) {
+	            this.mainHarbor.shop['button ' + i] = new _boatShop2.default(this.id);
+	            this.mainHarbor.shop.equipement = new _equipementShop2.default(this.id, shop_equipement);
+	        }
 
-	        //this.inventory = new Inventory();
+	        console.log(this);
+
+	        this.inventory = new _inventory2.default();
 
 	        // Creation des références au parent dans les enfants
 
@@ -205,7 +222,7 @@
 	            }
 	        }
 
-	        // fonction pour sauvegarder l'objet du joueur dans son json aproprié
+	        // fonction pour sauvegarder l'objet du joueur dans son json approprié
 
 	    }, {
 	        key: 'saveDataJson',
@@ -229,12 +246,7 @@
 	            }
 	            if (o.mainHarbor.shop != undefined) {
 
-	                var _n = null;
-	                for (_n in o.mainHarbor.shop) {
-
-	                    delete o.mainHarbor.shop[_n].parent;
-	                    delete o.mainHarbor.shop[_n].$el;
-	                }
+	                delete o.mainHarbor.shop;
 	            }
 
 	            // ensuite on peut lancer la requete du fichier update_json_model.php
@@ -381,7 +393,7 @@
 	    _createClass(Boat, [{
 	        key: 'create_boat_button',
 	        value: function create_boat_button() {
-	            this.$el.append('<li id="li' + this.id + '" style="display: inline-block">\n                            <div>\n                                <p style="width: 30%; margin: 0 auto">' + this.name + ' x:' + this.x + ' y:' + this.y + '</p>\n                                <input style="width: 45%; margin: 0 auto" type="number" placeholder="x"/>\n                                <input style="width: 45%; margin: 0 auto" type="number" placeholder="y"/>\n                                <input type="button" value="Move"/>\n                            </div>\n                         </li>');
+	            this.$el.append('\n            <li id="li' + this.id + '" style="display: inline-block">\n                <div>\n                    <p style="width: 30%; margin: 0 auto">' + this.name + ' x:' + this.x + ' y:' + this.y + '</p>\n                    <input style="width: 45%; margin: 0 auto" type="number" placeholder="x"/>\n                    <input style="width: 45%; margin: 0 auto" type="number" placeholder="y"/>\n                    <input type="button" value="Move"/>\n                </div>\n            </li>\n        ');
 	        }
 	    }]);
 
@@ -489,6 +501,7 @@
 	            this.parent.wallet.renderWallet();
 	            console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
 	            this.stockage = 0;
+	            this.parent.wallet.renderWallet();
 	            this.parent.saveDataJson(this.parent);
 	        }
 	    }]);
@@ -636,9 +649,9 @@
 
 	                parent.boats[parent.id] = new data.class(undefined, parent.id);
 	                parent.id++;
-
+	                console.log(parent);
 	                parent.wallet.ecu -= 100;
-
+	                parent.wallet.renderWallet();
 	                parent.saveDataJson(parent);
 
 	                parent.wallet.renderWallet();
@@ -668,7 +681,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Shop = function () {
-	    function Shop(id) {
+	    function Shop(id, shop_equipement) {
 	        _classCallCheck(this, Shop);
 
 	        this.$el = $('div#button-shop');
@@ -713,6 +726,195 @@
 	}();
 
 	exports.default = Shop;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _shop = __webpack_require__(8);
+
+	var _shop2 = _interopRequireDefault(_shop);
+
+	var _equipement = __webpack_require__(10);
+
+	var _equipement2 = _interopRequireDefault(_equipement);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ShopEquipement = function (_Shop) {
+	    _inherits(ShopEquipement, _Shop);
+
+	    function ShopEquipement(id, shop_equipement) {
+	        _classCallCheck(this, ShopEquipement);
+
+	        var _this = _possibleConstructorReturn(this, (ShopEquipement.__proto__ || Object.getPrototypeOf(ShopEquipement)).call(this, id, shop_equipement));
+
+	        var $el = $(document.getElementById('equipement-model'));
+
+	        var id_equip = 0;
+	        var property = null;
+	        for (property in shop_equipement) {
+	            if (shop_equipement.hasOwnProperty(property)) {
+	                _this[shop_equipement[property].Nom] = new _equipement2.default(shop_equipement[property], $el, id_equip);
+	            }
+	            $el.on('click', 'input[data-id-equip=' + id_equip + ']', { that: _this, id: id, equipement: shop_equipement[property] }, _this.buy_equip);
+	            id_equip++;
+	        }
+	        console.log(_this);
+	        return _this;
+	    }
+
+	    _createClass(ShopEquipement, [{
+	        key: 'buy_equip',
+	        value: function buy_equip(e) {
+	            var parent = e.data.that.parent;
+	            var wallet = parent.wallet;
+	            var equipement = e.data.equipement;
+	            var equipementName = equipement.Nom;
+	            var price = equipement.Prix;
+
+	            console.log(equipement);
+
+	            if (wallet.ecu >= price) {
+
+	                parent.inventory[equipementName] = equipement;
+	                parent.wallet.ecu -= price;
+
+	                wallet.renderWallet();
+	            }
+	        }
+	    }]);
+
+	    return ShopEquipement;
+	}(_shop2.default);
+
+	exports.default = ShopEquipement;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Equipement = function () {
+	    function Equipement(equipement, $el, id_equip) {
+	        _classCallCheck(this, Equipement);
+
+	        $el.append('<li></li>');
+
+	        var property = null;
+	        for (property in equipement) {
+	            if (equipement.hasOwnProperty(property)) {
+	                if (equipement[property] != null) {
+	                    this[property] = equipement[property];
+	                    if (property != 'id' && property != 'Prix') {
+	                        this.render_equipement($el, property, equipement[property]);
+	                    }
+	                    if (property == 'Prix') {
+	                        $el.children().last().append('<input type="button" data-id-equip="' + id_equip + '" value="Acheter pour ' + equipement[property] + ' \xE9cus">');
+	                    }
+	                }
+	            }
+	        }
+	    }
+
+	    _createClass(Equipement, [{
+	        key: 'render_equipement',
+	        value: function render_equipement($el, property, equipement_property) {
+	            $el.children().last().append('\n            <p>\n                ' + property + ' : ' + equipement_property + '\n            </p>\n        ');
+	        }
+	    }]);
+
+	    return Equipement;
+	}();
+
+	exports.default = Equipement;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Inventory = function Inventory() {
+	    _classCallCheck(this, Inventory);
+
+	    this.name = 'Inventory';
+	};
+
+	exports.default = Inventory;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Ranking = function Ranking() {
+	    _classCallCheck(this, Ranking);
+
+	    // Get the modal
+	    var modal = document.getElementById('modalPopup');
+
+	    // Get the button that opens the modal
+	    var btn = document.getElementById("button-classment");
+
+	    // Get the <span> element that closes the modal
+	    var span = document.getElementsByClassName("close")[0];
+
+	    // When the user clicks the button, open the modal
+	    btn.onclick = function () {
+	        modal.style.display = "block";
+	    };
+
+	    // When the user clicks on <span> (x), close the modal
+	    span.onclick = function () {
+	        modal.style.display = "none";
+	    };
+
+	    // When the user clicks anywhere outside of the modal, close it
+	    window.onclick = function (event) {
+	        if (event.target == modal) {
+	            modal.style.display = "none";
+	        }
+	    };
+	};
+
+	exports.default = Ranking;
 
 /***/ })
 /******/ ]);

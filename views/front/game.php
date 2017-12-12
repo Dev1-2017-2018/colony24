@@ -14,12 +14,8 @@
 
 <section class="container">
 	<!-- ASIDE -->
-	<div class="aside action-list">
-		<div id="list-text">
-			<p>Liste d'action du joueur a ajouter impotentia fines mediocrium delictorum nefanda Clematii cuiusdam</p>
-			<p>misceri sibi generum, flagrans eius amore, non impetraret, ut ferebatur, per palatii pseudothyrum introducta, oblato pretioso reginae monili id adsecuta </p>
-			<p>Vbi curarum abiectis ponderibus aliis tamquam nodum </p>
-			<p>Atque, ut Tullius ait, ut etiam ferae fame </p>
+	<div class="aside actionList">
+		<div id="listText">
 		</div>
 	</div>
 	<div class="aside buttons">
@@ -27,39 +23,6 @@
 		</div>
 		<div id="button-classment">
 			<p class="button">Classment</p>
-            <div id="modalPopup" class="modal">
-		        <div class="modal-content">
-		            <span class="close">&times;</span>
-		            <table>
-		                <tr>
-		                    <th>Rank</th>
-		                    <th>Name</th>
-		                    <th>Score</th>
-		                </tr>
-		                <p>
-		                    <?php $i = 1; ?>
-		                    <?php foreach ($datasScore as $data) : ?>
-		                    <tr>
-
-		                        <td>
-		                            <?php echo $i; ?>
-		                            <?php $i++; ?>
-		                        </td>
-		                        <td><?php echo htmlentities($data['pseudo']); ?></td>
-		                        <td><?php echo htmlentities($data['score']); ?></td>
-		                    </tr>
-		                    <?php endforeach; ?>
-		                </p>
-		                <p>
-		                    <tr>
-		                        <td><?php echo htmlentities($rankUser[0]['rank']+1); ?></td>
-		                        <td><?php echo htmlentities($scoreUser[0]['pseudo']); ?></td>
-		                        <td><?php echo htmlentities($scoreUser[0]['score']); ?></td>
-		                    </tr>
-		                </p>
-		            </table>
-		        </div>
-		    </div>
 		</div>
 	</div>
 
@@ -118,7 +81,7 @@
 	<!-- MAIN -->
 	<div class="main">
         <div id="player-boats">
-            <ul id="boats"></ul>
+            <p> ici on va append nos div </p>
         </div>
 	</div>
 </section>

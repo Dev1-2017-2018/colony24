@@ -23,11 +23,11 @@
 	<!-- ***** CSS UNIVERSAL ***** -->
 	<link type="text/css" rel="stylesheet" href="/../css/global.css"/>
 	<link type="text/css" rel="stylesheet" href="/../css/log_reg.css"/>
+	<link rel="stylesheet" type="text/css" href="/../css/scorePopupCss.css">
 
 	</head>
 <body>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <?php echo $content; ?>
-    <script src = "js/bundle.js"></script>
 </body>
 </html>

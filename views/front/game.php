@@ -53,6 +53,39 @@
 		</div>
 		<div id="button-classment">
 			<p class="button">Classment</p>
+			<div id="modalPopup" class="modal">
+		        <div class="modal-content">
+		            <span class="close">&times;</span>
+		            <table>
+		                <tr>
+		                    <th>Rank</th>
+		                    <th>Name</th> 
+		                    <th>Score</th>
+		                </tr>
+		                <p>
+		                    <?php $i = 1; ?>
+		                    <?php foreach ($datasScore as $data) : ?>
+		                    <tr>
+		                        
+		                        <td>
+		                            <?php echo $i; ?>
+		                            <?php $i++; ?>
+		                        </td>
+		                        <td><?php echo htmlentities($data['pseudo']); ?></td>
+		                        <td><?php echo htmlentities($data['score']); ?></td>
+		                    </tr>
+		                    <?php endforeach; ?>
+		                </p>
+		                <p>
+		                    <tr>
+		                        <td><?php echo htmlentities($rankUser[0]['rank']+1); ?></td>
+		                        <td><?php echo htmlentities($scoreUser[0]['pseudo']); ?></td>
+		                        <td><?php echo htmlentities($scoreUser[0]['score']); ?></td>
+		                    </tr>
+		                </p>
+		            </table>
+		        </div>
+		    </div>
 		</div>
 	</div>
 
@@ -137,6 +170,36 @@
 
     $data = send_json($user);
 ?>
+
+<script id="popupScore">
+    var userData = <?php echo $data; ?>;
+
+    // Get the modal
+    var modal = document.getElementById('modalPopup');
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("button-classment");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 
 <script id="myScript">
     let userData = <?php echo $data; ?>;

@@ -27,6 +27,9 @@ function score ()
 function main ()
 {
     $datas = getShop();
+    $datasScore = scoreName();
+    $scoreUser = scoreUser();
+    $rankUser = rankUser();
 
     include __DIR__ . '/../views/front/game.php';
 }

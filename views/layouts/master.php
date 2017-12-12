@@ -9,6 +9,5 @@
 <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <?php echo $content; ?>
-    <script src = "js/bundle.js"></script>
 </body>
 </html>

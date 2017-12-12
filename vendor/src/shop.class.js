@@ -2,7 +2,7 @@ import Boat from './boat.class';
 
 export default class Shop
 {
-    constructor(id)
+    constructor(id,shop_equipement)
     {
         this.$el = $('ul#shop');
 

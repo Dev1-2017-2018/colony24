@@ -1,14 +1,19 @@
+
 import Wallet from './wallet.class';
 
 import Boat from './boat.class';
 
 import Map from './map.class'
 
-import Shop from './boat.shop.class';
+import BuyBoat from './boat.shop.class';
+
+import ShopEquipement from './equipement.shop.class';
+
+import Inventory from './inventory.class';
 
 export default class Game
 {
-	constructor(config)
+	constructor(config,shop_equipement)
 	{
 	    this.name = config.name;
 
@@ -36,16 +41,18 @@ export default class Game
         // Creation de main Harbor
         this.mainHarbor = {};
 
-
-
         // Creation du shop
         this.mainHarbor.shop = {};
+        this.mainHarbor.shop.equipement = {};
 
         for (let i = 0; i < 1; i++){
-            this.mainHarbor.shop[`button ${i}`] = new Shop(this.id);
+            this.mainHarbor.shop[`button ${i}`] = new BuyBoat(this.id);
+            this.mainHarbor.shop.equipement = new ShopEquipement(this.id,shop_equipement);
         }
 
-		//this.inventory = new Inventory();
+        console.log(this);
+
+		this.inventory = new Inventory();
 
         // Creation des références au parent dans les enfants
 
@@ -93,7 +100,7 @@ export default class Game
         }
     }
 
-    // fonction pour sauvegarder l'objet du joueur dans son json aproprié
+    // fonction pour sauvegarder l'objet du joueur dans son json approprié
     saveDataJson(o){
 
         // premièrement dans cette fonction on va devoir enlever toutes les références au parent dans les enfants
@@ -114,12 +121,7 @@ export default class Game
         }
         if (o.mainHarbor.shop != undefined){
 
-            let n = null;
-            for(n in o.mainHarbor.shop){
-
-                delete o.mainHarbor.shop[n].parent;
-                delete o.mainHarbor.shop[n].$el;
-            }
+            delete o.mainHarbor.shop;
         }
 
         // ensuite on peut lancer la requete du fichier update_json_model.php

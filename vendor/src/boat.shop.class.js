@@ -6,12 +6,10 @@ export default class BuyBoat extends Shop
     constructor(id)
     {
         super(id);
-
         this.id = id;
         this.$el = $("ul#shop");
 
         this.create_button();
-
         this.$el.on('click', `input[data-id=${id}]`, { class: Boat, that: this, id: id }, this.buy_boat);
     }
 
@@ -28,7 +26,7 @@ export default class BuyBoat extends Shop
 
             parent.boats[parent.id] = new data.class(undefined,parent.id);
             parent.id++;
-
+            console.log(parent);
             parent.wallet.ecu -= 100;
 
             parent.saveDataJson(parent);

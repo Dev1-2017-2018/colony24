@@ -23,15 +23,16 @@ export default class Boat extends Boats {
 	}
 
 	create_boat_button(){
-	    this.$el.append(`<li id="li${this.id}" style="display: inline-block">
-                            <div>
-                                <p style="width: 30%; margin: 0 auto">${this.name} x:${this.x} y:${this.y}</p>
-                                <input style="width: 45%; margin: 0 auto" type="number" placeholder="x"/>
-                                <input style="width: 45%; margin: 0 auto" type="number" placeholder="y"/>
-                                <input type="button" value="Move"/>
-                            </div>
-                         </li>`
-        );
+	    this.$el.append(`
+            <li id="li${this.id}" style="display: inline-block">
+                <div>
+                    <p style="width: 30%; margin: 0 auto">${this.name} x:${this.x} y:${this.y}</p>
+                    <input style="width: 45%; margin: 0 auto" type="number" placeholder="x"/>
+                    <input style="width: 45%; margin: 0 auto" type="number" placeholder="y"/>
+                    <input type="button" value="Move"/>
+                </div>
+            </li>
+        `);
     }
 
 

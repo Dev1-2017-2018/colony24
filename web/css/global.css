@@ -163,7 +163,8 @@ p.button
 }
 
 /* Modal Content */
-.modal-content {
+
+#modal-content {
     background-color: #fefefe;
     overflow: scroll;
     margin: auto;
@@ -171,6 +172,18 @@ p.button
     border: 1px solid #888;
     width: 80%;
     height: 70%;
+}
+
+/* Display PopUp */
+
+ul#equipement-model li{
+    margin : 50px 0;
+}
+ul#equipement-model li p{
+    color : #000;
+}
+ul#equipement-model li input{
+    margin-top: 30px;
 }
 
 /* The Close Button */
@@ -275,6 +288,11 @@ div.main
   grid-column-end: 4;
   grid-row-start: 1;
   grid-row-end: 6;
+}
+
+ul#boats{
+    margin-top: 150px;
+    margin-left: 150px;
 }
 
 /********************** ASIDE *************************/

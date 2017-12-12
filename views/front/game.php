@@ -2,41 +2,15 @@
 <?php ob_start() ;?>
 
 
-<!-- Popup du shop -->
+<!-- Display  Popup du shop -->
 <div id="myModal" class="modal">
-    <div class="modal-content">
+    <div id="modal-content">
         <span class="close">&times;</span>
-        <?php $id = 1;?>
-        <ul>
-            <?php foreach($datas as $val):?>
-                <li style="margin-bottom: 30px;">
-                    <?php
-                    echo 'Marque : '.$val['brand'].'<br>'.
-                        'Nom : '.$val['name'].'<br>';
-                    if (isset($val['energy'])){
-                        echo 'Energie disponible : '.$val['energy'].'<br>';
-                    }elseif(isset($val['power']) && isset($val['speed'])){
-                        echo 'Puissance : '.$val['power'].'<br>'.
-                            'Vitesse : '.$val['speed'].'<br>';
-                    }elseif (isset($val['propulsion'])){
-                        echo 'Propulsion : '.$val['propulsion'].'<br>';
-                    }elseif (isset($val['power'])){
-                        echo 'Puissance : '.$val['power'].'<br>';
-                    }else{
-                        echo 'Réparation : '.$val['repair'].'<br>';
-                    }
-                    echo 'Prix : '.$val['price'].'<br>';
-                    ?>
-                    <input type='button' id="<?php echo $id;?>" value='Acheter'/>
-                    <?php $id++;?>
-                </li>
-            <?php endforeach; ?>
+        <ul id="equipement-model">
+
         </ul>
     </div>
 </div>
-
-
-
 
 <section class="container">
 	<!-- ASIDE -->
@@ -53,20 +27,20 @@
 		</div>
 		<div id="button-classment">
 			<p class="button">Classment</p>
-			<div id="modalPopup" class="modal">
+            <div id="modalPopup" class="modal">
 		        <div class="modal-content">
 		            <span class="close">&times;</span>
 		            <table>
 		                <tr>
 		                    <th>Rank</th>
-		                    <th>Name</th> 
+		                    <th>Name</th>
 		                    <th>Score</th>
 		                </tr>
 		                <p>
 		                    <?php $i = 1; ?>
 		                    <?php foreach ($datasScore as $data) : ?>
 		                    <tr>
-		                        
+
 		                        <td>
 		                            <?php echo $i; ?>
 		                            <?php $i++; ?>
@@ -144,7 +118,7 @@
 	<!-- MAIN -->
 	<div class="main">
         <div id="player-boats">
-            <p> ici on va append nos div </p>
+            <ul id="boats"></ul>
         </div>
 	</div>
 </section>
@@ -171,38 +145,9 @@
     $data = send_json($user);
 ?>
 
-<script id="popupScore">
-    var userData = <?php echo $data; ?>;
-
-    // Get the modal
-    var modal = document.getElementById('modalPopup');
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("button-classment");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal 
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
-
 <script id="myScript">
     let userData = <?php echo $data; ?>;
+    let shop_equipement = <?php echo json_encode($datas, JSON_PRETTY_PRINT); ?>;
 </script>
 
 <script src ="js/bundle.js"></script>

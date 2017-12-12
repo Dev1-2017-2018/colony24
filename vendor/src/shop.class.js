@@ -18,7 +18,6 @@ export default class Shop
             span.onclick = function() {
                 modal.style.display = "none";
             }
-
             // Quand l'utilisateur clique en dehors de la popup, elle se ferme
             window.onclick = function(event) {
                 if (event.target === modal) {
@@ -26,6 +25,8 @@ export default class Shop
                 }
             }
         });
+            parent.boats[parent.id] = new data.class(undefined, parent.id);
+            parent.id++;
 
     }
     create_button(){

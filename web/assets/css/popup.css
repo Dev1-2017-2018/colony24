@@ -14,7 +14,7 @@
 }
 
 /* Modal Content */
-#modal-content {
+.modal-content {
     background-color: #fefefe;
     overflow: scroll;
     margin: auto;

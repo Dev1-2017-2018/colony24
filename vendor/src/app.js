@@ -9,7 +9,7 @@ $(function () {
 
     // Initialisation du jeu
 
-    colony24 = new Game(userData,shop_equipement);
+    colony24 = new Game(userData, shop_equipement);
 
-})
+});
 console.log( 'app loaded' );

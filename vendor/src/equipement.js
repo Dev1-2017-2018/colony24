@@ -1,4 +1,3 @@
-import Inventory from "./inventory.class";
 export default class Equipement{
     constructor (equipement,$el, id_equip)
     {
@@ -9,10 +8,10 @@ export default class Equipement{
             if (equipement.hasOwnProperty(property)) {
                 if(equipement[property] != null){
                     this[property] = equipement[property];
-                    if (property != 'id' && property != 'Price'){
+                    if (property != 'id' && property != 'Prix'){
                         this.render_equipement($el, property, equipement[property]);
                     }
-                    if(property == 'Price'){
+                    if(property == 'Prix'){
                         $el.children().last().append(`<input type="button" data-id-equip="${id_equip}" value="Acheter pour ${equipement[property]} écus">`);
                     }
                 }

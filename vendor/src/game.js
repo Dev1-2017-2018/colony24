@@ -1,4 +1,3 @@
-
 import Wallet from './wallet.class';
 
 import Boat from './boat.class';
@@ -11,20 +10,20 @@ import ShopEquipement from './equipement.shop.class';
 
 import Inventory from './inventory.class';
 
+
 export default class Game
 {
-	constructor(config,shop_equipement)
-	{
-	    this.name = config.name;
-
+    constructor(config,shop_equipement)
+    {
+        this.name = config.name;
         // Launch map
-	    this.map = new Map();
+        this.map = new Map();
 
-		// Creation de la wallet
-		this.wallet = new Wallet(Number(config.wallet.gold), Number(config.wallet.ecu));
+        // Creation de la wallet
+        this.wallet = new Wallet(Number(config.wallet.gold), Number(config.wallet.ecu));
 
         // Creation des bateaux
-		this.boats = {};
+        this.boats = {};
 
         let boat = null;
 
@@ -52,7 +51,7 @@ export default class Game
 
         console.log(this);
 
-		this.inventory = new Inventory();
+       this.inventory = new Inventory();
 
         // Creation des références au parent dans les enfants
 
@@ -64,9 +63,9 @@ export default class Game
 
         this.saveDataJson(this);
 
-	}
+    }
 
-	// crée une référence au parent dans tous les enfants de bateau
+    // crée une référence au parent dans tous les enfants de bateau
     setBoatParent (o){
         if(o.boats != undefined){
 

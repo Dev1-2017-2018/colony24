@@ -1,8 +1,8 @@
 import Boats from './boats.class';
 
 export default class Boat extends Boats {
-	constructor(boat, id) {
-	    super(boat, id);
+    constructor(boat, id) {
+        super(boat, id);
 
         this.$el = $("ul#boats");
 
@@ -22,10 +22,10 @@ export default class Boat extends Boats {
                 $(`#li${context.id} > div > p`).html(`${context.name} x:${context.x} y:${context.y}`);
             }
         });
-	}
+    }
 
-	create_boat_button(){
-	    this.$el.append(`
+    create_boat_button(){
+        this.$el.append(`
             <li id="li${this.id}" style="display: inline-block">
                 <div>
                     <p style="width: 30%; margin: 0 auto">${this.name} x:${this.x} y:${this.y}</p>

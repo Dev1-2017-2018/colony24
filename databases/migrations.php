@@ -35,14 +35,14 @@ $userScore = "
 $shop = "
 	CREATE TABLE `shop` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`Brand` VARCHAR (100) NOT NULL,
-	`Name` VARCHAR (100) NOT NULL,
-	`Power` INT UNSIGNED NULL DEFAULT NULL,
+	`Marque` VARCHAR (100) NOT NULL,
+	`Nom` VARCHAR (100) NOT NULL,
+	`Puissance` INT UNSIGNED NULL DEFAULT NULL,
 	`Propulsion` INT UNSIGNED NULL DEFAULT NULL,
-	`Energy` INT UNSIGNED NULL DEFAULT NULL,
-	`Speed` INT UNSIGNED NULL DEFAULT NULL,
-	`Repair` INT UNSIGNED NULL DEFAULT NULL,
-	`Price` INT UNSIGNED NOT NULL,
+	`Energie` INT UNSIGNED NULL DEFAULT NULL,
+	`Vitesse` INT UNSIGNED NULL DEFAULT NULL,
+	`Reparation` INT UNSIGNED NULL DEFAULT NULL,
+	`Prix` INT UNSIGNED NOT NULL,
 	PRIMARY KEY (`id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 ";
@@ -79,7 +79,7 @@ for ( $i = 0; $i < 5; $i++ ) {
 $prepareUserScore = NULL;
 
 $prepareShop = $pdo->prepare("INSERT INTO `shop` 
-								(`id`, `brand`, `name`, `power`, `propulsion`, `energy`, `speed`, `repair`, `price`) 
+								(`id`, `Marque`, `Nom`, `Puissance`, `Propulsion`, `Energie`, `Vitesse`, `Reparation`, `Prix`) 
 								VALUES
 								(1, 'Arnson', 'Batterie PWR 4', NULL, NULL, 300, NULL, NULL, 600),
 								(2, 'Lukslit', 'Batterie SUH 7', NULL, NULL, 500, NULL, NULL, 800),

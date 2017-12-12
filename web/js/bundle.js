@@ -109,11 +109,11 @@
 
 	var _boatShop2 = _interopRequireDefault(_boatShop);
 
-	var _equipementShop = __webpack_require__(11);
+	var _equipementShop = __webpack_require__(9);
 
 	var _equipementShop2 = _interopRequireDefault(_equipementShop);
 
-	var _inventory = __webpack_require__(9);
+	var _inventory = __webpack_require__(11);
 
 	var _inventory2 = _interopRequireDefault(_inventory);
 
@@ -126,7 +126,6 @@
 	        _classCallCheck(this, Game);
 
 	        this.name = config.name;
-
 	        // Launch map
 	        this.map = new _map2.default();
 
@@ -277,7 +276,7 @@
 /* 3 */
 /***/ (function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -294,22 +293,38 @@
 	        this.goldValue = 1.2; //SQL GOLD VALUE A INTEGRER
 	        this.gold = gold;
 	        this.ecu = ecu;
-	        console.log("[[WALLET]] goldValue is " + this.goldValue + " \n[[WALLET]] gold is " + this.gold + " \n[[WALLET]] ecu is " + this.ecu + " \n");
+
+	        // Selection des <p> pour render les golds et écus
+	        this.$gold = document.getElementById.bind(document, 'gold');
+	        this.$ecu = document.getElementById.bind(document, 'ecu');
+
+	        this.renderWallet();
+
+	        console.log('[[WALLET]] goldValue is ' + this.goldValue + ' \n[[WALLET]] gold is ' + this.gold + ' \n[[WALLET]] ecu is ' + this.ecu + ' \n');
 	    }
 
 	    //Gold convert to Ecu
 
 
 	    _createClass(Wallet, [{
-	        key: "convertGoldEcu",
+	        key: 'convertGoldEcu',
 	        value: function convertGoldEcu(goldChange) {
-	            console.log("[[WALLET convertGoldToEcu()]] In Wallet > " + this.ecu + " ecu & " + this.gold + " gold & " + this.goldValue + " goldValue\n");
+	            console.log('[[WALLET convertGoldToEcu()]] In Wallet > ' + this.ecu + ' ecu & ' + this.gold + ' gold & ' + this.goldValue + ' goldValue\n');
 	            if (this.gold >= goldChange) {
-	                console.log("[[WALLET convertGoldToEcu()]] You convert " + goldChange + " gold to ecu with a " + this.goldValue + " Value Gold \n");
+	                console.log('[[WALLET convertGoldToEcu()]] You convert ' + goldChange + ' gold to ecu with a ' + this.goldValue + ' Value Gold \n');
 	                this.gold -= goldChange;
 	                this.ecu += goldChange * this.goldValue;
-	                console.log("[[WALLET convertGoldToEcu()]] You have now " + this.ecu + " ecu and " + this.gold + " gold\n");
-	            } else console.log("[[WALLET convertGoldToEcu()]] you are missing " + (goldChange - this.gold) + " to complete this transaction\n");
+	                console.log('[[WALLET convertGoldToEcu()]] You have now ' + this.ecu + ' ecu and ' + this.gold + ' gold\n');
+	            } else console.log('[[WALLET convertGoldToEcu()]] you are missing ' + (goldChange - this.gold) + ' to complete this transaction\n');
+	        }
+
+	        // actualise l'affichage des golds et écus dans le DOM
+
+	    }, {
+	        key: 'renderWallet',
+	        value: function renderWallet() {
+	            this.$gold().innerHTML = this.gold;
+	            this.$ecu().innerHTML = this.ecu;
 	        }
 	    }]);
 
@@ -357,6 +372,8 @@
 	        $('li#li' + id).on('click', 'input[type=\'button\']', { that: _this }, function (e) {
 
 	            var context = e.data.that;
+
+	            console.log(context);
 
 	            var inputX = $('#li' + context.id + ' > div > input:nth-child(2)').val();
 	            var inputY = $('#li' + context.id + ' > div > input:nth-child(3)').val();
@@ -477,6 +494,7 @@
 	            this.parent.wallet.gold += this.stockage;
 	            console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
 	            this.stockage = 0;
+	            this.parent.wallet.renderWallet();
 	            this.parent.saveDataJson(this.parent);
 	        }
 	    }]);
@@ -589,7 +607,7 @@
 	        var _this = _possibleConstructorReturn(this, (BuyBoat.__proto__ || Object.getPrototypeOf(BuyBoat)).call(this, id));
 
 	        _this.id = id;
-	        _this.$el = $("ul#shop");
+	        _this.$el = $("div#button-shop");
 
 	        _this.create_button();
 	        _this.$el.on('click', 'input[data-id=' + id + ']', { class: _boat2.default, that: _this, id: id }, _this.buy_boat);
@@ -612,7 +630,7 @@
 	                parent.id++;
 	                console.log(parent);
 	                parent.wallet.ecu -= 100;
-
+	                parent.wallet.renderWallet();
 	                parent.saveDataJson(parent);
 	            }
 	        }
@@ -647,7 +665,7 @@
 	    function Shop(id, shop_equipement) {
 	        _classCallCheck(this, Shop);
 
-	        this.$el = $('ul#shop');
+	        this.$el = $('div#button-shop');
 
 	        this.$el.on('click', 'input[data-type=Equipement]', function () {
 
@@ -661,7 +679,6 @@
 	            span.onclick = function () {
 	                modal.style.display = "none";
 	            };
-
 	            // Quand l'utilisateur clique en dehors de la popup, elle se ferme
 	            window.onclick = function (event) {
 	                if (event.target === modal) {
@@ -689,36 +706,6 @@
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var Inventory = function () {
-	    function Inventory() {
-	        _classCallCheck(this, Inventory);
-	    }
-
-	    _createClass(Inventory, [{
-	        key: "equip",
-	        value: function equip() {}
-	    }]);
-
-	    return Inventory;
-	}();
-
-	exports.default = Inventory;
-
-/***/ }),
-/* 10 */,
-/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -733,13 +720,9 @@
 
 	var _shop2 = _interopRequireDefault(_shop);
 
-	var _equipement = __webpack_require__(14);
+	var _equipement = __webpack_require__(10);
 
 	var _equipement2 = _interopRequireDefault(_equipement);
-
-	var _inventory = __webpack_require__(9);
-
-	var _inventory2 = _interopRequireDefault(_inventory);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -758,13 +741,14 @@
 	        var _this = _possibleConstructorReturn(this, (ShopEquipement.__proto__ || Object.getPrototypeOf(ShopEquipement)).call(this, id, shop_equipement));
 
 	        var $el = $(document.getElementById('equipement-model'));
+
 	        var id_equip = 0;
 	        var property = null;
 	        for (property in shop_equipement) {
 	            if (shop_equipement.hasOwnProperty(property)) {
-	                _this[shop_equipement[property].Name] = new _equipement2.default(shop_equipement[property], $el, id_equip);
+	                _this[shop_equipement[property].Nom] = new _equipement2.default(shop_equipement[property], $el, id_equip);
 	            }
-	            $el.on('click', 'input[data-id-equip=' + id_equip + ']', { class: _inventory2.default, that: _this, id: id }, _this.buy_equip);
+	            $el.on('click', 'input[data-id-equip=' + id_equip + ']', { that: _this, id: id, equipement: shop_equipement[property] }, _this.buy_equip);
 	            id_equip++;
 	        }
 	        console.log(_this);
@@ -774,9 +758,21 @@
 	    _createClass(ShopEquipement, [{
 	        key: 'buy_equip',
 	        value: function buy_equip(e) {
-	            var data = e.data;
-	            var parent = data.that.parent;
-	            parent.inventory = new data.class();
+	            var parent = e.data.that.parent;
+	            var wallet = parent.wallet;
+	            var equipement = e.data.equipement;
+	            var equipementName = equipement.Nom;
+	            var price = equipement.Prix;
+
+	            console.log(equipement);
+
+	            if (wallet.ecu >= price) {
+
+	                parent.inventory[equipementName] = equipement;
+	                parent.wallet.ecu -= price;
+
+	                wallet.renderWallet();
+	            }
 	        }
 	    }]);
 
@@ -786,10 +782,8 @@
 	exports.default = ShopEquipement;
 
 /***/ }),
-/* 12 */,
-/* 13 */,
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 10 */
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -798,12 +792,6 @@
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _inventory = __webpack_require__(9);
-
-	var _inventory2 = _interopRequireDefault(_inventory);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -818,10 +806,10 @@
 	            if (equipement.hasOwnProperty(property)) {
 	                if (equipement[property] != null) {
 	                    this[property] = equipement[property];
-	                    if (property != 'id' && property != 'Price') {
+	                    if (property != 'id' && property != 'Prix') {
 	                        this.render_equipement($el, property, equipement[property]);
 	                    }
-	                    if (property == 'Price') {
+	                    if (property == 'Prix') {
 	                        $el.children().last().append('<input type="button" data-id-equip="' + id_equip + '" value="Acheter pour ' + equipement[property] + ' \xE9cus">');
 	                    }
 	                }
@@ -840,6 +828,26 @@
 	}();
 
 	exports.default = Equipement;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Inventory = function Inventory() {
+	    _classCallCheck(this, Inventory);
+
+	    this.name = 'Inventory';
+	};
+
+	exports.default = Inventory;
 
 /***/ })
 /******/ ]);

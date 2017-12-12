@@ -4,7 +4,7 @@ export default class Shop
 {
     constructor(id,shop_equipement)
     {
-        this.$el = $('ul#shop');
+        this.$el = $('div#button-shop');
 
         this.$el.on('click', `input[data-type=Equipement]`, function(){
 
@@ -25,8 +25,6 @@ export default class Shop
                 }
             }
         });
-            parent.boats[parent.id] = new data.class(undefined, parent.id);
-            parent.id++;
 
     }
     create_button(){

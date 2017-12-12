@@ -63,7 +63,7 @@ background-color: rgba(233,171,88,.0);*/
 {
   background-color: #2c3e50;
 }*/
-div.action-list
+div.actionList
 {
   grid-column-start: 1;
   grid-column-end: 3;
@@ -75,17 +75,20 @@ div.action-list
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 15px 14.5px 20px
+  padding: 37px 24px 14.5px 20px;
 }
-#list-text
+#listText
 {
   display: flex;
   flex-direction: column;
 	align-items: stretch;
   width: 100%;
   height: 100%;
+  overflow:auto;
 }
-div.action-list div p
+
+
+div.actionList div p
 {
   font-family: 'Russo One', sans-serif;
   text-align: center;
@@ -96,9 +99,9 @@ div.action-list div p
   font-size: 1em;
   line-height: 1.45;
   letter-spacing: .025em;
-  margin-top: 1em;
+  margin-top: .8em;
 }
-div.action-list div p:nth-child(1)
+div.actionList div p:nth-child(1)
 {
   margin-top: 0em;
 }
@@ -163,8 +166,7 @@ p.button
 }
 
 /* Modal Content */
-
-#modal-content {
+.modal-content {
     background-color: #fefefe;
     overflow: scroll;
     margin: auto;
@@ -172,18 +174,6 @@ p.button
     border: 1px solid #888;
     width: 80%;
     height: 70%;
-}
-
-/* Display PopUp */
-
-ul#equipement-model li{
-    margin : 50px 0;
-}
-ul#equipement-model li p{
-    color : #000;
-}
-ul#equipement-model li input{
-    margin-top: 30px;
 }
 
 /* The Close Button */
@@ -290,11 +280,6 @@ div.main
   grid-row-end: 6;
 }
 
-ul#boats{
-    margin-top: 150px;
-    margin-left: 150px;
-}
-
 /********************** ASIDE *************************/
 /*titre intro*/
 div.element_middle{
@@ -315,4 +300,40 @@ div.element_middle{
 div.element_middle h1 {
   display: block;
 
+}
+
+
+/********************** ANIMATION *************************/
+@keyframes bounceIn {
+  from, 20%, 40%, 60%, 80%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0% {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+  40% {
+    transform: scale3d(.9, .9, .9);
+  }
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+  80% {
+    transform: scale3d(.97, .97, .97);
+  }
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+.bounceIn {
+  animation-name: bounceIn;
+  animation: bounceIn 2s ease-out !important;
+  animation-fill-mode: forwards;
+  backface-visibility: visible !important;
 }

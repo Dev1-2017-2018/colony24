@@ -68,7 +68,7 @@ export default class Boats
     returnHome(){
         this.y = 0;
         this.x = 0;
-        console.log("Votre bateau est retourner à Main Harbor pour vider son stockage ");
+        console.log("Votre bateau est retourné à Main Harbor pour vider son stockage ");
         this.parent.wallet.gold += this.stockage;
         this.parent.wallet.renderWallet();
         console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");

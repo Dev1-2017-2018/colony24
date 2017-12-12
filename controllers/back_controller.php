@@ -23,6 +23,51 @@ function score ()
     include __DIR__ . '/../views/back/score.php';
 }
 
+function map ()
+{
+    $x = $_GET['x'];
+    $y = $_GET['y'];
+
+    $im = imagecreatefrompng("../databases/map.png");
+    $rgb = imagecolorat($im, $x, $y);
+    $r = ($rgb >> 16) & 0xFF;
+    $g = ($rgb >> 8) & 0xFF;
+    $b = $rgb & 0xFF;
+
+    $data = ["x" => $x, "y" => $y, "p" => $r, "g" => $g, "i" => $b]; 
+    $json = json_encode($data);
+    echo $json;
+}
+
+function moveBoat () {
+
+    $x = $_GET['x'];
+    $y = $_GET['y'];
+
+    $im = imagecreatefrompng("../databases/map.png");
+    $rgb = imagecolorat($im, $x, $y);
+    $r = ($rgb >> 16) & 0xFF;
+    $g = ($rgb >> 8) & 0xFF;
+    $b = $rgb & 0xFF;
+
+    $data = [
+    "succes"=>0,
+    "x"=>$x,
+    "y"=>$y
+    ];
+
+    if($b == 0){
+    if($g>0){
+        $data["succes"] = 1;
+        $data["gold"]  = $g;
+        $color = imagecolorallocate($im, $r, 0, $b);
+        imagesetpixel($im, $x, $y, $color);
+        }
+    }
+
+    echo json_encode($data);
+}
+
 
 function main ()
 {

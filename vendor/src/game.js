@@ -55,6 +55,8 @@ export default class Game
 
        this.inventory = new Inventory();
 
+       this.ranking = new Ranking();
+
         // Creation des références au parent dans les enfants
 
         this.setBoatParent(this);

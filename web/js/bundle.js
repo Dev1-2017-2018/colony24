@@ -105,6 +105,10 @@
 
 	var _map2 = _interopRequireDefault(_map);
 
+	var _ranking = __webpack_require__(12);
+
+	var _ranking2 = _interopRequireDefault(_ranking);
+
 	var _boatShop = __webpack_require__(7);
 
 	var _boatShop2 = _interopRequireDefault(_boatShop);
@@ -476,7 +480,9 @@
 	                if (this.stockage <= 2) {
 	                    this.stockage++;
 	                    console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
+	                    this.parent.saveDataJson(this.parent);
 	                    if (this.stockage == 2) {
+	                        this.parent.saveDataJson(this.parent);
 	                        this.returnHome();
 	                    }
 	                }
@@ -492,6 +498,7 @@
 	            this.x = 0;
 	            console.log("Votre bateau est retourner à Main Harbor pour vider son stockage ");
 	            this.parent.wallet.gold += this.stockage;
+	            this.parent.wallet.renderWallet();
 	            console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
 	            this.stockage = 0;
 	            this.parent.wallet.renderWallet();
@@ -609,7 +616,12 @@
 	        _this.id = id;
 	        _this.$el = $("div#button-shop");
 
+	        // On lance la propriété crée dans le parent shop.class.js
 	        _this.create_button();
+
+	        // On accroche un événement on click sur la div button-shop en passant en paramètre Boat,
+	        // le context de la class BuyBoat et l'id du constructor
+	        // On met ensuite en callback this.buy_boat
 	        _this.$el.on('click', 'input[data-id=' + id + ']', { class: _boat2.default, that: _this, id: id }, _this.buy_boat);
 	        return _this;
 	    }
@@ -617,6 +629,15 @@
 	    _createClass(BuyBoat, [{
 	        key: 'buy_boat',
 	        value: function buy_boat(e) {
+
+	            // e correspond à l'object événement renvoyé par jQuery, il contient donc toutes les informations
+	            // du DOM dont la position de la souris la touche préssée etc..
+	            // jQuery nous crée un objet data dans tout ça qui contient nos paramètre
+	            // class that et id
+	            // Si j'envoie this en paramètre c'est pour une bonne raison
+	            // le context this d'un événement jQuery est l'élément du DOM
+	            // donc dans ce cas ci la div avec l'id button-shop
+	            // j'avais donc ici besoin de pouvoir accéder a la référence au parent contenue dans l'objet BuyBoat
 
 	            var data = e.data;
 	            var parent = data.that.parent;
@@ -632,6 +653,10 @@
 	                parent.wallet.ecu -= 100;
 	                parent.wallet.renderWallet();
 	                parent.saveDataJson(parent);
+
+	                parent.wallet.renderWallet();
+
+	                console.log(parent);
 	            }
 	        }
 	    }]);
@@ -643,7 +668,7 @@
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -652,12 +677,6 @@
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _boat = __webpack_require__(4);
-
-	var _boat2 = _interopRequireDefault(_boat);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -687,6 +706,10 @@
 	            };
 	        });
 	    }
+
+	    // propriété appelée dans boats.shop.class.js
+	    // On crée deux boutons shop pour l'instant on laisse comme ça mais c'est nul il faut refactoriser
+
 
 	    _createClass(Shop, [{
 	        key: 'create_button',
@@ -848,6 +871,50 @@
 	};
 
 	exports.default = Inventory;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Ranking = function Ranking() {
+	    _classCallCheck(this, Ranking);
+
+	    // Get the modal
+	    var modal = document.getElementById('modalPopup');
+
+	    // Get the button that opens the modal
+	    var btn = document.getElementById("button-classment");
+
+	    // Get the <span> element that closes the modal
+	    var span = document.getElementsByClassName("close")[0];
+
+	    // When the user clicks the button, open the modal
+	    btn.onclick = function () {
+	        modal.style.display = "block";
+	    };
+
+	    // When the user clicks on <span> (x), close the modal
+	    span.onclick = function () {
+	        modal.style.display = "none";
+	    };
+
+	    // When the user clicks anywhere outside of the modal, close it
+	    window.onclick = function (event) {
+	        if (event.target == modal) {
+	            modal.style.display = "none";
+	        }
+	    };
+	};
+
+	exports.default = Ranking;
 
 /***/ })
 /******/ ]);

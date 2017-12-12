@@ -15,6 +15,7 @@ require __DIR__ . '/model/user_score_model.php';
 require __DIR__ . '/model/create_folder_model.php';
 require __DIR__ . '/model/send_json_model.php';
 require __DIR__ . '/model/update_json_model.php';
+require __DIR__ . '/model/score_model.php';
 require __DIR__ . '/model/shop_model.php';
 require __DIR__ . '/controllers/front_controller.php';
 require __DIR__ . '/controllers/back_controller.php';

@@ -27,6 +27,39 @@
 		</div>
 		<div id="button-classment">
 			<p class="button">Classment</p>
+            <div id="modalPopup" class="modal">
+		        <div class="modal-content">
+		            <span class="close">&times;</span>
+		            <table>
+		                <tr>
+		                    <th>Rank</th>
+		                    <th>Name</th>
+		                    <th>Score</th>
+		                </tr>
+		                <p>
+		                    <?php $i = 1; ?>
+		                    <?php foreach ($datasScore as $data) : ?>
+		                    <tr>
+
+		                        <td>
+		                            <?php echo $i; ?>
+		                            <?php $i++; ?>
+		                        </td>
+		                        <td><?php echo htmlentities($data['pseudo']); ?></td>
+		                        <td><?php echo htmlentities($data['score']); ?></td>
+		                    </tr>
+		                    <?php endforeach; ?>
+		                </p>
+		                <p>
+		                    <tr>
+		                        <td><?php echo htmlentities($rankUser[0]['rank']+1); ?></td>
+		                        <td><?php echo htmlentities($scoreUser[0]['pseudo']); ?></td>
+		                        <td><?php echo htmlentities($scoreUser[0]['score']); ?></td>
+		                    </tr>
+		                </p>
+		            </table>
+		        </div>
+		    </div>
 		</div>
 	</div>
 

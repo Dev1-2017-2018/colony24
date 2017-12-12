@@ -4,6 +4,8 @@ import Boat from './boat.class';
 
 import Map from './map.class'
 
+import Ranking from './ranking.class';
+
 import BuyBoat from './boat.shop.class';
 
 import ShopEquipement from './equipement.shop.class';

@@ -26,8 +26,6 @@ $userScore = "
     CREATE TABLE `user_score` (
         `user_id`INT UNSIGNED NOT NULL AUTO_INCREMENT,
       	`score` BIGINT UNSIGNED NULL DEFAULT 0,
-		`gold` BIGINT UNSIGNED NULL DEFAULT 0,
-		`silver` BIGINT UNSIGNED NULL DEFAULT 0,
 		KEY `user_score_user_id_foreign` (`user_id`),
 		CONSTRAINT `user_score_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE 
     )  ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -57,7 +55,7 @@ $pdo->exec($shop);
 
 $prepareUser = $pdo->prepare("INSERT INTO `users` (`pseudo`,`email`, `password`) VALUES (?,?,?)");
 
-for($i = 0; $i < 5; $i++) {
+for($i = 0; $i < 15; $i++) {
 	$prepareUser->bindValue(1, $faker->name);
 	$prepareUser->bindValue(2, $faker->unique()->email);
 	$prepareUser->bindValue(3, 'admin');
@@ -67,11 +65,10 @@ for($i = 0; $i < 5; $i++) {
 
 $prepareUser = NULL;
 
-$prepareUserScore = $pdo->prepare ("INSERT INTO `user_score` (`silver`,`score`) VALUES (?,?)");
+$prepareUserScore = $pdo->prepare ("INSERT INTO `user_score` (`score`) VALUES (?)");
 
-for ( $i = 0; $i < 5; $i++ ) {
-    $prepareUserScore->bindValue (1, 3000);
-    $prepareUserScore->bindValue (2, $faker->randomFloat ($nbMaxDecimals = NULL, $min = 0, $max = 3000));
+for ( $i = 0; $i < 15; $i++ ) {
+    $prepareUserScore->bindValue (1, $faker->randomFloat ($nbMaxDecimals = NULL, $min = 0, $max = 3000));
     $prepareUserScore->execute ();
 
 }

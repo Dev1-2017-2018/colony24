@@ -105,19 +105,19 @@
 
 	var _map2 = _interopRequireDefault(_map);
 
-	var _ranking = __webpack_require__(12);
+	var _ranking = __webpack_require__(7);
 
 	var _ranking2 = _interopRequireDefault(_ranking);
 
-	var _boatShop = __webpack_require__(7);
+	var _boatShop = __webpack_require__(8);
 
 	var _boatShop2 = _interopRequireDefault(_boatShop);
 
-	var _equipementShop = __webpack_require__(9);
+	var _equipementShop = __webpack_require__(10);
 
 	var _equipementShop2 = _interopRequireDefault(_equipementShop);
 
-	var _inventory = __webpack_require__(11);
+	var _inventory = __webpack_require__(12);
 
 	var _inventory2 = _interopRequireDefault(_inventory);
 
@@ -579,6 +579,50 @@
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Ranking = function Ranking() {
+	    _classCallCheck(this, Ranking);
+
+	    // Get the modal
+	    var modal = document.getElementById('modalPopup');
+
+	    // Get the button that opens the modal
+	    var btn = document.getElementById("button-classment");
+
+	    // Get the <span> element that closes the modal
+	    var span = document.getElementsByClassName("close")[0];
+
+	    // When the user clicks the button, open the modal
+	    btn.onclick = function () {
+	        modal.style.display = "block";
+	    };
+
+	    // When the user clicks on <span> (x), close the modal
+	    span.onclick = function () {
+	        modal.style.display = "none";
+	    };
+
+	    // When the user clicks anywhere outside of the modal, close it
+	    window.onclick = function (event) {
+	        if (event.target == modal) {
+	            modal.style.display = "none";
+	        }
+	    };
+	};
+
+	exports.default = Ranking;
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -589,7 +633,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _shop = __webpack_require__(8);
+	var _shop = __webpack_require__(9);
 
 	var _shop2 = _interopRequireDefault(_shop);
 
@@ -667,7 +711,7 @@
 	exports.default = BuyBoat;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -728,7 +772,7 @@
 	exports.default = Shop;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -739,11 +783,11 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _shop = __webpack_require__(8);
+	var _shop = __webpack_require__(9);
 
 	var _shop2 = _interopRequireDefault(_shop);
 
-	var _equipement = __webpack_require__(10);
+	var _equipement = __webpack_require__(11);
 
 	var _equipement2 = _interopRequireDefault(_equipement);
 
@@ -805,7 +849,7 @@
 	exports.default = ShopEquipement;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -853,7 +897,7 @@
 	exports.default = Equipement;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -871,50 +915,6 @@
 	};
 
 	exports.default = Inventory;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var Ranking = function Ranking() {
-	    _classCallCheck(this, Ranking);
-
-	    // Get the modal
-	    var modal = document.getElementById('modalPopup');
-
-	    // Get the button that opens the modal
-	    var btn = document.getElementById("button-classment");
-
-	    // Get the <span> element that closes the modal
-	    var span = document.getElementsByClassName("close")[0];
-
-	    // When the user clicks the button, open the modal
-	    btn.onclick = function () {
-	        modal.style.display = "block";
-	    };
-
-	    // When the user clicks on <span> (x), close the modal
-	    span.onclick = function () {
-	        modal.style.display = "none";
-	    };
-
-	    // When the user clicks anywhere outside of the modal, close it
-	    window.onclick = function (event) {
-	        if (event.target == modal) {
-	            modal.style.display = "none";
-	        }
-	    };
-	};
-
-	exports.default = Ranking;
 
 /***/ })
 /******/ ]);

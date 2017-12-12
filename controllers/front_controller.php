@@ -40,6 +40,8 @@ function add_user(){
         }elseif (!empty($_POST) && $_POST['password'] != $_POST['passcheck']) {
             echo "Mots de passe différents !!!";
         }
+    }else{
+        echo "Vous devez remplir tous les champs";
     }
     include __DIR__ . '/../views/front/add_user.php';
 }

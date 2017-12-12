@@ -9,10 +9,10 @@ function add_user(){
 	$pdo = getPDO();
 	$email = checkEmail();
 
-	if (!empty($_POST) && empty($email) == false) {
+	if (empty($_POST['pseudo']) && empty($_POST['email']) && empty($_POST['password']) && empty($email) == false) {
 		echo "Votre email est invalide";
 	}elseif(!empty($_POST) && empty($email) == true){
-		if( !empty($_POST) && $_POST['password'] == $_POST['passcheck']) {
+		if( $_POST['password'] == $_POST['passcheck']) {
 
 			$pseudo = htmlspecialchars($_POST['pseudo']);
 			$password = password_hash($_POST['password'], PASSWORD_DEFAULT ) ;

@@ -6,12 +6,12 @@ export default class BuyBoat extends Shop
     constructor(id)
     {
         super(id);
-
         this.id = id;
         this.$el = $("div#button-shop");
 
         // On lance la propriété crée dans le parent shop.class.js
         this.create_button();
+
 
         // On accroche un événement on click sur la div button-shop en passant en paramètre Boat,
         // le context de la class BuyBoat et l'id du constructor
@@ -41,9 +41,9 @@ export default class BuyBoat extends Shop
 
             parent.boats[parent.id] = new data.class(undefined,parent.id);
             parent.id++;
-
+            console.log(parent);
             parent.wallet.ecu -= 100;
-
+            parent.wallet.renderWallet();
             parent.saveDataJson(parent);
 
             parent.wallet.renderWallet();

@@ -37,14 +37,15 @@ export default class Wallet
     }
     displayActionList(){
       //Affichage dans la liste des actions
-      $( "#listText" ).append(`<p class="bounceIn">Content de te revoir !`);
 
+/*
       $('#listText').scrollTop($('#listText')[0].scrollHeight); //scrolling end of div
       setTimeout(function(ctx){$( "#listText" ).append(`<p class="bounceIn">Vous avez actuellement ${ctx.gold} de gold<p>`)}, 1800, this);
       setTimeout(function(ctx){
         $( "#listText" ).append(`<p class="bounceIn">Et vous avez actuellement ${ctx.ecu} d'ecu<p>`)
         $('#listText').scrollTop($('#listText')[0].scrollHeight); //scrolling end of div
       }, 3600, this);
+*/
 
 
     }

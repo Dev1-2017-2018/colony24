@@ -1,0 +1,79 @@
+/*******************/ /*--/ LOGIN REGISTER COLONY24 /--*/ /*******************/
+/********************************************************************/
+
+section.login-page {
+  display: grid;
+  grid-template-columns: 32vw 37vw 32vw;
+  grid-template-rows: 20vh 60vh 20vh;
+}
+
+.form {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 4;
+
+  z-index: 1;
+  background: #FFFFFF;
+  width: 42%;
+  min-width: 42%;
+  max-height: 275px;
+  padding: 45px;
+  text-align: center;
+  border-radius: 5px;
+
+  box-shadow: 0 0 7px 5px rgba(0, 0, 0, 0.1), 10px 10px 16px 0 rgba(0, 0, 0, 0.14);
+}
+.reg {
+  max-height: 415px!important;
+}
+.form p {
+  color: #ccc;
+}
+.form input {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px 0px 15px 15px;
+  font-size: 12.8px;
+}
+.form input.logreg_button {
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+}
+.form .message {
+  margin: 10px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}

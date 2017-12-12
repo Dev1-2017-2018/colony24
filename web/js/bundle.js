@@ -146,9 +146,7 @@
 	        // Creation du shop
 	        this.mainHarbor.shop = {};
 
-	        for (var i = 0; i < 1; i++) {
-	            this.mainHarbor.shop['button ' + i] = new _boatShop2.default(this.id);
-	        }
+	        this.mainHarbor.shop['button_boat_shop'] = new _boatShop2.default(this.id);
 
 	        //this.inventory = new Inventory();
 
@@ -270,7 +268,7 @@
 /* 3 */
 /***/ (function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -287,22 +285,38 @@
 	        this.goldValue = 1.2; //SQL GOLD VALUE A INTEGRER
 	        this.gold = gold;
 	        this.ecu = ecu;
-	        console.log("[[WALLET]] goldValue is " + this.goldValue + " \n[[WALLET]] gold is " + this.gold + " \n[[WALLET]] ecu is " + this.ecu + " \n");
+
+	        // Selection des <p> pour render les golds et écus
+	        this.$gold = document.getElementById.bind(document, 'gold');
+	        this.$ecu = document.getElementById.bind(document, 'ecu');
+
+	        this.renderWallet();
+
+	        console.log('[[WALLET]] goldValue is ' + this.goldValue + ' \n[[WALLET]] gold is ' + this.gold + ' \n[[WALLET]] ecu is ' + this.ecu + ' \n');
 	    }
 
 	    //Gold convert to Ecu
 
 
 	    _createClass(Wallet, [{
-	        key: "convertGoldEcu",
+	        key: 'convertGoldEcu',
 	        value: function convertGoldEcu(goldChange) {
-	            console.log("[[WALLET convertGoldToEcu()]] In Wallet > " + this.ecu + " ecu & " + this.gold + " gold & " + this.goldValue + " goldValue\n");
+	            console.log('[[WALLET convertGoldToEcu()]] In Wallet > ' + this.ecu + ' ecu & ' + this.gold + ' gold & ' + this.goldValue + ' goldValue\n');
 	            if (this.gold >= goldChange) {
-	                console.log("[[WALLET convertGoldToEcu()]] You convert " + goldChange + " gold to ecu with a " + this.goldValue + " Value Gold \n");
+	                console.log('[[WALLET convertGoldToEcu()]] You convert ' + goldChange + ' gold to ecu with a ' + this.goldValue + ' Value Gold \n');
 	                this.gold -= goldChange;
 	                this.ecu += goldChange * this.goldValue;
-	                console.log("[[WALLET convertGoldToEcu()]] You have now " + this.ecu + " ecu and " + this.gold + " gold\n");
-	            } else console.log("[[WALLET convertGoldToEcu()]] you are missing " + (goldChange - this.gold) + " to complete this transaction\n");
+	                console.log('[[WALLET convertGoldToEcu()]] You have now ' + this.ecu + ' ecu and ' + this.gold + ' gold\n');
+	            } else console.log('[[WALLET convertGoldToEcu()]] you are missing ' + (goldChange - this.gold) + ' to complete this transaction\n');
+	        }
+
+	        // actualise l'affichage des golds et écus dans le DOM
+
+	    }, {
+	        key: 'renderWallet',
+	        value: function renderWallet() {
+	            this.$gold().innerHTML = this.gold;
+	            this.$ecu().innerHTML = this.ecu;
 	        }
 	    }]);
 
@@ -350,6 +364,8 @@
 	        $('li#li' + id).on('click', 'input[type=\'button\']', { that: _this }, function (e) {
 
 	            var context = e.data.that;
+
+	            console.log(context);
 
 	            var inputX = $('#li' + context.id + ' > div > input:nth-child(2)').val();
 	            var inputY = $('#li' + context.id + ' > div > input:nth-child(3)').val();
@@ -452,7 +468,9 @@
 	                if (this.stockage <= 2) {
 	                    this.stockage++;
 	                    console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
+	                    this.parent.saveDataJson(this.parent);
 	                    if (this.stockage == 2) {
+	                        this.parent.saveDataJson(this.parent);
 	                        this.returnHome();
 	                    }
 	                }
@@ -468,6 +486,7 @@
 	            this.x = 0;
 	            console.log("Votre bateau est retourner à Main Harbor pour vider son stockage ");
 	            this.parent.wallet.gold += this.stockage;
+	            this.parent.wallet.renderWallet();
 	            console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
 	            this.stockage = 0;
 	            this.parent.saveDataJson(this.parent);
@@ -582,10 +601,14 @@
 	        var _this = _possibleConstructorReturn(this, (BuyBoat.__proto__ || Object.getPrototypeOf(BuyBoat)).call(this, id));
 
 	        _this.id = id;
-	        _this.$el = $("ul#shop");
+	        _this.$el = $("div#button-shop");
 
+	        // On lance la propriété crée dans le parent shop.class.js
 	        _this.create_button();
 
+	        // On accroche un événement on click sur la div button-shop en passant en paramètre Boat,
+	        // le context de la class BuyBoat et l'id du constructor
+	        // On met ensuite en callback this.buy_boat
 	        _this.$el.on('click', 'input[data-id=' + id + ']', { class: _boat2.default, that: _this, id: id }, _this.buy_boat);
 	        return _this;
 	    }
@@ -593,6 +616,15 @@
 	    _createClass(BuyBoat, [{
 	        key: 'buy_boat',
 	        value: function buy_boat(e) {
+
+	            // e correspond à l'object événement renvoyé par jQuery, il contient donc toutes les informations
+	            // du DOM dont la position de la souris la touche préssée etc..
+	            // jQuery nous crée un objet data dans tout ça qui contient nos paramètre
+	            // class that et id
+	            // Si j'envoie this en paramètre c'est pour une bonne raison
+	            // le context this d'un événement jQuery est l'élément du DOM
+	            // donc dans ce cas ci la div avec l'id button-shop
+	            // j'avais donc ici besoin de pouvoir accéder a la référence au parent contenue dans l'objet BuyBoat
 
 	            var data = e.data;
 	            var parent = data.that.parent;
@@ -608,6 +640,10 @@
 	                parent.wallet.ecu -= 100;
 
 	                parent.saveDataJson(parent);
+
+	                parent.wallet.renderWallet();
+
+	                console.log(parent);
 	            }
 	        }
 	    }]);
@@ -619,7 +655,7 @@
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -629,19 +665,13 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _boat = __webpack_require__(4);
-
-	var _boat2 = _interopRequireDefault(_boat);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Shop = function () {
 	    function Shop(id) {
 	        _classCallCheck(this, Shop);
 
-	        this.$el = $('ul#shop');
+	        this.$el = $('div#button-shop');
 
 	        this.$el.on('click', 'input[data-type=Equipement]', function () {
 
@@ -655,7 +685,6 @@
 	            span.onclick = function () {
 	                modal.style.display = "none";
 	            };
-
 	            // Quand l'utilisateur clique en dehors de la popup, elle se ferme
 	            window.onclick = function (event) {
 	                if (event.target === modal) {
@@ -664,6 +693,10 @@
 	            };
 	        });
 	    }
+
+	    // propriété appelée dans boats.shop.class.js
+	    // On crée deux boutons shop pour l'instant on laisse comme ça mais c'est nul il faut refactoriser
+
 
 	    _createClass(Shop, [{
 	        key: 'create_button',

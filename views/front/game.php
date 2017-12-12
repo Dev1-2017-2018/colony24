@@ -2,50 +2,20 @@
 <?php ob_start() ;?>
 
 
-<!-- Popup du shop -->
+<!-- Display  Popup du shop -->
 <div id="myModal" class="modal">
-    <div class="modal-content">
+    <div id="modal-content">
         <span class="close">&times;</span>
-        <?php $id = 1;?>
-        <ul>
-            <?php foreach($datas as $val):?>
-                <li style="margin-bottom: 30px;">
-                    <?php
-                    echo 'Marque : '.$val['brand'].'<br>'.
-                        'Nom : '.$val['name'].'<br>';
-                    if (isset($val['energy'])){
-                        echo 'Energie disponible : '.$val['energy'].'<br>';
-                    }elseif(isset($val['power']) && isset($val['speed'])){
-                        echo 'Puissance : '.$val['power'].'<br>'.
-                            'Vitesse : '.$val['speed'].'<br>';
-                    }elseif (isset($val['propulsion'])){
-                        echo 'Propulsion : '.$val['propulsion'].'<br>';
-                    }elseif (isset($val['power'])){
-                        echo 'Puissance : '.$val['power'].'<br>';
-                    }else{
-                        echo 'Réparation : '.$val['repair'].'<br>';
-                    }
-                    echo 'Prix : '.$val['price'].'<br>';
-                    ?>
-                    <input type='button' id="<?php echo $id;?>" value='Acheter'/>
-                    <?php $id++;?>
-                </li>
-            <?php endforeach; ?>
+        <ul id="equipement-model">
+
         </ul>
     </div>
 </div>
 
-
-
-
 <section class="container">
 	<!-- ASIDE -->
-	<div class="aside action-list">
-		<div id="list-text">
-			<p>Liste d'action du joueur a ajouter impotentia fines mediocrium delictorum nefanda Clematii cuiusdam</p>
-			<p>misceri sibi generum, flagrans eius amore, non impetraret, ut ferebatur, per palatii pseudothyrum introducta, oblato pretioso reginae monili id adsecuta </p>
-			<p>Vbi curarum abiectis ponderibus aliis tamquam nodum </p>
-			<p>Atque, ut Tullius ait, ut etiam ferae fame </p>
+	<div class="aside actionList">
+		<div id="listText">
 		</div>
 	</div>
 	<div class="aside buttons">
@@ -140,6 +110,7 @@
 
 <script id="myScript">
     let userData = <?php echo $data; ?>;
+    let shop_equipement = <?php echo json_encode($datas, JSON_PRETTY_PRINT); ?>;
 </script>
 
 <script src ="js/bundle.js"></script>

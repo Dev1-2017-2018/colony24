@@ -12,7 +12,7 @@ export default class ShopEquipement extends Shop
         let property = null;
         for (property in shop_equipement) {
             if (shop_equipement.hasOwnProperty(property)) {
-                this[shop_equipement[property].Nom] = new Equipement(shop_equipement[property],$el,id_equip);
+                this[shop_equipement[property].Nom] = new Equipement(shop_equipement[property],$el,id_equip, 1);
             }
             $el.on('click',`input[data-id-equip=${id_equip}]`,{that: this, id: id, equipement: shop_equipement[property] }, this.buy_equip);
             id_equip++;

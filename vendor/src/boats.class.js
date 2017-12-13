@@ -52,17 +52,40 @@ export default class Boats
     }
 
     goldMining(gold){
+         console.log(this);
 
         // on vérifie qu'il y ait bien de l'or à la position
         if(gold > 0){
 
             if(this.stockage <= 600){
 
-
-
-                this.stockage += gold;
-
-                console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
+                let random = Math.random()*100;
+                if (random <= 70) {
+                    console.log('Soleil');
+                    console.log(random);
+                    this.stockage += gold;
+                    console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
+                    console.log(gold + ' gold');
+                }else if(random >70 && random <= 85){
+                    console.log('tempête');
+                    console.log(random);
+                    this.stockage += gold*0.50;
+                    console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
+                    console.log('réduction du gain de 50%, ' + this.stockage + ' gold');
+                }else if(random >85 && random <= 95){
+                    console.log('ouragan');
+                    console.log(random);
+                    console.log('aucune extraction possible, ' + this.stockage + ' gold');
+                    this.returnHome();
+                }else{
+                    console.log('TSUNAAMIIIII');
+                    $("#li"+this.id).remove();
+                    delete this.parent.boats[this.id];
+                    this.parent.saveDataJson(this.parent);
+                    console.log(random);
+                    console.log('Bateau detruit');
+                    return;
+                }
 
                 if(this.stockage >= 600) {
 

@@ -559,18 +559,21 @@
 	    _classCallCheck(this, Ranking);
 
 	    $('#button-classement').on('click', function () {
-	        var modal = document.getElementById('popupClassement');
-
 	        //  Affiche la popup
-	        modal.style.display = "block";
+	        document.getElementById('popupClassement').style.display = "flex";
+	        document.getElementById('popUp').style.display = "grid";
 
 	        window.onclick = function (event) {
-	            if (event.target === modal) modal.style.display = 'none';
+	            if (event.target === document.getElementById('background')) {
+	                document.getElementById('popupClassement').style.display = 'none';
+	                document.getElementById('popUp').style.display = 'none';
+	            }
 	        };
 	    });
 
-	    $('.close').on('click', function () {
+	    $('.closeButton').on('click', function () {
 	        $(this).closest('.modal').css('display', 'none');
+	        $(this).closest('.popUp').css('display', 'none');
 	    });
 	};
 
@@ -685,18 +688,20 @@
 	        _classCallCheck(this, Shop);
 
 	        $('#button-shop').on('click', function () {
-	            var modal = document.getElementById('popupShop');
-
-	            //  Affiche la popup
-	            modal.style.display = "block";
+	            document.getElementById('popupShop').style.display = "block";
+	            document.getElementById('popUp').style.display = "grid";
 
 	            window.onclick = function (event) {
-	                if (event.target === modal) modal.style.display = 'none';
+	                if (event.target === document.getElementById('background')) {
+	                    document.getElementById('popupShop').style.display = 'none';
+	                    document.getElementById('popUp').style.display = 'none';
+	                }
 	            };
 	        });
 
-	        $('.close').on('click', function () {
+	        $('.closeButton').on('click', function () {
 	            $(this).closest('.modal').css('display', 'none');
+	            $(this).closest('.popUp').css('display', 'none');
 	        });
 	    }
 
@@ -906,17 +911,20 @@
 	        // espace qui contient le bouton inventory
 	        var $el = $("div#button-inventory");
 	        $('#button-inventory').on("click", function () {
-	            var inventory = document.getElementById("popupInventory");
-
-	            inventory.style.display = "block";
+	            document.getElementById("popupInventory").style.display = "block";
+	            document.getElementById('popUp').style.display = "grid";
 
 	            window.onclick = function (event) {
-	                if (event.target === inventory) inventory.style.display = "none";
+	                if (event.target === document.getElementById('background')) {
+	                    document.getElementById('popupInventory').style.display = 'none';
+	                    document.getElementById('popUp').style.display = 'none';
+	                }
 	            };
 	        });
 
-	        $('.close').on('click', function () {
+	        $('.closeButton').on('click', function () {
 	            $(this).closest('.modal').css('display', 'none');
+	            $(this).closest('.popUp').css('display', 'none');
 	        });
 
 	        // Appel la function create_inventory

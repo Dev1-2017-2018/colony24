@@ -2,8 +2,6 @@ import Wallet from './wallet.class';
 
 import Boat from './boat.class';
 
-import Map from './map.class'
-
 import Ranking from './ranking.class';
 
 import BuyBoat from './boat.shop.class';
@@ -20,8 +18,6 @@ export default class Game
     constructor(config,shop_equipement)
     {
         this.name = config.name;
-        // Launch map
-        this.map = new Map();
 
         // Creation de la wallet
         this.wallet = new Wallet(Number(config.wallet.gold), Number(config.wallet.ecu));
@@ -48,10 +44,9 @@ export default class Game
         this.mainHarbor.shop = {};
         this.mainHarbor.shop.equipement = {};
 
-        for (let i = 0; i < 1; i++){
-            this.mainHarbor.shop[`button ${i}`] = new BuyBoat(this.id);
-            this.mainHarbor.shop.equipement = new ShopEquipement(this.id,shop_equipement);
-        }
+        this.mainHarbor.shop[`button 0`] = new BuyBoat(this.id);
+        this.mainHarbor.shop.equipement = new ShopEquipement(this.id,shop_equipement);
+
 
         console.log(this);
 

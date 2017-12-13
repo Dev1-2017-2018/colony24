@@ -24,7 +24,6 @@ export default class Shop
     create_button(){
         let $el = $('#equipement-model');
         let button = `<input type='button' data-id='${this.id}' value='Acheter un bateau'/>`;
-        console.log('El est :'+$el);
         $el.append(button);
     }
 }

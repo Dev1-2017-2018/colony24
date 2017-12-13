@@ -22,58 +22,77 @@ export default class Boats
 
     movement(positionY = 0, positionX = 0) {
 
-        let map = this.parent.map.map;
 
-        if(typeof positionY == 'string'){
-            positionY = Number(positionY);
-        }
-        if (typeof positionX == 'string'){
-            positionX = Number(positionX);
+        function foo(callback, that){
+            $.getJSON( `moveboat?x=${positionX}&y=${positionY}`).done(function (data) {
+                callback(data, that);
+            });
         }
 
-        if(positionY >= 0 && positionX >= 0 && positionY <= 9 && positionX <= 9) {
-            // Ici, I correspond à une île, à modifier selon la vraie map
-            if (map[positionY][positionX]  != "I") {
+
+        foo(function(data, that){
+            let x = data.x;
+            let y = data.y;
+            let success = data.success;
+            console.log(data);
+
+            if(x >= 0 && y >= 0 && success === 1) {
+
                 // Modification de la position du bateau
-                this.y = positionY;
-                this.x = positionX;
-                console.log("Votre bateau est maintenant en " + this.y + " - " + this.x);
-                this.goldMining(map);
+                that.y = positionY;
+                that.x = positionX;
+                console.log("Votre bateau est maintenant en " + x + " - " + y);
+                $(`#li${that.id} > div > p`).html(`${that.name} x:${x} y:${y}`);
+                that.goldMining(data.gold);
             }else{
-                console.log("Colision avec une île");
+                return console.log("Une île se trouve à cette position");
             }
-        }else{
-            // Empêche de sortir de la map - ici défini en 10x10
-            console.log("Votre bateau ne peut s'aventurer aussi loin");
-        }
+        }, this);
     }
 
-    goldMining(map){
-        // Ici, G correspond à de l'or, à modifier selon la vraie map
-        if(map[this.y][this.x] == "G"){
-            if(this.stockage <= 2){
-                this.stockage++;
+    goldMining(gold){
+
+        // on vérifie qu'il y ait bien de l'or à la position
+        if(gold > 0){
+
+            if(this.stockage <= 600){
+
+
+
+                this.stockage += gold;
+
                 console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
-                this.parent.saveDataJson(this.parent);
-                if(this.stockage == 2) {
-                    this.parent.saveDataJson(this.parent);
+
+                if(this.stockage >= 600) {
+
+                    this.stockage = 600;
                     this.returnHome();
+
+                } else{
+
+                    this.parent.saveDataJson(this.parent);
                 }
             }
         }else {
-            console.log("Il n'y a pas d'Or en : " + this.y  + " - " + this.x)
+
+            console.log("Il n'y a pas d'Or en : " + this.y  + " - " + this.x);
             this.parent.saveDataJson(this.parent);
         }
     }
     returnHome(){
+
         this.y = 0;
         this.x = 0;
+        $(`#li${this.id} > div > p`).html(`${this.name} x:${this.x} y:${this.y}`);
+
         console.log("Votre bateau est retourné à Main Harbor pour vider son stockage ");
+
         this.parent.wallet.gold += this.stockage;
         this.parent.wallet.renderWallet();
-        console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
         this.stockage = 0;
-        this.parent.wallet.renderWallet();
+
+        console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
+
         this.parent.saveDataJson(this.parent);
     }
 }

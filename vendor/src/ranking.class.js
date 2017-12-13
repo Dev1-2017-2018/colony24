@@ -1,7 +1,7 @@
 export default class Ranking{
     constructor (){
 
-    $('#button-classement').on('click',function(){
+        $('#button-classement').on('click',function(){
             let modal = document.getElementById('popupClassement');
 
             //  Affiche la popup

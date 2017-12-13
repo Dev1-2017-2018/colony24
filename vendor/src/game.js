@@ -12,12 +12,16 @@ import Inventory from './inventory.class';
 
 import Equipement from './equipement.class';
 
+import ActionList from './actionList.class';
 
 export default class Game
 {
     constructor(config,shop_equipement)
     {
         this.name = config.name;
+
+        // Launch map
+        this.actionlist = new ActionList();
 
         // Creation de la wallet
         this.wallet = new Wallet(Number(config.wallet.gold), Number(config.wallet.ecu));
@@ -72,6 +76,10 @@ export default class Game
 
         this.saveDataJson(this);
 
+        //Show Action List Start
+        this.actionlist.showInAL (`Salut ${this.name} !`, 0);
+        this.actionlist.showInAL (`Tu as ${this.wallet.ecu} écus `, 1000);
+        this.actionlist.showInAL (`et ${this.wallet.gold} gold`, 1500);
     }
 
     // crée une référence au parent dans tous les enfants de bateau
@@ -152,7 +160,4 @@ export default class Game
 
         this.setShopParent(this);
     }
-
-
-
 }

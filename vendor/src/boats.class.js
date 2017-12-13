@@ -25,7 +25,6 @@ export default class Boats
 
         function foo(callback, that){
             $.getJSON( `moveboat?x=${positionX}&y=${positionY}`).done(function (data) {
-
                 callback(data, that);
             });
         }
@@ -46,7 +45,7 @@ export default class Boats
                 $(`#li${that.id} > div > p`).html(`${that.name} x:${x} y:${y}`);
                 that.goldMining(data.gold);
             }else{
-               return console.log("Une île se trouve à cette position");
+                return console.log("Une île se trouve à cette position");
             }
         }, this);
     }
@@ -58,11 +57,33 @@ export default class Boats
 
             if(this.stockage <= 600){
 
-
-
-                this.stockage += gold;
-
-                console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
+                let random = Math.random()*100;
+                if (random <= 70) {
+                    console.log('Soleil');
+                    console.log(random);
+                    this.stockage += gold;
+                    console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
+                    console.log(gold + ' gold');
+                }else if(random >70 && random <= 85){
+                    console.log('tempête');
+                    console.log(random);
+                    this.stockage += gold*0.50;
+                    console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
+                    console.log('réduction du gain de 50%, ' + this.stockage + ' gold');
+                }else if(random >85 && random <= 95){
+                    console.log('ouragan');
+                    console.log(random);
+                    console.log('aucune extraction possible, ' + this.stockage + ' gold');
+                    this.returnHome();
+                }else{
+                    console.log('TSUNAAMIIIII');
+                    $("#li"+this.id).remove();
+                    delete this.parent.boats[this.id];
+                    this.parent.saveDataJson(this.parent);
+                    console.log(random);
+                    console.log('Bateau detruit');
+                    return;
+                }
 
                 if(this.stockage >= 600) {
 

@@ -17,8 +17,7 @@
     </div>
     <!-- ASIDE -->
     <div class="aside actionList">
-        <div id="listText">
-        </div>
+        <ul id="listText"></ul>
     </div>
     <div class="aside buttons">
         <div id="shop">
@@ -27,7 +26,6 @@
         <div id="inventory">
             <p class="button" id="button-inventory">Inventory</p>
         </div>
-
         <div id="classement" class="button-classment">
             <p class="button" id="button-classement">Classement</p>
             <div id="popupClassement" class="modal">

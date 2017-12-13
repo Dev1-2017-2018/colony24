@@ -4,9 +4,9 @@ import Inventory from './inventory.class';
 
 export default class ShopEquipement extends Shop
 {
-    constructor(id, shop_equipement)
+    constructor(id,shop_equipement)
     {
-        super(id, shop_equipement);
+        super(id,shop_equipement);
 
         let $el = $(document.getElementById('equipement-model'));
 
@@ -19,8 +19,6 @@ export default class ShopEquipement extends Shop
             $el.on('click',`input[data-id-equip=${id_equip}]`,{that: this, id: id, equipement: shop_equipement[property] }, this.buy_equip);
             id_equip++;
         }
-
-        // this.inventoryRender();
     }
 
     buy_equip(e){
@@ -81,4 +79,9 @@ export default class ShopEquipement extends Shop
             </p>
         `);
     }
+
+    //Action List
+    // parent.actionlist.showInAL (`Tu viens d'achter "${ equipment}" comme nouveau équipement`, 0);
+    parent.actionlist.showInAL (`Tu as : ${parent.wallet.ecu} écus`, 1500);
+    parent.actionlist.showInAL (`et : ${parent.wallet.gold} gold`, 2000);
 }

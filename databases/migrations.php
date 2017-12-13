@@ -8,7 +8,7 @@ $default = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ];
 
-$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', '', $default);
+$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', 'root', $default);
 
 print_r ($pdo);
 

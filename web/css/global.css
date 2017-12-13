@@ -326,13 +326,14 @@ div.modal {
   flex-wrap: wrap;
   align-items: stretch;
   justify-content: flex-start;
-  padding: 1.7% 0;
+  padding: .7% 0 0 0;
 
   border-radius: 10px;
   overflow: scroll;
   background-color: #324263;
 }
 div#popupClassement table {
+  height: 100%;
   width: 100%;
 }
 div#popupClassement table td, div#popupClassement table th{
@@ -352,7 +353,7 @@ div#popupClassement table tr th:nth-child(3){
   width: 25%;
 }
 div#popupClassement table tbody tr{
-  height: 2.85em;
+  /* height: 2.85em; */
   margin-bottom: 20px;
   padding: 0px 40px;
   background-color: #394a6b;

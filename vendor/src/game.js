@@ -2,8 +2,6 @@ import Wallet from './wallet.class';
 
 import Boat from './boat.class';
 
-import Map from './map.class'
-
 import Ranking from './ranking.class';
 
 import BuyBoat from './boat.shop.class';
@@ -11,6 +9,8 @@ import BuyBoat from './boat.shop.class';
 import ShopEquipement from './equipement.shop.class';
 
 import Inventory from './inventory.class';
+
+import Equipement from './equipement.class';
 
 import ActionList from './actionList.class';
 
@@ -20,8 +20,6 @@ export default class Game
     constructor(config,shop_equipement)
     {
         this.name = config.name;
-        // Launch map
-        this.map = new Map();
 
         // Launch map
         this.actionlist = new ActionList();
@@ -59,6 +57,15 @@ export default class Game
         console.log(this);
 
        this.inventory = new Inventory();
+
+        for (let equipement in config.inventory) {
+            if (config.inventory.hasOwnProperty(equipement)) {
+                this.inventory[config.inventory[equipement].Nom] = new Equipement(config.inventory[equipement],
+                    $(document.getElementById('equipement-model')),
+                    config.inventory[equipement].id);
+            }
+        }
+
 
        this.ranking = new Ranking();
 

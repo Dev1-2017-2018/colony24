@@ -51,17 +51,19 @@ function moveBoat () {
     $b = $rgb & 0xFF;
 
     $data = [
-    "succes"=>0,
+    "success"=>0,
     "x"=>$x,
     "y"=>$y
     ];
 
     if($b == 0){
-    if($g>0){
-        $data["succes"] = 1;
+        $data["success"] = 1;
         $data["gold"]  = $g;
-        $color = imagecolorallocate($im, $r, 0, $b);
-        imagesetpixel($im, $x, $y, $color);
+        if($g>0){
+            $color = imagecolorallocate($im, $r, 0, $b);
+            imagesetpixel($im, $x, $y, $color);
+            imagepng($im, "../databases/map.png");
+            imagedestroy($im);
         }
     }
 

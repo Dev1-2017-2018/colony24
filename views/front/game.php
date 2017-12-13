@@ -1,15 +1,8 @@
 <!-- Affichage de Main Harbor -->
 <?php ob_start() ;?>
 
-<<<<<<< HEAD
-
-
-<section class="container">
-
     <!-- POP UP -->
-=======
 <section class="container">
->>>>>>> cf261e94cb39e2f717331fdd6ef708d79683d3c5
     <div id="popupShop" class="modal">
         <div id="modal-content">
             <span class="close">&times;</span>
@@ -17,7 +10,6 @@
             </ul>
         </div>
     </div>
-<<<<<<< HEAD
     <div id="popupClassement" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -52,15 +44,12 @@
         </div>
     </div>
 
-
-=======
     <div id="popupInventory" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <ul id="inventory-model"></ul>
         </div>
     </div>
->>>>>>> cf261e94cb39e2f717331fdd6ef708d79683d3c5
     <!-- ASIDE -->
     <div class="aside actionList">
         <ul id="listText"></ul>
@@ -72,11 +61,7 @@
         <div id="inventory">
             <p class="button" id="button-inventory">Inventory</p>
         </div>
-<<<<<<< HEAD
-        <div id="classement">
-=======
         <div id="classement" class="button-classment">
->>>>>>> cf261e94cb39e2f717331fdd6ef708d79683d3c5
             <p class="button" id="button-classement">Classement</p>
         </div>
     </div>

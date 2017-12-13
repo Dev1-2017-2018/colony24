@@ -61,11 +61,7 @@ function setFlashMessage( $message, $type = 'success' )
 
 function hasFlashMessage()
 {
-
-
     if ( isset($_SESSION['flash']) ) return true;
-
-
+    
     return false;
-
 }

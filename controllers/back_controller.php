@@ -79,5 +79,4 @@ function main ()
     $rankUser = rankUser();
 
     include __DIR__ . '/../views/front/game.php';
-
 }

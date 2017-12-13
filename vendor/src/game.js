@@ -2,30 +2,38 @@ import Wallet from './wallet.class';
 
 import Boat from './boat.class';
 
-import Map from './map.class'
+import Ranking from './ranking.class';
 
-import Shop from './boat.shop.class';
+import BuyBoat from './boat.shop.class';
+
+import ShopEquipement from './equipement.shop.class';
+
+import Inventory from './inventory.class';
+
+import Equipement from './equipement.class';
+
 
 export default class Game
 {
-	constructor(config)
-	{
-	    this.name = config.name;
+    constructor(config,shop_equipement)
+    {
+        this.name = config.name;
 
-        // Launch map
-	    this.map = new Map();
-
-		// Creation de la wallet
-		this.wallet = new Wallet(Number(config.wallet.gold), Number(config.wallet.ecu));
+        // Creation de la wallet
+        this.wallet = new Wallet(Number(config.wallet.gold), Number(config.wallet.ecu));
 
         // Creation des bateaux
-		this.boats = {};
+        this.boats = {};
 
         let boat = null;
 
+        this.id = 0;
+
         for (boat in config.boats) {
             if (config.boats.hasOwnProperty(boat)) {
-                this.boats[boat] = new Boat(config.boats[boat]);
+                this.boats[this.id] = new Boat(config.boats[boat], this.id);
+                this.id = this.boats[this.id].id;
+                this.id++;
             }
         }
 
@@ -34,12 +42,25 @@ export default class Game
 
         // Creation du shop
         this.mainHarbor.shop = {};
+        this.mainHarbor.shop.equipement = {};
 
-        for (let i = 0; i < 1; i++){
-            this.mainHarbor.shop[`button ${i}`] = new Shop(i);
+        this.mainHarbor.shop[`button 0`] = new BuyBoat(this.id);
+        this.mainHarbor.shop.equipement = new ShopEquipement(this.id,shop_equipement);  
+
+        this.inventory = new Inventory();
+
+        for (let equipement in config.inventory) {
+            if (config.inventory.hasOwnProperty(equipement)) {
+                this.inventory[config.inventory[equipement].Nom] = new Equipement(config.inventory[equipement],
+                    $(document.getElementById('equipement-model')),
+                    config.inventory[equipement].id);
+            }
         }
 
-		//this.inventory = new Inventory();
+        this.mainHarbor.shop.equipement.inventoryPush(this);
+
+
+        this.ranking = new Ranking();
 
         // Creation des références au parent dans les enfants
 
@@ -49,14 +70,11 @@ export default class Game
 
         this.setShopParent(this);
 
-        this.boats.Bateau.movement(this.map.map, 1, 1);
-
         this.saveDataJson(this);
 
-        console.log(this);
-	}
+    }
 
-	// crée une référence au parent dans tous les enfants de bateau
+    // crée une référence au parent dans tous les enfants de bateau
     setBoatParent (o){
         if(o.boats != undefined){
 
@@ -90,7 +108,7 @@ export default class Game
         }
     }
 
-    // fonction pour sauvegarder l'objet du joueur dans son json aproprié
+    // fonction pour sauvegarder l'objet du joueur dans son json approprié
     saveDataJson(o){
 
         // premièrement dans cette fonction on va devoir enlever toutes les références au parent dans les enfants
@@ -111,12 +129,7 @@ export default class Game
         }
         if (o.mainHarbor.shop != undefined){
 
-            let n = null;
-            for(n in o.mainHarbor.shop){
-
-                delete o.mainHarbor.shop[n].parent;
-                delete o.mainHarbor.shop[n].$el;
-            }
+            delete o.mainHarbor.shop;
         }
 
         // ensuite on peut lancer la requete du fichier update_json_model.php
@@ -139,5 +152,7 @@ export default class Game
 
         this.setShopParent(this);
     }
+
+
 
 }

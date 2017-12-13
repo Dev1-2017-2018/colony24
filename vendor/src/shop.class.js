@@ -1,32 +1,30 @@
-import Boat from './boat.class'
-
 export default class Shop
 {
-    constructor(id)
+    constructor(id,shop_equipement)
     {
-        this.$el = $('ul#shop');
-        this.$el.on('click', `input[data-id=${id}]`, { class: Boat, that: this, id: id }, this.buy_boat);
+
+        $('#button-shop').on('click',function(){
+            let modal = document.getElementById('popupShop');
+
+            //  Affiche la popup
+            modal.style.display = "block";
+
+            window.onclick = function(event) {
+                if (event.target === modal) modal.style.display = 'none';
+            }
+        });
+
+        $('.close').on('click',function(){
+            $(this).closest('.modal').css('display','none');
+        });
 
     }
 
-    buy_boat(e){
-
-        let data = e.data;
-        let parent = data.that.parent;
-
-        if (parent.wallet.ecu < 100){
-
-            return console.log("Vous n'avez pas assez d'écu");
-
-        } else {
-
-            parent.boats[`bateau${data.id}`] = new data.class;
-
-            parent.wallet.ecu -= 100;
-
-            parent.saveDataJson(parent);
-
-        }
-
+    // propriété appelée dans boats.shop.class.js
+    create_button(){
+        let $el = $('#equipement-model');
+        let button = `<input type='button' data-id='${this.id}' value='Acheter un bateau'/>`;
+        console.log('El est :'+$el);
+        $el.append(button);
     }
 }

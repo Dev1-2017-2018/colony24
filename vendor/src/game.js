@@ -12,12 +12,18 @@ import Inventory from './inventory.class';
 
 import Equipement from './equipement.class';
 
+import ActionList from './actionList.class';
+
+import RenderBoats from './renderBoats.class';
 
 export default class Game
 {
     constructor(config,shop_equipement)
     {
         this.name = config.name;
+
+        // Launch map
+        this.actionlist = new ActionList();
 
         // Creation de la wallet
         this.wallet = new Wallet(Number(config.wallet.gold), Number(config.wallet.ecu));
@@ -39,19 +45,19 @@ export default class Game
 
         // Creation de main Harbor
         this.mainHarbor = {};
+        
+        // Création des svg pour les bateaux
+        this.renderBoats = new RenderBoats();
+        this.renderBoats.createBoatsButton(this.boats);
 
         // Creation du shop
         this.mainHarbor.shop = {};
         this.mainHarbor.shop.equipement = {};
 
-        for (let i = 0; i < 1; i++){
-            this.mainHarbor.shop[`button ${i}`] = new BuyBoat(this.id);
-            this.mainHarbor.shop.equipement = new ShopEquipement(this.id,shop_equipement);
-        }
+        this.mainHarbor.shop[`button 0`] = new BuyBoat(this.id);
+        this.mainHarbor.shop.equipement = new ShopEquipement(this.id,shop_equipement);  
 
-        console.log(this);
-
-       this.inventory = new Inventory();
+        this.inventory = new Inventory();
 
         for (let equipement in config.inventory) {
             if (config.inventory.hasOwnProperty(equipement)) {
@@ -61,8 +67,10 @@ export default class Game
             }
         }
 
+        this.mainHarbor.shop.equipement.inventoryPush(this);
 
-       this.ranking = new Ranking();
+
+        this.ranking = new Ranking();
 
         // Creation des références au parent dans les enfants
 
@@ -74,6 +82,10 @@ export default class Game
 
         this.saveDataJson(this);
 
+        //Show Action List Start
+        this.actionlist.showInAL (`Salut ${this.name} !`, 0);
+        this.actionlist.showInAL (`Tu as ${this.wallet.ecu} écus `, 1000);
+        this.actionlist.showInAL (`et ${this.wallet.gold} gold`, 1500);
     }
 
     // crée une référence au parent dans tous les enfants de bateau
@@ -154,7 +166,4 @@ export default class Game
 
         this.setShopParent(this);
     }
-
-
-
 }

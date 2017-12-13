@@ -86,7 +86,8 @@ div.actionList
   height: 100%;
   overflow:auto;
 }
-div.actionList div p
+div.actionList div p,
+div.actionList ul li
 {
   font-family: 'Russo One', sans-serif;
   text-align: center;
@@ -120,7 +121,7 @@ div.buttons
 div.buttons > div
 {
   width: 100%;
-  height: 46%;
+  height: 92px;
   background-color: #16a085;
   border-radius: 12px;
   cursor: pointer;
@@ -238,7 +239,7 @@ div.player-info div
 
 #player-wallet
 {
-  width: 50%;
+  width: 550px;
   padding: 0px 10px;
   display: flex;
   height: 100%;
@@ -324,35 +325,21 @@ div.element_middle h1 {
 
 /********************** ANIMATION *************************/
 @keyframes bounceIn {
-  from, 20%, 40%, 60%, 80%, to {
-      -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-      animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-  }
-  0% {
+  from {
     opacity: 0;
-    transform: scale3d(.3, .3, .3);
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
   }
-  20% {
-    transform: scale3d(1.1, 1.1, 1.1);
-  }
-  40% {
-    transform: scale3d(.9, .9, .9);
-  }
-  60% {
-    opacity: 1;
-    transform: scale3d(1.03, 1.03, 1.03);
-  }
-  80% {
-    transform: scale3d(.97, .97, .97);
-  }
+
   to {
     opacity: 1;
-    transform: scale3d(1, 1, 1);
+    -webkit-transform: none;
+    transform: none;
   }
 }
 .bounceIn {
   animation-name: bounceIn;
-  animation: bounceIn 2s ease-out !important;
+  animation: bounceIn .8s ease-out !important;
   animation-fill-mode: forwards;
   backface-visibility: visible !important;
 }

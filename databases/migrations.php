@@ -8,7 +8,7 @@ $default = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ];
 
-$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', 'root', $default);
+$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', '', $default);
 
 print_r ($pdo);
 
@@ -27,7 +27,7 @@ $userScore = "
         `user_id`INT UNSIGNED NOT NULL AUTO_INCREMENT,
       	`score` BIGINT UNSIGNED NULL DEFAULT 0,
 		KEY `user_score_user_id_foreign` (`user_id`),
-		CONSTRAINT `user_score_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE 
+		CONSTRAINT `user_score_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
     )  ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 ";
 $shop = "
@@ -75,8 +75,13 @@ for ( $i = 0; $i < 15; $i++ ) {
 
 $prepareUserScore = NULL;
 
+<<<<<<< HEAD
 $prepareShop = $pdo->prepare("INSERT INTO `shop` 
 								(`id`, `Marque`, `Nom`, `Puissance`, `Propulsion`, `Energie`, `Vitesse`, `Reparation`, `Prix`) 
+=======
+$prepareShop = $pdo->prepare("INSERT INTO `shop`
+								(`id`, `Marque`, `Nom`, `Puissance`, `Propulsion`, `Energie`, `Vitesse`, `Reparation`, `Prix`)
+>>>>>>> 6073946fbc76cbc099c4ce4f1fbf5bf11864b614
 								VALUES
 								(1, 'Arnson', 'Batterie PWR 4', NULL, NULL, 300, NULL, NULL, 600),
 								(2, 'Lukslit', 'Batterie SUH 7', NULL, NULL, 500, NULL, NULL, 800),

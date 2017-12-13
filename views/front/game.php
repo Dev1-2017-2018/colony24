@@ -1,27 +1,31 @@
 <!-- Affichage de Main Harbor -->
 <?php ob_start() ;?>
 
-
-
-<div id="popupShop" class="modal">
-    <div id="modal-content">
-        <span class="close">&times;</span>
-        <ul id="equipement-model">
-        </ul>
-    </div>
-</div>
-
 <section class="container">
+    <div id="popupShop" class="modal">
+        <div id="modal-content">
+            <span class="close">&times;</span>
+            <ul id="equipement-model">
+            </ul>
+        </div>
+    </div>
+    <div id="popupInventory" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <ul id="inventory-model"></ul>
+        </div>
+    </div>
     <!-- ASIDE -->
     <div class="aside actionList">
-        <div id="listText">
-        </div>
+        <ul id="listText"></ul>
     </div>
     <div class="aside buttons">
         <div id="shop">
             <p class="button" id="button-shop">Shop</p>
         </div>
-
+        <div id="inventory">
+            <p class="button" id="button-inventory">Inventory</p>
+        </div>
         <div id="classement" class="button-classment">
             <p class="button" id="button-classement">Classement</p>
             <div id="popupClassement" class="modal">

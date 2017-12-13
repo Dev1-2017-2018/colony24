@@ -1,5 +1,7 @@
 import Shop from './shop.class';
 import Equipement from './equipement.class';
+import Inventory from './inventory.class';
+
 export default class ShopEquipement extends Shop
 {
     constructor(id,shop_equipement)
@@ -35,8 +37,46 @@ export default class ShopEquipement extends Shop
             wallet.renderWallet();
             parent.saveDataJson(parent);
 
+            e.data.that.inventoryPush(parent);
         }
+    }
+
+    inventoryPush(parent)
+    {
+        let equipement = parent.inventory;
+        console.log(parent.inventory);
+        // Liaison Inventaire
+        let $ivt = $('ul#inventory-model');
+
+        // console.log($ivt);
 
 
+        // Vérification des Values
+        for (let value in equipement) {
+            $ivt.append('<li></li>');
+            if (equipement.hasOwnProperty(value)) {
+                if (equipement[value] != "id") {
+                    let ivtProperty = "";
+                    for (let carac in equipement[value]) {
+                        if(equipement[value][carac] != "") {
+                            if (carac != 'id' && carac != 'Nom'  && carac != 'Prix') {
+                                ivtProperty += `<br/> ${carac} : ${equipement[value][carac]}`;
+                            }
+                        }
+                    }
+                    this.inventoryRender($ivt, value, ivtProperty);
+                }
+            }
+        }
+    }
+
+    inventoryRender($ivt, value, ivtProperty)
+    {
+        $ivt.children().last().append(`
+            <p style="color:black;">
+                ${value}
+                ${ivtProperty}
+            </p>
+        `);
     }
 }

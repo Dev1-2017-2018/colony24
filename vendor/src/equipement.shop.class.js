@@ -49,7 +49,6 @@ export default class ShopEquipement extends Shop
         let $ivt = $('ul#inventory-model');
 
 
-
         // Vérification des Values
         for (let value in equipement) {
             $ivt.append('<li></li>');

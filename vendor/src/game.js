@@ -14,6 +14,8 @@ import Equipement from './equipement.class';
 
 import ActionList from './actionList.class';
 
+import RenderBoats from './renderBoats.class';
+
 export default class Game
 {
     constructor(config,shop_equipement)
@@ -43,6 +45,10 @@ export default class Game
 
         // Creation de main Harbor
         this.mainHarbor = {};
+        
+        // Création des svg pour les bateaux
+        this.renderBoats = new RenderBoats();
+        this.renderBoats.createBoatsButton(this.boats);
 
         // Creation du shop
         this.mainHarbor.shop = {};

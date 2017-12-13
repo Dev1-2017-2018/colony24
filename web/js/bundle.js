@@ -121,6 +121,10 @@
 
 	var _inventory2 = _interopRequireDefault(_inventory);
 
+	var _equipement = __webpack_require__(13);
+
+	var _equipement2 = _interopRequireDefault(_equipement);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -166,6 +170,12 @@
 	        console.log(this);
 
 	        this.inventory = new _inventory2.default();
+
+	        for (var equipement in config.inventory) {
+	            if (config.inventory.hasOwnProperty(equipement)) {
+	                this.inventory[config.inventory[equipement].Nom] = new _equipement2.default(config.inventory[equipement], $(document.getElementById('equipement-model')), config.inventory[equipement].id);
+	            }
+	        }
 
 	        this.ranking = new _ranking2.default();
 
@@ -514,7 +524,7 @@
 	        value: function returnHome() {
 	            this.y = 0;
 	            this.x = 0;
-	            console.log("Votre bateau est retourner à Main Harbor pour vider son stockage ");
+	            console.log("Votre bateau est retourné à Main Harbor pour vider son stockage ");
 	            this.parent.wallet.gold += this.stockage;
 	            this.parent.wallet.renderWallet();
 	            console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
@@ -632,7 +642,7 @@
 	        var _this = _possibleConstructorReturn(this, (BuyBoat.__proto__ || Object.getPrototypeOf(BuyBoat)).call(this, id));
 
 	        _this.id = id;
-	        _this.$el = $(".buttons");
+	        _this.$el = $("#equipement-model");
 
 	        // On lance la propriété crée dans le parent shop.class.js
 	        _this.create_button();
@@ -704,22 +714,16 @@
 
 	        $('#button-shop').on('click', function () {
 	            var modal = document.getElementById('popupShop');
-	            console.log('click');
 
 	            //  Affiche la popup
 	            modal.style.display = "block";
 
 	            window.onclick = function (event) {
-	                if (event.target == modal) {
-	                    console.log(modal);
-	                    modal.style.display = 'none';
-	                }
+	                if (event.target === modal) modal.style.display = 'none';
 	            };
 	        });
 
 	        $('.close').on('click', function () {
-	            console.log('ici');
-	            console.log($(this).closest('.modal'));
 	            $(this).closest('.modal').css('display', 'none');
 	        });
 	    }
@@ -730,8 +734,8 @@
 	    _createClass(Shop, [{
 	        key: 'create_button',
 	        value: function create_button() {
-	            var $el = $('.buttons');
-	            var button = '<input type=\'button\' data-id=\'' + this.id + '\' value=\'buy a boat\'/>';
+	            var $el = $('#equipement-model');
+	            var button = '<input type=\'button\' data-id=\'' + this.id + '\' value=\'Acheter un bateau\'/>';
 	            console.log('El est :' + $el);
 	            $el.append(button);
 	        }
@@ -758,7 +762,7 @@
 
 	var _shop2 = _interopRequireDefault(_shop);
 
-	var _equipement = __webpack_require__(10);
+	var _equipement = __webpack_require__(13);
 
 	var _equipement2 = _interopRequireDefault(_equipement);
 
@@ -789,7 +793,6 @@
 	            $el.on('click', 'input[data-id-equip=' + id_equip + ']', { that: _this, id: id, equipement: shop_equipement[property] }, _this.buy_equip);
 	            id_equip++;
 	        }
-	        console.log(_this);
 	        return _this;
 	    }
 
@@ -802,14 +805,13 @@
 	            var equipementName = equipement.Nom;
 	            var price = equipement.Prix;
 
-	            console.log(equipement);
-
 	            if (wallet.ecu >= price) {
 
 	                parent.inventory[equipementName] = equipement;
 	                parent.wallet.ecu -= price;
-
+	                console.log(parent.inventory);
 	                wallet.renderWallet();
+	                parent.saveDataJson(parent);
 	            }
 	        }
 	    }]);
@@ -820,7 +822,59 @@
 	exports.default = ShopEquipement;
 
 /***/ }),
-/* 10 */
+/* 10 */,
+/* 11 */
+/***/ (function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Inventory = function Inventory() {
+	    _classCallCheck(this, Inventory);
+	};
+
+	exports.default = Inventory;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Ranking = function Ranking() {
+	    _classCallCheck(this, Ranking);
+
+	    $('#button-classement').on('click', function () {
+	        var modal = document.getElementById('popupClassement');
+
+	        //  Affiche la popup
+	        modal.style.display = "block";
+
+	        window.onclick = function (event) {
+	            if (event.target === modal) modal.style.display = 'none';
+	        };
+	    });
+
+	    $('.close').on('click', function () {
+	        $(this).closest('.modal').css('display', 'none');
+	    });
+	};
+
+	exports.default = Ranking;
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -866,63 +920,6 @@
 	}();
 
 	exports.default = Equipement;
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var Inventory = function Inventory() {
-	    _classCallCheck(this, Inventory);
-
-	    this.name = 'Inventory';
-	};
-
-	exports.default = Inventory;
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var Ranking = function Ranking() {
-	    _classCallCheck(this, Ranking);
-
-	    $('#button-classement').on('click', function () {
-	        var modal = document.getElementById('popupClassement');
-	        console.log('click');
-
-	        //  Affiche la popup
-	        modal.style.display = "block";
-
-	        window.onclick = function (event) {
-	            if (event.target == modal) {
-	                console.log(modal);
-	                modal.style.display = 'none';
-	            }
-	        };
-	    });
-
-	    $('.close').on('click', function () {
-	        $(this).closest('.modal').css('display', 'none');
-	    });
-	};
-
-	exports.default = Ranking;
 
 /***/ })
 /******/ ]);

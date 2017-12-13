@@ -32,7 +32,8 @@ function create_json($user){
          'wallet' => array(
              'gold' => 100,
              'ecu' => 300
-         )
+         ),
+         'inventory' => array()
      );
 
     $fp = fopen('../databases/users/'.$user.'/'.$user.'.json', 'w');

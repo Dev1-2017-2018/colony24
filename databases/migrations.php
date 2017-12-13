@@ -70,7 +70,6 @@ $prepareUserScore = $pdo->prepare ("INSERT INTO `user_score` (`score`) VALUES (?
 for ( $i = 0; $i < 150; $i++ ) {
     $prepareUserScore->bindValue (1, $faker->randomFloat ($nbMaxDecimals = NULL, $min = 0, $max = 3000));
     $prepareUserScore->execute ();
-
 }
 
 $prepareUserScore = NULL;

@@ -12,8 +12,6 @@ export default class Boat extends Boats {
 
             let context = e.data.that;
 
-            console.log(context);
-
             let inputX = $(`#li${context.id} > div > input:nth-child(2)`).val();
             let inputY = $(`#li${context.id} > div > input:nth-child(3)`).val();
 

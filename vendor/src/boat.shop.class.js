@@ -47,7 +47,7 @@ export default class BuyBoat extends Shop
             parent.saveDataJson(parent);
 
             //Action List
-            parent.actionlist.showInAL (`Un nouveau "${parent.boats[parent.id-1].name}" vient de débarquer à Main Harbor`, 0);
+            parent.actionlist.showInAL (`Un nouveau ${parent.boats[parent.id-1].name} vient de débarquer à Main Harbor`, 0);
             parent.actionlist.showInAL (`Tu as : ${parent.wallet.ecu} d'écu`, 1500);
             parent.actionlist.showInAL (`et Tu as : ${parent.wallet.gold} de gold`, 2000);
         }

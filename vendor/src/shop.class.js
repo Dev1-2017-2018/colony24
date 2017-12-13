@@ -1,39 +1,30 @@
-
 export default class Shop
 {
     constructor(id,shop_equipement)
     {
-        this.$el = $('div#button-shop');
 
-        this.$el.on('click', `input[data-type=Equipement]`, function(){
-
-            let modal = document.getElementById('myModal');
-            let span  = document.getElementsByClassName("close")[0];
+        $('#button-shop').on('click',function(){
+            let modal = document.getElementById('popupShop');
 
             //  Affiche la popup
             modal.style.display = "block";
 
-            // Croix pour fermer la popup
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-            // Quand l'utilisateur clique en dehors de la popup, elle se ferme
             window.onclick = function(event) {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                }
+                if (event.target === modal) modal.style.display = 'none';
             }
+        });
+
+        $('.close').on('click',function(){
+            $(this).closest('.modal').css('display','none');
         });
 
     }
 
     // propriété appelée dans boats.shop.class.js
-    // On crée deux boutons shop pour l'instant on laisse comme ça mais c'est nul il faut refactoriser
     create_button(){
-        let button = `<input type='button' data-id='${this.id}' value='buy a boat'/>`;
-        this.$el.append(button);
-
-        let button_shop = `<input type='button' data-type='Equipement' id="myBtn" value='Shop'/>`;
-        this.$el.append(button_shop);
+        let $el = $('#equipement-model');
+        let button = `<input type='button' data-id='${this.id}' value='Acheter un bateau'/>`;
+        console.log('El est :'+$el);
+        $el.append(button);
     }
 }

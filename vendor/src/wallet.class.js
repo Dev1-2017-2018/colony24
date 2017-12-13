@@ -6,12 +6,7 @@ export default class Wallet
         this.gold = gold;
         this.ecu = ecu;
 
-        // Selection des <p> pour render les golds et écus
-        this.$gold = document.getElementById.bind(document, 'gold');
-        this.$ecu = document.getElementById.bind(document, 'ecu');
-
         this.renderWallet();
-        this.displayActionList();
         console.log( `[[WALLET]] goldValue is ${this.goldValue} \n[[WALLET]] gold is ${this.gold } \n[[WALLET]] ecu is ${this.ecu } \n` );
     }
 
@@ -31,21 +26,12 @@ export default class Wallet
 
     // actualise l'affichage des golds et écus dans le DOM
     renderWallet(){
-        this.$gold().innerHTML = this.gold;
-        this.$ecu().innerHTML = this.ecu;
-        console.log(this)
+        // Selection des <p> pour render les golds et écus
+        let $gold = document.getElementById.bind(document, 'gold');
+        let $ecu = document.getElementById.bind(document, 'ecu');
+
+        $gold().innerHTML = this.gold;
+        $ecu().innerHTML = this.ecu;
     }
-    displayActionList(){
-      //Affichage dans la liste des actions
-      $( "#listText" ).append(`<p class="bounceIn">Content de te revoir !`);
 
-      $('#listText').scrollTop($('#listText')[0].scrollHeight); //scrolling end of div
-      setTimeout(function(ctx){$( "#listText" ).append(`<p class="bounceIn">Vous avez actuellement ${ctx.gold} de gold<p>`)}, 1800, this);
-      setTimeout(function(ctx){
-        $( "#listText" ).append(`<p class="bounceIn">Et vous avez actuellement ${ctx.ecu} d'ecu<p>`)
-        $('#listText').scrollTop($('#listText')[0].scrollHeight); //scrolling end of div
-      }, 3600, this);
-
-
-    }
 }

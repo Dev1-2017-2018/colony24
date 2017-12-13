@@ -7,7 +7,7 @@ export default class BuyBoat extends Shop
     {
         super(id);
         this.id = id;
-        this.$el = $("div#button-shop");
+        this.$el = $("#equipement-model");
 
         // On lance la propriété crée dans le parent shop.class.js
         this.create_button();

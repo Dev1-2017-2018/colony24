@@ -266,10 +266,11 @@ div.player-info div
 }
 #player-wallet div:nth-child(2) svg
 {
-  width: 22px;
+  width: 32px;
+  height: 44px;
   fill: #fff;
-  margin-right: 6px;
-  transform: translateY(-39%);
+  margin-right: -5px;
+  transform: translateY(-25%);
 }
 #player-wallet div p
 {

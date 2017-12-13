@@ -10,6 +10,8 @@ import ShopEquipement from './equipement.shop.class';
 
 import Inventory from './inventory.class';
 
+import Equipement from './equipement.class';
+
 
 export default class Game
 {
@@ -50,6 +52,15 @@ export default class Game
         console.log(this);
 
        this.inventory = new Inventory();
+
+        for (let equipement in config.inventory) {
+            if (config.inventory.hasOwnProperty(equipement)) {
+                this.inventory[config.inventory[equipement].Nom] = new Equipement(config.inventory[equipement],
+                    $(document.getElementById('equipement-model')),
+                    config.inventory[equipement].id);
+            }
+        }
+
 
        this.ranking = new Ranking();
 

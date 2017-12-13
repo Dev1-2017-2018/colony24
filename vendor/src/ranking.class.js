@@ -3,16 +3,12 @@ export default class Ranking{
 
     $('#button-classement').on('click',function(){
             let modal = document.getElementById('popupClassement');
-            console.log('click');
 
             //  Affiche la popup
             modal.style.display = "block";
 
             window.onclick = function(event) {
-                if (event.target == modal) {
-                    console.log(modal);
-                    modal.style.display = 'none';
-                }
+                if (event.target === modal) modal.style.display = 'none';
             }
         });
 

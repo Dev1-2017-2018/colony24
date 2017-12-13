@@ -6,8 +6,6 @@ export default class Wallet
         this.gold = gold;
         this.ecu = ecu;
 
-
-
         this.renderWallet();
         console.log( `[[WALLET]] goldValue is ${this.goldValue} \n[[WALLET]] gold is ${this.gold } \n[[WALLET]] ecu is ${this.ecu } \n` );
     }

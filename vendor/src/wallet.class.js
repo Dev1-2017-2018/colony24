@@ -6,10 +6,6 @@ export default class Wallet
         this.gold = gold;
         this.ecu = ecu;
 
-        // Selection des <p> pour render les golds et écus
-        this.$gold = document.getElementById.bind(document, 'gold');
-        this.$ecu = document.getElementById.bind(document, 'ecu');
-
         this.renderWallet();
         this.displayActionList();
         console.log( `[[WALLET]] goldValue is ${this.goldValue} \n[[WALLET]] gold is ${this.gold } \n[[WALLET]] ecu is ${this.ecu } \n` );
@@ -31,8 +27,11 @@ export default class Wallet
 
     // actualise l'affichage des golds et écus dans le DOM
     renderWallet(){
-        this.$gold().innerHTML = this.gold;
-        this.$ecu().innerHTML = this.ecu;
+        // Selection des <p> pour render les golds et écus
+        let $gold = document.getElementById.bind(document, 'gold');
+        let $ecu = document.getElementById.bind(document, 'ecu');
+        $gold().innerHTML = this.gold;
+        $ecu().innerHTML = this.ecu;
         console.log(this)
     }
     displayActionList(){

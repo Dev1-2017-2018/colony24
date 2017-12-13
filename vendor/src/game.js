@@ -132,8 +132,6 @@ export default class Game
         if (o.wallet != undefined){
 
             delete o.wallet.parent;
-            delete o.wallet.$gold;
-            delete o.wallet.$ecu;
         }
         if (o.mainHarbor.shop != undefined){
 

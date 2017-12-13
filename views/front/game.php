@@ -1,15 +1,53 @@
 <!-- Affichage de Main Harbor -->
 <?php ob_start() ;?>
 
-<div id="popupShop" class="modal">
-    <div id="modal-content">
-        <span class="close">&times;</span>
-        <ul id="equipement-model">
-        </ul>
-    </div>
-</div>
+
 
 <section class="container">
+
+    <!-- POP UP -->
+    <div id="popupShop" class="modal">
+        <div id="modal-content">
+            <span class="close">&times;</span>
+            <ul id="equipement-model">
+            </ul>
+        </div>
+    </div>
+    <div id="popupClassement" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <table>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+                <p>
+                    <?php $i = 1; ?>
+                    <?php foreach ($datasScore as $data) : ?>
+                        <tr>
+
+                            <td>
+                                <?php echo $i; ?>
+                                <?php $i++; ?>
+                            </td>
+                            <td><?php echo htmlentities($data['pseudo']); ?></td>
+                            <td><?php echo htmlentities($data['score']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </p>
+                <p>
+                    <tr>
+                        <td><?php echo htmlentities($rankUser[0]['rank']+1); ?></td>
+                        <td><?php echo htmlentities($scoreUser[0]['pseudo']); ?></td>
+                        <td><?php echo htmlentities($scoreUser[0]['score']); ?></td>
+                    </tr>
+                </p>
+            </table>
+        </div>
+    </div>
+
+
     <!-- ASIDE -->
     <div class="aside actionList">
         <ul id="listText">
@@ -19,42 +57,11 @@
         <div id="shop">
             <p class="button" id="button-shop">Shop</p>
         </div>
-
-        <div id="classement" class="button-classment">
+        <div id="inventory">
+            <p class="button" id="button-inventory">Inventory</p>
+        </div>
+        <div id="classement">
             <p class="button" id="button-classement">Classement</p>
-            <div id="popupClassement" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <table>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Name</th>
-                            <th>Score</th>
-                        </tr>
-                        <p>
-                            <?php $i = 1; ?>
-                            <?php foreach ($datasScore as $data) : ?>
-                                <tr>
-
-                                    <td>
-                                        <?php echo $i; ?>
-                                        <?php $i++; ?>
-                                    </td>
-                                    <td><?php echo htmlentities($data['pseudo']); ?></td>
-                                    <td><?php echo htmlentities($data['score']); ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </p>
-                        <p>
-                            <tr>
-                                <td><?php echo htmlentities($rankUser[0]['rank']+1); ?></td>
-                                <td><?php echo htmlentities($scoreUser[0]['pseudo']); ?></td>
-                                <td><?php echo htmlentities($scoreUser[0]['score']); ?></td>
-                            </tr>
-                        </p>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
 

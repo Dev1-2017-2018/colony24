@@ -1,8 +1,6 @@
 <!-- Affichage de Main Harbor -->
 <?php ob_start() ;?>
 
-
-
 <div id="popupShop" class="modal">
     <div id="modal-content">
         <span class="close">&times;</span>
@@ -14,8 +12,8 @@
 <section class="container">
     <!-- ASIDE -->
     <div class="aside actionList">
-        <div id="listText">
-        </div>
+        <ul id="listText">
+        </ul>
     </div>
     <div class="aside buttons">
         <div id="shop">

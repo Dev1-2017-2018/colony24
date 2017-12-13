@@ -1,5 +1,5 @@
 import Shop from './shop.class';
-import Equipement from './equipement';
+import Equipement from './equipement.class';
 export default class ShopEquipement extends Shop
 {
     constructor(id,shop_equipement)
@@ -17,7 +17,6 @@ export default class ShopEquipement extends Shop
             $el.on('click',`input[data-id-equip=${id_equip}]`,{that: this, id: id, equipement: shop_equipement[property] }, this.buy_equip);
             id_equip++;
         }
-        console.log(this);
     }
 
     buy_equip(e){
@@ -27,14 +26,14 @@ export default class ShopEquipement extends Shop
         let equipementName = equipement.Nom;
         let price = equipement.Prix;
 
-        console.log(equipement);
 
         if(wallet.ecu >= price){
 
             parent.inventory[equipementName] = equipement;
             parent.wallet.ecu -= price;
-
+            console.log(parent.inventory);
             wallet.renderWallet();
+            parent.saveDataJson(parent);
 
         }
 

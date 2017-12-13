@@ -2,115 +2,86 @@
 <?php ob_start() ;?>
 
 
-<!-- Popup du shop -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
+
+<div id="popupShop" class="modal">
+    <div id="modal-content">
         <span class="close">&times;</span>
-        <?php $id = 1;?>
-        <ul>
-            <?php foreach($datas as $val):?>
-                <li style="margin-bottom: 30px;">
-                    <?php
-                    echo 'Marque : '.$val['brand'].'<br>'.
-                        'Nom : '.$val['name'].'<br>';
-                    if (isset($val['energy'])){
-                        echo 'Energie disponible : '.$val['energy'].'<br>';
-                    }elseif(isset($val['power']) && isset($val['speed'])){
-                        echo 'Puissance : '.$val['power'].'<br>'.
-                            'Vitesse : '.$val['speed'].'<br>';
-                    }elseif (isset($val['propulsion'])){
-                        echo 'Propulsion : '.$val['propulsion'].'<br>';
-                    }elseif (isset($val['power'])){
-                        echo 'Puissance : '.$val['power'].'<br>';
-                    }else{
-                        echo 'Réparation : '.$val['repair'].'<br>';
-                    }
-                    echo 'Prix : '.$val['price'].'<br>';
-                    ?>
-                    <input type='button' id="<?php echo $id;?>" value='Acheter'/>
-                    <?php $id++;?>
-                </li>
-            <?php endforeach; ?>
+        <ul id="equipement-model">
         </ul>
     </div>
 </div>
 
-
-
-
 <section class="container">
-	<!-- ASIDE -->
-	<div class="aside action-list">
-		<div id="list-text">
-			<p>Liste d'action du joueur a ajouter impotentia fines mediocrium delictorum nefanda Clematii cuiusdam</p>
-			<p>misceri sibi generum, flagrans eius amore, non impetraret, ut ferebatur, per palatii pseudothyrum introducta, oblato pretioso reginae monili id adsecuta </p>
-			<p>Vbi curarum abiectis ponderibus aliis tamquam nodum </p>
-			<p>Atque, ut Tullius ait, ut etiam ferae fame </p>
-		</div>
-	</div>
-	<div class="aside buttons">
-		<div id="button-shop">
-		</div>
-		<div id="button-classment">
-			<p class="button">Classment</p>
-			<div id="modalPopup" class="modal">
-		        <div class="modal-content">
-		            <span class="close">&times;</span>
-		            <table>
-		                <tr>
-		                    <th>Rank</th>
-		                    <th>Name</th> 
-		                    <th>Score</th>
-		                </tr>
-		                <p>
-		                    <?php $i = 1; ?>
-		                    <?php foreach ($datasScore as $data) : ?>
-		                    <tr>
-		                        
-		                        <td>
-		                            <?php echo $i; ?>
-		                            <?php $i++; ?>
-		                        </td>
-		                        <td><?php echo htmlentities($data['pseudo']); ?></td>
-		                        <td><?php echo htmlentities($data['score']); ?></td>
-		                    </tr>
-		                    <?php endforeach; ?>
-		                </p>
-		                <p>
-		                    <tr>
-		                        <td><?php echo htmlentities($rankUser[0]['rank']+1); ?></td>
-		                        <td><?php echo htmlentities($scoreUser[0]['pseudo']); ?></td>
-		                        <td><?php echo htmlentities($scoreUser[0]['score']); ?></td>
-		                    </tr>
-		                </p>
-		            </table>
-		        </div>
-		    </div>
-		</div>
-	</div>
+    <!-- ASIDE -->
+    <div class="aside actionList">
+        <div id="listText">
+        </div>
+    </div>
+    <div class="aside buttons">
+        <div id="shop">
+            <p class="button" id="button-shop">Shop</p>
+        </div>
 
-	<!-- INFO PLAYER -->
-	<div class="player-info">
-			<div id="player-name">
-				<p><?php echo $_SESSION["user"]?></p>
-			</div>
-			<div id="player-wallet">
-				<div>
-					<svg width="10" height="20" id="gold_colony24" data-name="gold_colony24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.6 411.44"><title>gold_colony24</title>
-						<path d="M437,319.13H410.36L360.68,220.7H330.11l-45.7-90.55H207.19l-45.7,90.55H130.93L81.25,319.13H54.66L1,425.44H490.6ZM169.53,393.76,135.84,327h67.38Zm76.27-98.43-29.71-58.88h59.43Zm76.27,98.43L288.38,327h67.39ZM262.86,71.09H227.43V14h35.43Zm63.54,28L296.2,80.56,327.29,29.9l30.2,18.54Zm49.18,55.53-18-30.52,44.91-26.49,18,30.53ZM166.09,99.1,135,48.44,165.2,29.9l31.09,50.67Zm-49.17,55.52L72,128.13,90,97.61l44.91,26.49Zm0,0" transform="translate(-1 -14)"/>
-					</svg>
-					<p>GOLD :</p>
-					<p id="gold">250</p>
-				</div>
-				<div>
-					<svg version="1.1" id="gold_colony24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 310 410" style="enable-background:new 0 0 310 410;" xml:space="preserve">
+        <div id="classement" class="button-classment">
+            <p class="button" id="button-classement">Classement</p>
+            <div id="popupClassement" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <table>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                        <p>
+                            <?php $i = 1; ?>
+                            <?php foreach ($datasScore as $data) : ?>
+                                <tr>
+
+                                    <td>
+                                        <?php echo $i; ?>
+                                        <?php $i++; ?>
+                                    </td>
+                                    <td><?php echo htmlentities($data['pseudo']); ?></td>
+                                    <td><?php echo htmlentities($data['score']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </p>
+                        <p>
+                            <tr>
+                                <td><?php echo htmlentities($rankUser[0]['rank']+1); ?></td>
+                                <td><?php echo htmlentities($scoreUser[0]['pseudo']); ?></td>
+                                <td><?php echo htmlentities($scoreUser[0]['score']); ?></td>
+                            </tr>
+                        </p>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INFO PLAYER -->
+    <div class="player-info">
+        <div id="player-name">
+            <p><?php echo $_SESSION["user"]?></p>
+        </div>
+        <div id="player-wallet">
+            <div>
+                <svg width="10" height="20" id="gold_colony24" data-name="gold_colony24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.6 411.44"><title>gold_colony24</title>
+                    <path d="M437,319.13H410.36L360.68,220.7H330.11l-45.7-90.55H207.19l-45.7,90.55H130.93L81.25,319.13H54.66L1,425.44H490.6ZM169.53,393.76,135.84,327h67.38Zm76.27-98.43-29.71-58.88h59.43Zm76.27,98.43L288.38,327h67.39ZM262.86,71.09H227.43V14h35.43Zm63.54,28L296.2,80.56,327.29,29.9l30.2,18.54Zm49.18,55.53-18-30.52,44.91-26.49,18,30.53ZM166.09,99.1,135,48.44,165.2,29.9l31.09,50.67Zm-49.17,55.52L72,128.13,90,97.61l44.91,26.49Zm0,0" transform="translate(-1 -14)"/>
+                </svg>
+                <p>GOLD :</p>
+                <p id="gold">250</p>
+            </div>
+            <div>
+                <svg version="1.1" id="gold_colony24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 310 410" style="enable-background:new 0 0 310 410;" xml:space="preserve">
 						<g>
-							<path d="M104.3,31.1c-4.4,8.2-9.6,19.3-9.6,32.2c0,11.8,4.1,22.8,7.7,31.1c3.5,8,7.5,15.1,11.7,22.4c0.4,0.7,1.6,2.7,9,4.1
+                            <path d="M104.3,31.1c-4.4,8.2-9.6,19.3-9.6,32.2c0,11.8,4.1,22.8,7.7,31.1c3.5,8,7.5,15.1,11.7,22.4c0.4,0.7,1.6,2.7,9,4.1
 								c1.7,0.3,3.5,0.5,5.4,0.5c6.1,0,11.8-1.8,17.3-3.5c5.2-1.6,10.2-3.2,15.1-3.2h0.2c7.4,0.1,14.3,2.4,21.6,4.8c3.2,1,6.4,2.2,9.8,3
 								c1.4,0.4,2.3,0,2.9-0.3c16.4-8.7,30.7-20.2,40.1-32.5c4.7-6.1,8.7-14.3,12.2-25.1c1.6-5,3.4-12.4,0.3-19.4
 								c-4.1-9-14.8-10.1-22.5-10.1c-2.3,0-16.5,0.5-20.2,0.5c-9.5,0-20.5-0.7-30.9-6c-4.5-2.3-8.7-5.3-13.2-8.4
 								c-6.8-4.8-13.8-9.7-22-12.3c-2.3-0.7-4.6-1.1-6.8-1.1C116.7,8,107.3,25.4,104.3,31.1z"/>
-							<path d="M221.1,153.6c-6.5-6.1-12.5-11.5-18.8-16.8c-5.7-2-17.2-2.1-24.1-4.3c-6.4-2.1-13.1-4.4-19.9-4c-6.3,0.4-12.1,2.6-18.1,4.1
+                            <path d="M221.1,153.6c-6.5-6.1-12.5-11.5-18.8-16.8c-5.7-2-17.2-2.1-24.1-4.3c-6.4-2.1-13.1-4.4-19.9-4c-6.3,0.4-12.1,2.6-18.1,4.1
 								c-6.8,1.6-13.3,2.1-20.2,0.8c0,0-9.4-1.4-31.5-17.7c-9-6.7-18.6-12.6-29.6-15c-10.5-2.3-15,13.8-4.4,16.1c10.1,2.2,18.4,8,26.5,14
 								c0,0,0,0,0.1,0c-11.5,1.5-22.2,6.1-33.4,9.2c-10.4,2.8-6,19,4.4,16.1c11.3-3.1,22.5-8.5,34.3-9.1c1.9-0.1,3.7,0.1,5.5,0.5
 								c-26.4,21.7-50.7,45.6-68,75.4c-15,25.8-21.7,55.8-12.7,84.9c5.3,17,15.4,32.1,27.1,45.3C48.5,364.4,60,374.8,73.7,382
@@ -132,77 +103,48 @@
 								c0.7,1.5,1.5,2.8,2.6,3.9c1.1,1.1,2.4,2,3.8,2.7c1.5,0.6,3,0.9,4.7,0.9c1.7,0,3.3-0.3,4.8-0.9c1.5-0.6,2.8-1.5,3.9-2.7
 								c1.1-1.1,2-2.5,2.7-3.9c0.7-1.5,1-3.1,1-4.8v-45.4c0-2.5,0.9-4.6,2.6-6.4c1.7-1.8,3.9-2.7,6.4-2.7c2.5,0,4.6,0.9,6.3,2.7
 								c1.7,1.8,2.6,3.9,2.6,6.4V279.6z"/>
-						</g>
+                        </g>
 					</svg>
-					<p>ECU :</p>
-					<p id="ecu">360</p>
-				</div>
-			</div>
-
-	</div>
-
-	<!-- MAIN -->
-	<div class="main">
-        <div id="player-boats">
-            <p> ici on va append nos div </p>
+                <p>ECU :</p>
+                <p id="ecu">360</p>
+            </div>
         </div>
-	</div>
+
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+        <div id="player-boats">
+            <ul id="boats"></ul>
+        </div>
+    </div>
 </section>
 
 <?php
-    // récupére le username du joueur
-    $user = $_SESSION["user"];
+// récupére le username du joueur
+$user = $_SESSION["user"];
 
-    if (isset($_POST['player'])){
-        get_json();
-    }
+if (isset($_POST['player'])){
+    get_json();
+}
 
-    function get_json(){
-        $player = $_POST['player'];
-        update_json_data($player);
-    }
+function get_json(){
+    $player = $_POST['player'];
+    update_json_data($player);
+}
 
-    function send_json($user){
-        $monJson =  send_json_data($user);
+function send_json($user){
+    $monJson =  send_json_data($user);
 
-        return $monJson;
-    }
+    return $monJson;
+}
 
-    $data = send_json($user);
+$data = send_json($user);
 ?>
-
-<script id="popupScore">
-    var userData = <?php echo $data; ?>;
-
-    // Get the modal
-    var modal = document.getElementById('modalPopup');
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("button-classment");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal 
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
 
 <script id="myScript">
     let userData = <?php echo $data; ?>;
+    let shop_equipement = <?php echo json_encode($datas, JSON_PRETTY_PRINT); ?>;
 </script>
 
 <script src ="js/bundle.js"></script>

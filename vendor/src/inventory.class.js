@@ -1,17 +1,7 @@
-class Inventory
+export default class Inventory
 {
     constructor()
     {
+        this.name = 'Inventory';
     }
-    
-    equip()
-    {
-    }
-
-
-    ////ACTION WITH WALLET
-    buyEquipment()
-    {
-    }
-
 }

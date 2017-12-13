@@ -109,7 +109,7 @@
 
 	var _boatShop2 = _interopRequireDefault(_boatShop);
 
-	var _equipementShop = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./equipement.shop.class\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _equipementShop = __webpack_require__(9);
 
 	var _equipementShop2 = _interopRequireDefault(_equipementShop);
 
@@ -124,6 +124,10 @@
 	var _actionList = __webpack_require__(12);
 
 	var _actionList2 = _interopRequireDefault(_actionList);
+
+	var _renderBoats = __webpack_require__(13);
+
+	var _renderBoats2 = _interopRequireDefault(_renderBoats);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -158,6 +162,10 @@
 
 	                // Creation de main Harbor
 	                this.mainHarbor = {};
+
+	                // Création des svg pour les bateaux
+	                this.renderBoats = new _renderBoats2.default();
+	                this.renderBoats.createBoatsButton(this.boats);
 
 	                // Creation du shop
 	                this.mainHarbor.shop = {};
@@ -362,8 +370,6 @@
 	    value: true
 	});
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _boats = __webpack_require__(5);
 
 	var _boats2 = _interopRequireDefault(_boats);
@@ -382,33 +388,8 @@
 	    function Boat(boat, id) {
 	        _classCallCheck(this, Boat);
 
-	        var _this = _possibleConstructorReturn(this, (Boat.__proto__ || Object.getPrototypeOf(Boat)).call(this, boat, id));
-
-	        _this.$el = $("ul#boats");
-
-	        _this.create_boat_button();
-
-	        $('li#li' + id).on('click', 'input[type=\'button\']', { that: _this }, function (e) {
-
-	            var context = e.data.that;
-
-	            var inputX = $('#li' + context.id + ' > div > input:nth-child(2)').val();
-	            var inputY = $('#li' + context.id + ' > div > input:nth-child(3)').val();
-
-	            if (inputX != 0 || inputY != 0) {
-	                e.data.that.movement(inputY, inputX);
-	                $('#li' + context.id + ' > div > p').html(context.name + ' x:' + context.x + ' y:' + context.y);
-	            }
-	        });
-	        return _this;
+	        return _possibleConstructorReturn(this, (Boat.__proto__ || Object.getPrototypeOf(Boat)).call(this, boat, id));
 	    }
-
-	    _createClass(Boat, [{
-	        key: 'create_boat_button',
-	        value: function create_boat_button() {
-	            this.$el.append('\n            <li id="li' + this.id + '" style="display: inline-block">\n                <div>\n                    <p style="width: 30%; margin: 0 auto">' + this.name + ' x:' + this.x + ' y:' + this.y + '</p>\n                    <input style="width: 45%; margin: 0 auto" type="number" placeholder="x"/>\n                    <input style="width: 45%; margin: 0 auto" type="number" placeholder="y"/>\n                    <input type="button" value="Move"/>\n                </div>\n            </li>\n        ');
-	        }
-	    }]);
 
 	    return Boat;
 	}(_boats2.default);
@@ -578,18 +559,21 @@
 	    _classCallCheck(this, Ranking);
 
 	    $('#button-classement').on('click', function () {
-	        var modal = document.getElementById('popupClassement');
-
 	        //  Affiche la popup
-	        modal.style.display = "block";
+	        document.getElementById('popupClassement').style.display = "flex";
+	        document.getElementById('popUp').style.display = "grid";
 
 	        window.onclick = function (event) {
-	            if (event.target === modal) modal.style.display = 'none';
+	            if (event.target === document.getElementById('background')) {
+	                document.getElementById('popupClassement').style.display = 'none';
+	                document.getElementById('popUp').style.display = 'none';
+	            }
 	        };
 	    });
 
-	    $('.close').on('click', function () {
+	    $('.closeButton').on('click', function () {
 	        $(this).closest('.modal').css('display', 'none');
+	        $(this).closest('.popUp').css('display', 'none');
 	    });
 	};
 
@@ -704,18 +688,20 @@
 	        _classCallCheck(this, Shop);
 
 	        $('#button-shop').on('click', function () {
-	            var modal = document.getElementById('popupShop');
-
-	            //  Affiche la popup
-	            modal.style.display = "block";
+	            document.getElementById('popupShop').style.display = "block";
+	            document.getElementById('popUp').style.display = "grid";
 
 	            window.onclick = function (event) {
-	                if (event.target === modal) modal.style.display = 'none';
+	                if (event.target === document.getElementById('background')) {
+	                    document.getElementById('popupShop').style.display = 'none';
+	                    document.getElementById('popUp').style.display = 'none';
+	                }
 	            };
 	        });
 
-	        $('.close').on('click', function () {
+	        $('.closeButton').on('click', function () {
 	            $(this).closest('.modal').css('display', 'none');
+	            $(this).closest('.popUp').css('display', 'none');
 	        });
 	    }
 
@@ -738,7 +724,121 @@
 	exports.default = Shop;
 
 /***/ }),
-/* 9 */,
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _shop = __webpack_require__(8);
+
+	var _shop2 = _interopRequireDefault(_shop);
+
+	var _equipement = __webpack_require__(10);
+
+	var _equipement2 = _interopRequireDefault(_equipement);
+
+	var _inventory = __webpack_require__(11);
+
+	var _inventory2 = _interopRequireDefault(_inventory);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ShopEquipement = function (_Shop) {
+	    _inherits(ShopEquipement, _Shop);
+
+	    function ShopEquipement(id, shop_equipement) {
+	        _classCallCheck(this, ShopEquipement);
+
+	        var _this = _possibleConstructorReturn(this, (ShopEquipement.__proto__ || Object.getPrototypeOf(ShopEquipement)).call(this, id, shop_equipement));
+
+	        var $el = $(document.getElementById('equipement-model'));
+
+	        var id_equip = 0;
+	        var property = null;
+	        for (property in shop_equipement) {
+	            if (shop_equipement.hasOwnProperty(property)) {
+	                _this[shop_equipement[property].Nom] = new _equipement2.default(shop_equipement[property], $el, id_equip, 1);
+	            }
+	            $el.on('click', 'input[data-id-equip=' + id_equip + ']', { that: _this, id: id, equipement: shop_equipement[property] }, _this.buy_equip);
+	            id_equip++;
+	        }
+	        return _this;
+	    }
+
+	    _createClass(ShopEquipement, [{
+	        key: 'buy_equip',
+	        value: function buy_equip(e) {
+	            var parent = e.data.that.parent;
+	            var wallet = parent.wallet;
+	            var equipement = e.data.equipement;
+	            var equipementName = equipement.Nom;
+	            var price = equipement.Prix;
+
+	            if (wallet.ecu >= price) {
+
+	                parent.inventory[equipementName] = equipement;
+	                parent.wallet.ecu -= price;
+	                console.log(parent.inventory);
+	                wallet.renderWallet();
+	                parent.saveDataJson(parent);
+
+	                e.data.that.inventoryPush(parent);
+	            }
+	        }
+	    }, {
+	        key: 'inventoryPush',
+	        value: function inventoryPush(parent) {
+	            var equipement = parent.inventory;
+	            console.log(parent.inventory);
+	            // Liaison Inventaire
+	            var $ivt = $('ul#inventory-model');
+
+	            // console.log($ivt);
+
+
+	            // Vérification des Values
+	            for (var value in equipement) {
+	                $ivt.append('<li></li>');
+	                if (equipement.hasOwnProperty(value)) {
+	                    if (equipement[value] != "id") {
+	                        var ivtProperty = "";
+	                        for (var carac in equipement[value]) {
+	                            if (equipement[value][carac] != "") {
+	                                if (carac != 'id' && carac != 'Nom' && carac != 'Prix') {
+	                                    ivtProperty += '<br/> ' + carac + ' : ' + equipement[value][carac];
+	                                }
+	                            }
+	                        }
+	                        this.inventoryRender($ivt, value, ivtProperty);
+	                    }
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'inventoryRender',
+	        value: function inventoryRender($ivt, value, ivtProperty) {
+	            $ivt.children().last().append('\n            <p style="color:black;">\n                ' + value + '\n                ' + ivtProperty + '\n            </p>\n        ');
+	        }
+	    }]);
+
+	    return ShopEquipement;
+	}(_shop2.default);
+
+	exports.default = ShopEquipement;
+
+/***/ }),
 /* 10 */
 /***/ (function(module, exports) {
 
@@ -811,17 +911,20 @@
 	        // espace qui contient le bouton inventory
 	        var $el = $("div#button-inventory");
 	        $('#button-inventory').on("click", function () {
-	            var inventory = document.getElementById("popupInventory");
-
-	            inventory.style.display = "block";
+	            document.getElementById("popupInventory").style.display = "block";
+	            document.getElementById('popUp').style.display = "grid";
 
 	            window.onclick = function (event) {
-	                if (event.target === inventory) inventory.style.display = "none";
+	                if (event.target === document.getElementById('background')) {
+	                    document.getElementById('popupInventory').style.display = 'none';
+	                    document.getElementById('popUp').style.display = 'none';
+	                }
 	            };
 	        });
 
-	        $('.close').on('click', function () {
+	        $('.closeButton').on('click', function () {
 	            $(this).closest('.modal').css('display', 'none');
+	            $(this).closest('.popUp').css('display', 'none');
 	        });
 
 	        // Appel la function create_inventory
@@ -886,6 +989,86 @@
 	}();
 
 	exports.default = ActionList;
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var RenderBoats = function () {
+	    function RenderBoats() {
+	        _classCallCheck(this, RenderBoats);
+
+	        this.name = 'renderBoats';
+	    }
+
+	    _createClass(RenderBoats, [{
+	        key: 'createBoatsButton',
+	        value: function createBoatsButton(boats) {
+	            if ($('#svgBoats').length) {
+	                $('#svgBoats').remove();
+	            }
+	            var boatType = [];
+	            var svgBoat = '<svg width="100%" height="' + window.innerHeight + '" id="svgBoats">';
+	            //  ----------------------------------------
+	            var coordinate = {
+	                x: 500,
+	                y: 200
+	                //  ----------------------------------------
+	            };for (var boat in boats) {
+	                if (boatType.indexOf(boats[boat].name) == -1) {
+	                    boatType.push(boats[boat].name);
+	                    svgBoat += '<rect x="' + coordinate.x + '" y="' + coordinate.y + '" width="100" height="100" style="fill:rgb(0,255,150);" id="' + boats[boat].name + '"/>';
+	                    // ---------------------------------
+	                    coordinate.x += 150;
+	                    // ---------------------------------
+	                }
+	            }
+	            svgBoat += '</svg>';
+	            $('#player-boats').prepend(svgBoat);
+	            $('#svgBoats').find('rect').on('click', function () {
+	                var list = '<div id="boatList" style="background-color: rgba(0,250,125,0.5); position: absolute;width: 90%;height: 90%;left: 5%;top: 5%"><h1 id="echapBoat" style="position:absolute;right:2%;top:0px;">X</h1></div>';
+	                $('body').append(list);
+	                var id = this.id;
+	                for (var _boat in boats) {
+	                    if (boats[_boat].name == id) {
+	                        $('#boatList').append('<li id="li' + boats[_boat].id + '" style="display: inline-block">\n                        <div>\n                            <p style="width: 30%; margin: 0 auto">' + boats[_boat].name + ' x:' + boats[_boat].x + ' y:' + boats[_boat].y + '</p>\n                            <input style="width: 45%; margin: 0 auto" type="number" placeholder="x"/>\n                            <input style="width: 45%; margin: 0 auto" type="number" placeholder="y"/>\n                            <input type="button" value="Move"/>\n                        </div>\n                    </li>');
+	                        $('li#li' + boats[_boat].id).on('click', 'input[type=\'button\']', { that: boats[_boat] }, function (e) {
+
+	                            var context = e.data.that;
+
+	                            console.log(context);
+
+	                            var inputX = $('#li' + context.id + ' > div > input:nth-child(2)').val();
+	                            var inputY = $('#li' + context.id + ' > div > input:nth-child(3)').val();
+
+	                            if (inputX != 0 || inputY != 0) {
+	                                context.movement(inputY, inputX);
+	                                $('#li' + context.id + ' > div > p').html(context.name + ' x:' + context.x + ' y:' + context.y);
+	                            }
+	                        });
+	                    }
+	                }
+	                $('#echapBoat').on('click', function () {
+	                    this.closest('div').remove();
+	                });
+	            });
+	        }
+	    }]);
+
+	    return RenderBoats;
+	}();
+
+	exports.default = RenderBoats;
 
 /***/ })
 /******/ ]);

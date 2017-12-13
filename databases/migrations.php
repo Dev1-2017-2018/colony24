@@ -74,7 +74,6 @@ for ( $i = 0; $i < 15; $i++ ) {
 }
 
 $prepareUserScore = NULL;
-
 $prepareShop = $pdo->prepare("INSERT INTO `shop`
 								(`id`, `Marque`, `Nom`, `Puissance`, `Propulsion`, `Energie`, `Vitesse`, `Reparation`, `Prix`)
 								VALUES

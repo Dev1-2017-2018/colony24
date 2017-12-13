@@ -86,6 +86,8 @@ div.actionList
   height: 100%;
   overflow:auto;
 }
+
+div.actionList div p,
 div.actionList ul li
 {
   font-family: 'Russo One', sans-serif;

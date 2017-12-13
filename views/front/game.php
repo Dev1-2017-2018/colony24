@@ -1,7 +1,6 @@
 <!-- Affichage de Main Harbor -->
 <?php ob_start() ;?>
 <section class="container">
-
     <div id="popupShop" class="modal">
         <div id="modal-content">
             <span class="close">&times;</span>
@@ -10,16 +9,23 @@
         </div>
     </div>
 
+    <div id="popupInventory" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <ul id="inventory-model"></ul>
+        </div>
+    </div>
     <!-- ASIDE -->
     <div class="aside actionList">
-        <ul id="listText">
-        </ul>
+        <ul id="listText"></ul>
     </div>
     <div class="aside buttons">
         <div id="shop">
             <p class="button" id="button-shop">Shop</p>
         </div>
-
+        <div id="inventory">
+            <p class="button" id="button-inventory">Inventory</p>
+        </div>
         <div id="classement" class="button-classment">
             <p class="button" id="button-classement">Classement</p>
             <div id="popupClassement" class="modal">

@@ -2,8 +2,6 @@ import Wallet from './wallet.class';
 
 import Boat from './boat.class';
 
-import Map from './map.class'
-
 import Ranking from './ranking.class';
 
 import BuyBoat from './boat.shop.class';
@@ -20,8 +18,6 @@ export default class Game
     constructor(config,shop_equipement)
     {
         this.name = config.name;
-        // Launch map
-        this.map = new Map();
 
         // Creation de la wallet
         this.wallet = new Wallet(Number(config.wallet.gold), Number(config.wallet.ecu));

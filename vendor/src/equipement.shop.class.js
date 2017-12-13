@@ -37,6 +37,11 @@ export default class ShopEquipement extends Shop
 
         }
 
+        //Action List
+        // parent.actionlist.showInAL (`Tu viens d'achter "${ equipment}" comme nouveau équipement`, 0);
+        parent.actionlist.showInAL (`Tu as : ${parent.wallet.ecu} d'écu`, 1500);
+        parent.actionlist.showInAL (`et Tu as : ${parent.wallet.gold} de gold`, 2000);
+
 
     }
 }

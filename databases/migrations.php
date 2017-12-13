@@ -75,8 +75,13 @@ for ( $i = 0; $i < 15; $i++ ) {
 
 $prepareUserScore = NULL;
 
+<<<<<<< HEAD
+$prepareShop = $pdo->prepare("INSERT INTO `shop` 
+								(`id`, `Marque`, `Nom`, `Puissance`, `Propulsion`, `Energie`, `Vitesse`, `Reparation`, `Prix`) 
+=======
 $prepareShop = $pdo->prepare("INSERT INTO `shop`
 								(`id`, `Marque`, `Nom`, `Puissance`, `Propulsion`, `Energie`, `Vitesse`, `Reparation`, `Prix`)
+>>>>>>> 6073946fbc76cbc099c4ce4f1fbf5bf11864b614
 								VALUES
 								(1, 'Arnson', 'Batterie PWR 4', NULL, NULL, 300, NULL, NULL, 600),
 								(2, 'Lukslit', 'Batterie SUH 7', NULL, NULL, 500, NULL, NULL, 800),

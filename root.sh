@@ -4,13 +4,14 @@
 
 #show tables;
 # select * from users;
+
+# composer install
+# cd vendor
+# npm install
+# npm run watch
+
 # cd databases
 # php migrations.php
-
-composer install
-cd vendor
-npm install
-npm run watch
 
 # php -S localhost:8000 -t web
 # sed -i -e "s/\"\"/\"root\"/g" app.php

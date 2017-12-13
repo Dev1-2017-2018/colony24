@@ -25,7 +25,6 @@ export default class Boats
 
         function foo(callback, that){
             $.getJSON( `moveboat?x=${positionX}&y=${positionY}`).done(function (data) {
-
                 callback(data, that);
             });
         }
@@ -46,13 +45,12 @@ export default class Boats
                 $(`#li${that.id} > div > p`).html(`${that.name} x:${x} y:${y}`);
                 that.goldMining(data.gold);
             }else{
-               return console.log("Une île se trouve à cette position");
+                return console.log("Une île se trouve à cette position");
             }
         }, this);
     }
 
     goldMining(gold){
-         console.log(this);
 
         // on vérifie qu'il y ait bien de l'or à la position
         if(gold > 0){

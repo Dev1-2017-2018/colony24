@@ -86,6 +86,7 @@ div.actionList
   height: 100%;
   overflow:auto;
 }
+div.actionList div p,
 div.actionList ul li
 {
   font-family: 'Russo One', sans-serif;
@@ -97,9 +98,9 @@ div.actionList ul li
   font-size: 1em;
   line-height: 1.45;
   letter-spacing: .025em;
-  margin-top: 0em;
+  margin-top: .8em;
 }
-div.actionList ul li:nth-child(1)
+div.actionList div p:nth-child(1)
 {
   margin-top: 0em;
 }

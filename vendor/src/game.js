@@ -55,7 +55,7 @@ export default class Game
         this.mainHarbor.shop.equipement = {};
 
         this.mainHarbor.shop[`button 0`] = new BuyBoat(this.id);
-        this.mainHarbor.shop.equipement = new ShopEquipement(this.id,shop_equipement);  
+        this.mainHarbor.shop.equipement = new ShopEquipement(this.id,shop_equipement);
 
         this.inventory = new Inventory();
 

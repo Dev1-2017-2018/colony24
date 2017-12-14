@@ -1,6 +1,6 @@
 export default class Boats
 {
-    constructor(boat = {name: "Bateau", structure: 100, blindage: 50, capacite: 50, poids: 10, stockage: 0, x: 0, y: 0}, id)
+    constructor(boat, id)
     {
         // Boats ici on crée automatiquement les propriétés de notre objet bateau et on vérifie si le type
         // des propriétés doit être un number ou non
@@ -34,15 +34,27 @@ export default class Boats
             let x = data.x;
             let y = data.y;
             let success = data.success;
-            console.log(data);
 
             if(x >= 0 && y >= 0 && success === 1) {
 
                 // Modification de la position du bateau
                 that.y = positionY;
                 that.x = positionX;
-                console.log("Votre bateau est maintenant en " + x + " - " + y);
-                $(`#li${that.id} > div > p`).html(`${that.name} x:${x} y:${y}`);
+
+                // Perte d'énérgie sur les déplacements
+                let n;
+                for (n in that.equipement) {
+                    if (that.equipement[n].hasOwnProperty('Energie')) {
+                        if (that.equipement[n]['Energie'] > 10) {
+                            that.equipement[n]['Energie'] -= 10;
+                            $(`#li${that.id} > div > p`).html(`${that.name} x:${x} y:${y}`);
+                            console.log("Votre bateau est maintenant en " + x + " - " + y);
+                        } else if (that.equipement[n]['Energie'] < 10) {
+                            return console.log("Vous n'avez pas assez de batterie");
+                        }
+                    } else { console.log('Moteur non trouvé :/'); }
+                }
+                console.log(that.equipement);
                 that.goldMining(data.gold);
             }else{
                 return console.log("Une île se trouve à cette position");
@@ -55,7 +67,7 @@ export default class Boats
         // on vérifie qu'il y ait bien de l'or à la position
         if(gold > 0){
 
-            if(this.stockage <= 600){
+            if(this.stockage <= this.capacite){
 
                 // Désignation par Random du climat
                 let random = Math.random()*100;
@@ -126,8 +138,9 @@ export default class Boats
                     return;
                 }
 
-                if(this.stockage >= 600) {
-                    this.stockage = 600;
+                if(this.stockage >= this.capacite) {
+
+                    this.stockage = this.capacite;
                     this.returnHome();
                 }
             }
@@ -143,9 +156,10 @@ export default class Boats
         this.x = 0;
         $(`#li${this.id} > div > p`).html(`${this.name} x:${this.x} y:${this.y}`);
 
-        this.parent.actionlist.showInAL(`Votre bateau est retourné à Main Harbor pour vider son stockage `, 0);
+        this.parent.actionlist.showInAL(`Votre ${this.name} est retourné à Main Harbor pour vider son stockage `, 0);
 
         this.parent.wallet.gold += this.stockage;
+
         this.parent.wallet.renderWallet();
 
         this.stockage = 0;

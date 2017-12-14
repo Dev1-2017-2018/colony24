@@ -1,22 +1,21 @@
 import Shop from './shop.class';
-import Boat from './boat.class';
+import Submarine from './submarine.class';
 
-export default class BuyBoat extends Shop
+export default class BuySubmarine extends Shop
 {
-    constructor(id)
-    {
+    constructor(id){
         super(id);
+
         this.id = id;
         this.$el = $("#equipement-model");
 
         // On lance la propriété crée dans le parent shop.class.js
-        this.create_button("bateau");
-
+        this.create_button("sous-marin");
 
         // On accroche un événement on click sur la div button-shop en passant en paramètre Boat,
         // le context de la class BuyBoat et l'id du constructor
         // On met ensuite en callback this.buy_boat
-        this.$el.on('click', `input[data-id=${id}]`, { class: Boat, that: this, id: id }, this.buy_boat);
+        this.$el.on('click', `input[data-id=${id}]`, { class: Submarine, that: this, id: id }, this.buy_boat);
     }
 
     buy_boat(e){

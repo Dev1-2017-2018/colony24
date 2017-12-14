@@ -19,15 +19,4 @@ export default class Ranking{
             $(this).closest('.popUp').css('display','none');
         });
     }
-
-    test(){
-        setInterval(function(){
-            $.ajax({
-                url: '/update',
-                success:function(){
-                    console.log('salut');
-                }
-            });
-        },1000);
-    }
 }

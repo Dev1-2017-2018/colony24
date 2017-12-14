@@ -1,6 +1,5 @@
 <!-- Affichage de Main Harbor -->
 <?php ob_start() ;?>
-
 <!-- POP UP -->
 <section id="popUp" style="display: none;">
   <!-- special -->
@@ -59,7 +58,7 @@
         <ul id="listText"></ul>
     </div>
     <div class="aside buttons">
-
+    <button class="change">Vendre l'or</button>
         <div id="shop">
             <p class="button" id="button-shop">Shop</p>
         </div>

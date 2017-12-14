@@ -51,7 +51,7 @@ export default class ShopEquipement extends Shop
 
         // Vérification des Values
         for (let value in equipement) {
-            $ivt.append('<li></li>');
+            $ivt.append('<li><br></li>');
             if (equipement.hasOwnProperty(value)) {
                 if (equipement[value] != "id") {
                     let ivtProperty = "";
@@ -71,7 +71,7 @@ export default class ShopEquipement extends Shop
     inventoryRender($ivt, value, ivtProperty)
     {
         $ivt.children().last().append(`
-            <p style="color:black;">
+            <p>
                 ${value}
                 ${ivtProperty}
             </p>

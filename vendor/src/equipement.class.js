@@ -2,7 +2,7 @@ export default class Equipement{
     constructor (equipement,$el, id_equip, append)
     {
         if(append){
-            $el.append(`<li></li>`);
+            $el.append(`<li><br></li>`);
         }
 
         let property = null;
@@ -24,9 +24,7 @@ export default class Equipement{
     }
     render_equipement($el, property, equipement_property){
         $el.children().last().append(`
-            <p>
-                ${property} : ${equipement_property}
-            </p>
+            <p>${equipement_property}</p>
         `);
     }
 }

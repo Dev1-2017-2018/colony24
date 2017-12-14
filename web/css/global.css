@@ -3,6 +3,7 @@
 * {
   margin: 0; padding: 0;
   border-collapse: collapse;
+  list-style-type: none;
 }
 body {
   background-color: #3c536a;
@@ -51,7 +52,7 @@ a{
 section.container {
   display: grid;
   grid-template-columns: 155px 11.5vw auto;
-  grid-template-rows: 17vh 42vh 41vh;
+  grid-template-rows: 17vh 37vh 46vh;
 }
 
 section.container > div {
@@ -99,7 +100,7 @@ div.actionList ul li
   font-size: 1em;
   line-height: 1.45;
   letter-spacing: .025em;
-  margin-top: .05em;
+  margin-top: .25em;
 }
 div.actionList ul li:nth-child(1)
 {
@@ -232,14 +233,14 @@ div.player-info div
   letter-spacing: .025em;
 }
 
-.change {
+#change {
   background-color: red;
   padding: 15px 80px;
   border: none;
 
 }
 
-.change:active {
+#change:active {
   background-color: yellow;
 }
 
@@ -251,6 +252,11 @@ div.main
   grid-row-start: 1;
   grid-row-end: 6;
 }
+/* div.main  svg.island
+{
+  width: 100%;
+  height: 100%;
+} */
 
 ul#boats{
   margin-top: 150px;
@@ -343,6 +349,50 @@ div.modal {
   overflow: scroll;
   background-color: #324263;
 }
+
+
+/* PopUp Shop */
+div#popupShop {
+  padding: 5% 5%;
+}
+/* div#popupShop  input {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+} */
+div#popupShop ul#equipement-model {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+   align-items: flex-start;
+}
+div#popupShop ul#equipement-model li {
+  height: 260px;
+  width: 215px;
+  border: 5px solid #f6f7ff;
+  text-align: center;
+  margin: 0 2.28% 5% 2.28%;
+  border-radius: 15px;
+  background: linear-gradient(to bottom, rgb(71, 91, 130) 0%, rgb(77, 90, 145) 49%,#394a6b 100%);
+  box-shadow: 4px 4px 10px 5px #00000014;
+}
+div#popupShop ul#equipement-model li p:nth-child(1){
+  text-transform: capitalize;
+  font-weight: 400;
+  color: #fff;
+  text-shadow: 1.5px 1.5px 1px #00000099;
+  font-size: 1.5em;
+  line-height: 1.1;
+  letter-spacing: .025em;
+  margin-top: 10px;
+}
+
+/* Classement */
 div#popupClassement table {
   height: 100%;
   width: 100%;
@@ -371,6 +421,9 @@ div#popupClassement table tbody tr{
 }
 div#popupClassement table tbody tr:nth-child(even) {
     background-color: #324263;
+}
+div#popupClassement table tbody tr:last-child  {
+    background-color: #673c77;
 }
 div#popupClassement table thead th{
   text-align: left;

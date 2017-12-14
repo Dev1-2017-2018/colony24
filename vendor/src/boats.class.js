@@ -40,8 +40,21 @@ export default class Boats
                 // Modification de la position du bateau
                 that.y = positionY;
                 that.x = positionX;
-                console.log("Votre bateau est maintenant en " + x + " - " + y);
-                $(`#li${that.id} > div > p`).html(`${that.name} x:${x} y:${y}`);
+
+                // Perte d'énérgie sur les déplacements
+                let n;
+                for (n in that.equipement) {
+                    if (that.equipement[n].hasOwnProperty('Energie')) {
+                        if (that.equipement[n]['Energie'] > 10) {
+                            that.equipement[n]['Energie'] -= 10;
+                            $(`#li${that.id} > div > p`).html(`${that.name} x:${x} y:${y}`);
+                            console.log("Votre bateau est maintenant en " + x + " - " + y);
+                        } else if (that.equipement[n]['Energie'] < 10) {
+                            return console.log("Vous n'avez pas assez de batterie");
+                        }
+                    } else { console.log('Moteur non trouvé :/'); }
+                }
+                console.log(that.equipement);
                 that.goldMining(data.gold);
             }else{
                 return console.log("Une île se trouve à cette position");

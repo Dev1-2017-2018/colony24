@@ -102,7 +102,8 @@ export default class Game
         this.mainHarbor.shop.equipement.inventoryPush(this);
 
 
-        this.ranking = new Ranking();
+        this.ranking = new Ranking();/*
+        this.ranking.test(this.wallet);*/
 
         // Creation des références au parent dans les enfants
 

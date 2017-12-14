@@ -36,6 +36,7 @@ export default class BuyBoat extends Shop
         if (parent.wallet.ecu < 100){
 
             return console.log("Vous n'avez pas assez d'écu");
+            parent.actionlist.showInAL (`Tu n'as pas assez d'écu`, 0);
 
         } else {
 
@@ -49,7 +50,7 @@ export default class BuyBoat extends Shop
             //Action List
             parent.actionlist.showInAL (`Un nouveau ${parent.boats[parent.id-1].name} vient de débarquer à Main Harbor`, 0);
             parent.actionlist.showInAL (`Tu as : ${parent.wallet.ecu} d'écu`, 1500);
-            parent.actionlist.showInAL (`et Tu as : ${parent.wallet.gold} de gold`, 2000);
+            parent.actionlist.showInAL (`et tu as : ${parent.wallet.gold} de gold`, 2000);
         }
 
     }

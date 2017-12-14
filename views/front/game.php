@@ -127,11 +127,10 @@
         <div id="player-boats">
             <ul id="boats"></ul>
         </div>
-        <div class="bgMainHarbor">
-          <svg>
-            
-          </svg>
-        </div>
+        <!-- <img src="assets/main_harbor.svg" alt="island" class="island">
+          <svg class="sea">
+
+          </svg> -->
     </div>
 </section>
 

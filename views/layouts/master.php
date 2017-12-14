@@ -24,7 +24,6 @@
 	<!-- ***** CSS UNIVERSAL ***** -->
 	<link type="text/css" rel="stylesheet" href="/../css/global.css"/>
 	<link type="text/css" rel="stylesheet" href="/../css/log_reg.css"/>
-	<link rel="stylesheet" type="text/css" href="/../css/scorePopupCss.css">
 
 	</head>
 <body>

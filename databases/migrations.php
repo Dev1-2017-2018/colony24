@@ -8,7 +8,7 @@ $default = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ];
 
-$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', 'root', $default);
+$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', '', $default);
 
 print_r ($pdo);
 
@@ -27,7 +27,7 @@ $userScore = "
         `user_id`INT UNSIGNED NOT NULL AUTO_INCREMENT,
       	`score` BIGINT UNSIGNED NULL DEFAULT 0,
 		KEY `user_score_user_id_foreign` (`user_id`),
-		CONSTRAINT `user_score_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE 
+		CONSTRAINT `user_score_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
     )  ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 ";
 $shop = "
@@ -55,7 +55,7 @@ $pdo->exec($shop);
 
 $prepareUser = $pdo->prepare("INSERT INTO `users` (`pseudo`,`email`, `password`) VALUES (?,?,?)");
 
-for($i = 0; $i < 15; $i++) {
+for($i = 0; $i < 150; $i++) {
 	$prepareUser->bindValue(1, $faker->name);
 	$prepareUser->bindValue(2, $faker->unique()->email);
 	$prepareUser->bindValue(3, 'admin');
@@ -67,16 +67,14 @@ $prepareUser = NULL;
 
 $prepareUserScore = $pdo->prepare ("INSERT INTO `user_score` (`score`) VALUES (?)");
 
-for ( $i = 0; $i < 15; $i++ ) {
+for ( $i = 0; $i < 150; $i++ ) {
     $prepareUserScore->bindValue (1, $faker->randomFloat ($nbMaxDecimals = NULL, $min = 0, $max = 3000));
     $prepareUserScore->execute ();
-
 }
 
 $prepareUserScore = NULL;
-
-$prepareShop = $pdo->prepare("INSERT INTO `shop` 
-								(`id`, `Marque`, `Nom`, `Puissance`, `Propulsion`, `Energie`, `Vitesse`, `Reparation`, `Prix`) 
+$prepareShop = $pdo->prepare("INSERT INTO `shop`
+								(`id`, `Marque`, `Nom`, `Puissance`, `Propulsion`, `Energie`, `Vitesse`, `Reparation`, `Prix`)
 								VALUES
 								(1, 'Arnson', 'Batterie PWR 4', NULL, NULL, 300, NULL, NULL, 600),
 								(2, 'Lukslit', 'Batterie SUH 7', NULL, NULL, 500, NULL, NULL, 800),

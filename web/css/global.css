@@ -2,6 +2,7 @@
 /********************************************************************/
 * {
   margin: 0; padding: 0;
+  border-collapse: collapse;
 }
 body {
   background-color: #3c536a;
@@ -50,7 +51,7 @@ a{
 section.container {
   display: grid;
   grid-template-columns: 155px 11.5vw auto;
-  grid-template-rows: 16vh 54vh 30vh;
+  grid-template-rows: 17vh 42vh 41vh;
 }
 
 section.container > div {
@@ -92,14 +93,13 @@ div.actionList ul li
 {
   font-family: 'Russo One', sans-serif;
   text-align: center;
-  text-transform: capitalize;
   font-weight: 200;
   color: #ffffff;
   text-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
   font-size: 1em;
   line-height: 1.45;
   letter-spacing: .025em;
-  margin-top: 0em;
+  margin-top: .05em;
 }
 div.actionList ul li:nth-child(1)
 {
@@ -110,7 +110,7 @@ div.buttons
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 3;
-  grid-row-end: 5;
+  grid-row-end: 4;
 
   background-color: #2c3e50;
   display: flex;
@@ -140,73 +140,17 @@ p.button
   font-size: 1.4em;
   line-height: 1.1;
   letter-spacing: .025em;
+  margin: 12px 0 0 0;
 }
 #button-shop {
 }
-.button-classment {
-  margin: 12px 0 0 0;
+.buttons div {
+  margin: 14px 0 0 0;
+}
+.buttons div:nth-child(1) {
+  margin: 0;
 }
 
-
-
-/*POP UP*/
-#classement a{
-  color : #000;
-}
-/* The Modal (background) */
-.modal {
-  font-size: 20px;
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  cursor : default;
-}
-
-/* Modal Content */
-
-#modal-content {
-  background-color: #fefefe;
-  overflow: scroll;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  height: 70%;
-}
-
-/* Display PopUp shop */
-
-ul#equipement-model li{
-  margin : 50px 0;
-}
-ul#equipement-model li p{
-  color : #000;
-}
-ul#equipement-model li input{
-  margin-top: 30px;
-}
-
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-}
 
 
 /*INFO PLAYER*/
@@ -268,10 +212,11 @@ div.player-info div
 }
 #player-wallet div:nth-child(2) svg
 {
-  width: 22px;
+  width: 32px;
+  height: 44px;
   fill: #fff;
-  margin-right: 6px;
-  transform: translateY(-39%);
+  margin-right: -5px;
+  transform: translateY(-25%);
 }
 #player-wallet div p
 {
@@ -343,4 +288,111 @@ div.element_middle h1 {
   animation: bounceIn .8s ease-out !important;
   animation-fill-mode: forwards;
   backface-visibility: visible !important;
+}
+
+
+/********************** POP UP *************************/
+section#popUp {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 10vw 80vw 10vw;
+  grid-template-rows: 10vh 80vh 10vh;
+}
+
+/* The Modal (background) */
+div#background {
+  z-index: 1;
+
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 4;
+
+  /* position: fixed; */
+  overflow: hidden;
+  background-color: #0000005e;
+}
+div.modal {
+  z-index: 2;
+
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: .7% 0 0 0;
+
+  border-radius: 10px;
+  overflow: scroll;
+  background-color: #324263;
+}
+div#popupClassement table {
+  height: 100%;
+  width: 100%;
+}
+div#popupClassement table td, div#popupClassement table th{
+  padding: 0 2.95%;
+}
+div#popupClassement table thead tr{
+  height: 4em;
+  margin-bottom: 3em;
+}
+div#popupClassement table tr th:nth-child(1){
+  width: 22%;
+}
+div#popupClassement table tr th:nth-child(2){
+  width: 58%;
+}
+div#popupClassement table tr th:nth-child(3){
+  width: 25%;
+}
+div#popupClassement table tbody tr{
+  /* height: 2.85em; */
+  margin-bottom: 20px;
+  padding: 0px 40px;
+  background-color: #394a6b;
+}
+div#popupClassement table tbody tr:nth-child(even) {
+    background-color: #324263;
+}
+div#popupClassement table thead th{
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #fff;
+  text-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  font-size: 1.4em;
+  line-height: 1.1;
+  letter-spacing: .025em;
+}
+div#popupClassement table td{
+  text-align: left;
+  text-transform: initial;
+  color: #fff;
+  font-size: 1.05em;
+  line-height: 0;
+}
+
+
+
+
+/* The Close Button */
+.closeButton {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.closeButton:hover,
+.closeButton:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }

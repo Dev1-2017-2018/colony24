@@ -41,12 +41,12 @@ export default class RenderBoats{
                     $(`li#li${boats[boat].id}`).on('click', `input[type='button']`, { that: boats[boat]}, function (e) {
 
                         let context = e.data.that;
-    
+
                         console.log(context);
-    
+
                         let inputX = $(`#li${context.id} > div > input:nth-child(2)`).val();
                         let inputY = $(`#li${context.id} > div > input:nth-child(3)`).val();
-    
+
                         if (inputX != 0 || inputY != 0){
                             context.movement(inputY, inputX);
                             $(`#li${context.id} > div > p`).html(`${context.name} x:${context.x} y:${context.y}`);

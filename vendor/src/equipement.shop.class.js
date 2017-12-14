@@ -56,7 +56,7 @@ export default class ShopEquipement extends Shop
                 if (equipement[value] != "id") {
                     let ivtProperty = "";
                     for (let carac in equipement[value]) {
-                        if(equipement[value][carac] != "") {
+                        if(equipement[value][carac] != null && equipement[value][carac] != "") {
                             if (carac != 'id' && carac != 'Nom'  && carac != 'Prix') {
                                 ivtProperty += `<br/> ${carac} : ${equipement[value][carac]}`;
                             }

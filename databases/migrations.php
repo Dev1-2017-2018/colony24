@@ -55,7 +55,7 @@ $pdo->exec($shop);
 
 $prepareUser = $pdo->prepare("INSERT INTO `users` (`pseudo`,`email`, `password`) VALUES (?,?,?)");
 
-for($i = 0; $i < 15; $i++) {
+for($i = 0; $i < 150; $i++) {
 	$prepareUser->bindValue(1, $faker->name);
 	$prepareUser->bindValue(2, $faker->unique()->email);
 	$prepareUser->bindValue(3, 'admin');
@@ -67,10 +67,9 @@ $prepareUser = NULL;
 
 $prepareUserScore = $pdo->prepare ("INSERT INTO `user_score` (`score`) VALUES (?)");
 
-for ( $i = 0; $i < 15; $i++ ) {
+for ( $i = 0; $i < 150; $i++ ) {
     $prepareUserScore->bindValue (1, $faker->randomFloat ($nbMaxDecimals = NULL, $min = 0, $max = 3000));
     $prepareUserScore->execute ();
-
 }
 
 $prepareUserScore = NULL;

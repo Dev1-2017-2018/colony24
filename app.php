@@ -1,5 +1,5 @@
 <?php
-
+# session
 session_start();
 
 define('SALT', 'pU1TIYoa6f3Gmqkg0UviAewPvkCLc9mCxKJsVFUX2cU9CiasvsLei');

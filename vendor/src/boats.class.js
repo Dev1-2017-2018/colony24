@@ -25,7 +25,6 @@ export default class Boats
 
         function foo(callback, that){
             $.getJSON( `moveboat?x=${positionX}&y=${positionY}`).done(function (data) {
-
                 callback(data, that);
             });
         }
@@ -46,7 +45,7 @@ export default class Boats
                 $(`#li${that.id} > div > p`).html(`${that.name} x:${x} y:${y}`);
                 that.goldMining(data.gold);
             }else{
-               return console.log("Une île se trouve à cette position");
+                return console.log("Une île se trouve à cette position");
             }
         }, this);
     }
@@ -58,25 +57,33 @@ export default class Boats
 
             if(this.stockage <= 600){
 
-
-
-                this.stockage += gold;
-
-                console.log("Vous avez extrait de l'Or en : " + this.y + " - " + this.x);
+                let random = Math.random()*100;
+                if (random <= 70) {
+                    this.parent.actionlist.showInAL(`Le beau temps annonce une belle prise : ${gold} gold rajoutés.`, 0);
+                    this.stockage += gold;
+                }else if(random >70 && random <= 85){
+                    this.parent.actionlist.showInAL(`C'est la tempête, les récoltes sont réduites : ${gold*0.50} gold rajoutés.`, 0);
+                    this.stockage += gold*0.50;
+                }else if(random >85 && random <= 95){
+                    this.parent.actionlist.showInAL(`L'ouragan vous empèche de continuer.`, 0);
+                    this.returnHome();
+                }else{
+                    this.parent.actionlist.showInAL(`ALERTE TSUNAMI, votre bateau chavire et rejoint les poissons.`, 0);
+                    $("#li"+this.id).remove();
+                    delete this.parent.boats[this.id];
+                    this.parent.saveDataJson(this.parent);
+                    return;
+                }
 
                 if(this.stockage >= 600) {
 
                     this.stockage = 600;
                     this.returnHome();
-
-                } else{
-
-                    this.parent.saveDataJson(this.parent);
-                }
+                } 
             }
         }else {
 
-            console.log("Il n'y a pas d'Or en : " + this.y  + " - " + this.x);
+            this.parent.actionlist.showInAL(`Il n'y a pas d'Or en : ${this.y} - ${this.x}`);
             this.parent.saveDataJson(this.parent);
         }
     }
@@ -86,13 +93,13 @@ export default class Boats
         this.x = 0;
         $(`#li${this.id} > div > p`).html(`${this.name} x:${this.x} y:${this.y}`);
 
-        console.log("Votre bateau est retourné à Main Harbor pour vider son stockage ");
+        this.parent.actionlist.showInAL(`Votre bateau est retourné à Main Harbor pour vider son stockage `, 0);
 
         this.parent.wallet.gold += this.stockage;
         this.parent.wallet.renderWallet();
         this.stockage = 0;
 
-        console.log("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or");
+        this.parent.actionlist.showInAL(`Vous avez maintenant : ${this.parent.wallet.gold} d'Or`, 1000);
 
         this.parent.saveDataJson(this.parent);
     }

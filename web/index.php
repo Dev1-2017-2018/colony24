@@ -19,8 +19,6 @@ if ( $uri == '/' ) {
         header('Location: /');
         exit;
     }
-
-
     main();
 
 }elseif ( $uri == '/score' ) {

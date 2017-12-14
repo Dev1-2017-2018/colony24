@@ -6,5 +6,5 @@ databases/users
 databases/migrations.php
 /web/js/bundle.js
 .idea
-app.php
+/app.php
 /databases/users/map.png

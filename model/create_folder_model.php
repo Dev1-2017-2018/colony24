@@ -26,7 +26,34 @@ function create_json($user){
                  'capacite' => 50,
                  'stockage' => 0,
                  'x' => 0,
-                 'y' => 0
+                 'y' => 0,
+                 'equipement' => array(
+                     'Batterie PWR 4' => array(
+                         'Energie' => 300,
+                         'Marque' => 'Arnson',
+                         'Nom' => 'Batterie PWR 4',
+                         'Prix' => 600
+                     ),
+                     'Foreuse DeepBlue' => array(
+                         'Marque' => 'Arnson',
+                         'Nom' => 'Foreuse \"DeepBlue\"',
+                         'Puissance' => 3,
+                         'Vitesse' => 15,
+                         'Prix' => 1500
+                     ),
+                     'Sondeuse S1' => array(
+                         'Marque' => 'Arnson',
+                         'Nom' => 'Sondeuse S1',
+                         'Puissance' => 2,
+                         'Prix' => 100
+                     ),
+                     'Moteur 032 CV' => array(
+                         'Marque' => 'Lukslit',
+                         'Nom' => 'Moteur 032 CV',
+                         'Propulsion' => 110,
+                         'Prix' => 400
+                     )
+                 )
              ),
          ),
          'wallet' => array(

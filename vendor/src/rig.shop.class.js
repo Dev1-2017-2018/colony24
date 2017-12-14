@@ -10,7 +10,7 @@ export default class BuyRig extends Shop
         this.$el = $("#equipement-model");
 
         // On lance la propriété crée dans le parent shop.class.js
-        this.create_button("plateforme");
+        this.create_button("une plateforme");
 
         // On accroche un événement on click sur la div button-shop en passant en paramètre Boat,
         // le context de la class BuyBoat et l'id du constructor
@@ -32,16 +32,16 @@ export default class BuyRig extends Shop
         let data = e.data;
         let parent = data.that.parent;
 
-        if (parent.wallet.ecu < 100){
+        if (parent.wallet.ecu < 10000){
 
-            return console.log("Vous n'avez pas assez d'écu");
+            return parent.actionlist.showInAL(`Vous n'avez pas assez d'écus, partez miner !!`);
 
         } else {
 
             parent.boats[parent.id] = new data.class(undefined,parent.id);
             parent.id++;
             console.log(parent);
-            parent.wallet.ecu -= 100;
+            parent.wallet.ecu -= 10000;
             parent.wallet.renderWallet();
             parent.saveDataJson(parent);
 

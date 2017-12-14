@@ -217,7 +217,7 @@ div.player-info div
   height: 44px;
   fill: #fff;
   margin-right: -5px;
-  transform: translateY(-25%);
+  margin-top: -10px;
 }
 #player-wallet div p
 {
@@ -356,13 +356,8 @@ div.modal {
 div#popupShop {
   padding: 5% 5%;
 }
-/* div#popupShop  input {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-} */
+
+
 div#popupShop ul#equipement-model {
   height: 100%;
   width: 100%;
@@ -370,28 +365,78 @@ div#popupShop ul#equipement-model {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-   align-items: flex-start;
+  align-items: flex-start;
 }
 div#popupShop ul#equipement-model li {
   height: 260px;
   width: 215px;
   border: 5px solid #f6f7ff;
   text-align: center;
-  margin: 0 2.28% 5% 2.28%;
+  margin: 0 1.42% 5% 1.42%;
   border-radius: 15px;
   background: linear-gradient(to bottom, rgb(71, 91, 130) 0%, rgb(77, 90, 145) 49%,#394a6b 100%);
   box-shadow: 4px 4px 10px 5px #00000014;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+div#popupShop ul#equipement-model li p{
+  text-transform: capitalize;
+  color: #fff;
+  text-shadow: 1.5px 1.5px 1px #00000042;
+  font-size: 1em;
+  line-height: 1.1;
+  letter-spacing: 0.12em;
+  margin-top: 5px;
 }
 div#popupShop ul#equipement-model li p:nth-child(1){
   text-transform: capitalize;
   font-weight: 400;
-  color: #fff;
-  text-shadow: 1.5px 1.5px 1px #00000099;
-  font-size: 1.5em;
+  color: #3498db;
+  text-shadow: 1.5px 1.5px 1px #00000085;
+  font-size: 1.4em;
   line-height: 1.1;
   letter-spacing: .025em;
-  margin-top: 10px;
+  margin-top: 15px;
 }
+
+div#popupShop ul#equipement-model li p:nth-child(2){
+  text-transform: capitalize;
+  color: #9b59b6;
+  text-shadow: 1.5px 1.5px 1px #00000042;
+  font-size: 1.03141592653532384626em;
+  line-height: 1.1;
+  letter-spacing: .025em;
+  margin-bottom: 15px;
+}
+
+
+div#popupShop ul#equipement-model li input {
+  width: 84%;
+  padding: 32.5px 0px;
+  border-radius: 12px;
+  font-weight: 400;
+  color: #fff;
+  text-shadow: 1.5px 1.5px 1px #00000099;
+  font-size: 1.4em;
+  line-height: 0;
+  letter-spacing: .025em;
+  background: linear-gradient(180deg, rgb(253,218,134) 0, rgb(225,157,60) 100%), rgb(253, 218, 134);
+  cursor: pointer;
+  border: none;
+  border: 4px solid #fff;
+  align-items: end;
+  justify-content: center;
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  left: 20px;
+  top: 190px;
+}
+
 
 /* Classement */
 div#popupClassement table {

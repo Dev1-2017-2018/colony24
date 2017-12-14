@@ -2,9 +2,9 @@
 /vendor/fzaninotto
 /vendor/node_modules
 /vendor/autoload.php
-databases/users/*
+databases/users
 databases/migrations.php
 /web/js/bundle.js
 .idea
-app.php
+/app.php
 /databases/users/map.png

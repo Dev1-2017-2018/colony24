@@ -87,6 +87,7 @@ div.actionList
   height: 100%;
   overflow:auto;
 }
+
 div.actionList div p,
 div.actionList ul li
 {
@@ -100,7 +101,7 @@ div.actionList ul li
   letter-spacing: .025em;
   margin-top: .05em;
 }
-div.actionList div p:nth-child(1)
+div.actionList ul li:nth-child(1)
 {
   margin-top: 0em;
 }
@@ -231,6 +232,16 @@ div.player-info div
   letter-spacing: .025em;
 }
 
+.change {
+  background-color: red;
+  padding: 15px 80px;
+  border: none;
+
+}
+
+.change:active {
+  background-color: yellow;
+}
 
 /*MAIN*/
 div.main

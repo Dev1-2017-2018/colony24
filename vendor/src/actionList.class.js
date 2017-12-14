@@ -21,6 +21,5 @@ export default class ActionList{
           $('#listText>li:nth-child('+i+')').remove();
         }
       }
-
     }
 }

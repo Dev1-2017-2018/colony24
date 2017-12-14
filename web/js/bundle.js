@@ -324,6 +324,10 @@
 
 	        this.renderWallet();
 	        console.log('[[WALLET]] goldValue is ' + this.goldValue + ' \n[[WALLET]] gold is ' + this.gold + ' \n[[WALLET]] ecu is ' + this.ecu + ' \n');
+	        $('.buttons').on('click', '.change', { that: this }, function (e) {
+	            e.data.that.convertGoldEcu(e.data.that.gold);
+	            e.data.that.renderWallet();
+	        });
 	    }
 
 	    //Gold convert to Ecu
@@ -332,13 +336,13 @@
 	    _createClass(Wallet, [{
 	        key: 'convertGoldEcu',
 	        value: function convertGoldEcu(goldChange) {
-	            console.log('[[WALLET convertGoldToEcu()]] In Wallet > ' + this.ecu + ' ecu & ' + this.gold + ' gold & ' + this.goldValue + ' goldValue\n');
 	            if (this.gold >= goldChange) {
-	                console.log('[[WALLET convertGoldToEcu()]] You convert ' + goldChange + ' gold to ecu with a ' + this.goldValue + ' Value Gold \n');
 	                this.gold -= goldChange;
 	                this.ecu += goldChange * this.goldValue;
 	                console.log('[[WALLET convertGoldToEcu()]] You have now ' + this.ecu + ' ecu and ' + this.gold + ' gold\n');
-	            } else console.log('[[WALLET convertGoldToEcu()]] you are missing ' + (goldChange - this.gold) + ' to complete this transaction\n');
+	            } else {
+	                console.log('[[WALLET convertGoldToEcu()]] you are missing ' + (goldChange - this.gold) + ' to complete this transaction\n');
+	            }
 	        }
 
 	        // actualise l'affichage des golds et écus dans le DOM

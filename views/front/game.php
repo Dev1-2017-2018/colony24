@@ -58,6 +58,7 @@
         <ul id="listText"></ul>
     </div>
     <div class="aside buttons">
+    <button class="change"></button>
         <div id="shop">
             <p class="button" id="button-shop">Shop</p>
         </div>
@@ -118,7 +119,6 @@
                 <p id="ecu"></p>
             </div>
         </div>
-
     </div>
 
     <!-- MAIN -->

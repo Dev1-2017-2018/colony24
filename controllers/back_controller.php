@@ -70,13 +70,56 @@ function moveBoat () {
     echo json_encode($data);
 }
 
-function main ()
-{
+function update(){
+
+    $pdo = getPDO();
+
+    $user = $_SESSION['user'];
+
+    $prepare = $pdo->prepare("SELECT score 
+                              FROM user_score, users
+                              WHERE users.id = user_score.user_id 
+                              AND pseudo = ?");
+
+    $prepare->bindValue(1, $user);
+
+    $prepare->execute();
+    $scoreActuel = $prepare->fetch();
+
+    $prepare = NULL;
+
+    $gold = $_GET['gold'];
+    var_dump($scoreActuel);
+    echo $gold;
+    $scoremodif = $scoreActuel['score'] + $gold;
+    $id = $_SESSION['auth'];
+
+    $prepare = $pdo->prepare("UPDATE user_score 
+                              SET score = ?
+                              WHERE user_id = ?");
+
+    $prepare->bindValue(1, $scoremodif);
+    $prepare->bindValue(2, $id);
+
+    $prepare->execute();
+
+    include __DIR__ . '/../views/front/game.php';
+}
+
+
+function main (){
     $datas = getShop();
     $datasScore = scoreName();
     $scoreUser = scoreUser();
     $rankUser = rankUser();
 
     include __DIR__ . '/../views/front/game.php';
+}
 
+function getClassement(){
+    $datasScore = scoreName();
+    $scoreUser = scoreUser();
+    $rankUser = rankUser();
+
+    include __DIR__ . '/../views/front/getClassement.php';
 }

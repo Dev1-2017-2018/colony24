@@ -51,7 +51,7 @@ export default class ShopEquipement extends Shop
 
         // Vérification des Values
         for (let value in equipement) {
-            $ivt.append('<li><br></li>');
+            $ivt.append('<li class="hvr-grow-shadow "></li>');
             if (equipement.hasOwnProperty(value)) {
                 if (equipement[value] != "id") {
                     let ivtProperty = "";

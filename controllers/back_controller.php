@@ -70,7 +70,6 @@ function moveBoat () {
     echo json_encode($data);
 }
 
-
 function main ()
 {
     $datas = getShop();
@@ -79,4 +78,5 @@ function main ()
     $rankUser = rankUser();
 
     include __DIR__ . '/../views/front/game.php';
+
 }

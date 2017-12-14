@@ -48,17 +48,15 @@ export default class ShopEquipement extends Shop
         // Liaison Inventaire
         let $ivt = $('ul#inventory-model');
 
-        // console.log($ivt);
-
 
         // Vérification des Values
         for (let value in equipement) {
-            $ivt.append('<li></li>');
+            $ivt.append('<li><br></li>');
             if (equipement.hasOwnProperty(value)) {
                 if (equipement[value] != "id") {
                     let ivtProperty = "";
                     for (let carac in equipement[value]) {
-                        if(equipement[value][carac] != "") {
+                        if(equipement[value][carac] != null && equipement[value][carac] != "") {
                             if (carac != 'id' && carac != 'Nom'  && carac != 'Prix') {
                                 ivtProperty += `<br/> ${carac} : ${equipement[value][carac]}`;
                             }
@@ -73,10 +71,11 @@ export default class ShopEquipement extends Shop
     inventoryRender($ivt, value, ivtProperty)
     {
         $ivt.children().last().append(`
-            <p style="color:black;">
+            <p>
                 ${value}
                 ${ivtProperty}
             </p>
         `);
     }
+
 }

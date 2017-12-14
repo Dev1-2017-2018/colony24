@@ -1,6 +1,5 @@
 <!-- Affichage de Main Harbor -->
 <?php ob_start() ;?>
-
 <!-- POP UP -->
 <section id="popUp" style="display: none;">
   <!-- special -->
@@ -8,11 +7,12 @@
   <span class="closeButton">&times;</span>
   <!-- shop -->
   <div id="popupShop" class="modal" style="display: none;">
-          <ul id="equipement-model">
-          </ul>
+    <ul id="equipement-model">
+    </ul>
   </div>
   <!-- inventory -->
   <div id="popupInventory" class="modal" style="display: none;">
+        <button id="change"></button>
       <ul id="inventory-model"></ul>
   </div>
   <!-- classment -->
@@ -58,6 +58,7 @@
         <ul id="listText"></ul>
     </div>
     <div class="aside buttons">
+    <button class="change">Vendre l'or</button>
         <div id="shop">
             <p class="button" id="button-shop">Shop</p>
         </div>
@@ -118,19 +119,18 @@
                 <p id="ecu"></p>
             </div>
         </div>
-
     </div>
 
     <!-- MAIN -->
     <div class="main">
+        <img src="assets/svg/main_harbor.svg" style="position: absolute;z-index: -1; margin-top: 150px;width: 60%; margin-left: 10%;">
         <div id="player-boats">
             <ul id="boats"></ul>
         </div>
-        <div class="bgMainHarbor">
-          <svg>
-            
-          </svg>
-        </div>
+        <!-- <img src="assets/main_harbor.svg" alt="island" class="island">
+          <svg class="sea">
+
+          </svg> -->
     </div>
 </section>
 

@@ -2,27 +2,61 @@
 <?php ob_start() ;?>
 <!-- POP UP -->
 <section id="popUp" style="display: none;">
+  <!-- POP UP FOR ASIDE BUTTON-->
   <!-- special -->
   <div id="background"></div>
-  <span class="closeButton">&times;</span>
+  <!-- <span class="closeButton">&times;</span> -->
   <!-- shop -->
-  <div id="popupShop" class="modal" style="display: none;">
+  <div id="popupShop" class="modal fadeInDown" style="display: none;">
     <ul id="equipement-model">
     </ul>
   </div>
   <!-- inventory -->
-  <div id="popupInventory" class="modal" style="display: none;">
-        <button id="change">changer gold</button>
+  <div id="popupInventory" class="modal fadeInDown" style="display: none;">
+      <button class="hvr-wobble-top" id="change">Change all gold in ecu</button>
       <ul id="inventory-model"></ul>
   </div>
-    <div id="popupEquipment" class="modal" style="display: none;">
-        <ul id="inventory2-model"></ul>
-        <ul id="boatEquipment-model"></ul>
-    </div>
   <!-- classment -->
-  <div id="popupClassement" class="modal" style="display: none;">
-      
+  <div id="popupClassement" class="modal fadeInDown" style="display: none;">
+      <table>
+        <thead>
+          <tr>
+              <th>Rank</th>
+              <th>Pseudo</th>
+              <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+              <?php $i = 1; ?>
+              <?php foreach ($datasScore as $data) : ?>
+                  <tr>
+                      <td>
+                          <?php echo $i; ?>
+                          <?php $i++; ?>
+                      </td>
+                      <td><?php echo htmlentities($data['pseudo']); ?></td>
+                      <td><?php echo htmlentities($data['score']); ?></td>
+                  </tr>
+              <?php endforeach; ?>
+              <tr>
+                  <td><?php echo htmlentities($rankUser[0]['rank']+1); ?></td>
+                  <td><?php echo htmlentities($scoreUser[0]['pseudo']); ?></td>
+                  <td><?php echo htmlentities($scoreUser[0]['score']); ?></td>
+              </tr>
+      </tbody>
+      </table>
   </div>
+
+  <!-- POP UP FOR BOAT -->
+  <!-- equipment -->
+  <div id="popupEquipment" class="modal" style="display: none;">
+      <ul id="inventory2-model"></ul>
+      <ul id="boatEquipment-model"></ul>
+  </div>
+
+
+
+
 </section>
 
 <!-- END POP UP -->
@@ -34,13 +68,13 @@
         <ul id="listText"></ul>
     </div>
     <div class="aside buttons">
-        <div id="shop">
+        <div id="shop" class="hvr-float">
             <p class="button" id="button-shop">Shop</p>
         </div>
-        <div id="inventory">
-            <p class="button" id="button-inventory">Inventory</p>
+        <div id="inventory" class="hvr-float">
+            <p class="button" id="button-inventory">Inventaire</p>
         </div>
-        <div id="classement" class="button-classment">
+        <div id="classement" class="button-classment hvr-float">
             <p class="button" id="button-classement">Classement</p>
         </div>
     </div>
@@ -48,10 +82,10 @@
     <!-- INFO PLAYER -->
     <div class="player-info">
         <div id="player-name">
-            <p><?php echo $_SESSION["user"]?></p>
+            <p class="hvr-wobble-top"><?php echo $_SESSION["user"]?></p>
         </div>
         <div id="player-wallet">
-            <div>
+            <div class="hvr-wobble-top">
                 <svg width="10" height="20" id="gold_colony24" data-name="gold_colony24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.6 411.44">
                   <title>gold_colony24</title>
                     <path d="M437,319.13H410.36L360.68,220.7H330.11l-45.7-90.55H207.19l-45.7,90.55H130.93L81.25,319.13H54.66L1,425.44H490.6ZM169.53,393.76,135.84,327h67.38Zm76.27-98.43-29.71-58.88h59.43Zm76.27,98.43L288.38,327h67.39ZM262.86,71.09H227.43V14h35.43Zm63.54,28L296.2,80.56,327.29,29.9l30.2,18.54Zm49.18,55.53-18-30.52,44.91-26.49,18,30.53ZM166.09,99.1,135,48.44,165.2,29.9l31.09,50.67Zm-49.17,55.52L72,128.13,90,97.61l44.91,26.49Zm0,0" transform="translate(-1 -14)"/>
@@ -59,7 +93,7 @@
                 <p>GOLD :</p>
                 <p id="gold"></p>
             </div>
-            <div>
+            <div class="hvr-wobble-top">
                 <svg width="10" height="20" id="ecu_colony24" data-name="gold_colony24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.6 411.44">
                   <title>ecu_colony24</title>
                   <path d="M104.3,31.1c-4.4,8.2-9.6,19.3-9.6,32.2c0,11.8,4.1,22.8,7.7,31.1c3.5,8,7.5,15.1,11.7,22.4c0.4,0.7,1.6,2.7,9,4.1
@@ -97,15 +131,11 @@
     </div>
 
     <!-- MAIN -->
-    <div class="main">
-        <img src="assets/svg/main_harbor.svg" style="position: absolute;z-index: -1; margin-top: 150px;width: 60%; margin-left: 10%;">
-        <div id="player-boats">
-            <ul id="boats"></ul>
-        </div>
-        <!-- <img src="assets/main_harbor.svg" alt="island" class="island">
-          <svg class="sea">
-
-          </svg> -->
+    <div id="player-boats">
+        <ul id="boats"></ul>
+    </div>
+    <div id="main">
+      <img src="assets/svg/island.svg" class="island">
     </div>
 </section>
 

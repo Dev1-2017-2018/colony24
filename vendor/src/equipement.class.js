@@ -2,7 +2,7 @@ export default class Equipement{
     constructor (equipement,$el, id_equip, append)
     {
         if(append){
-            $el.append(`<li><br></li>`);
+            $el.append(`<li class="hvr-grow-shadow "></li>`);
         }
 
         let property = null;
@@ -22,7 +22,7 @@ export default class Equipement{
                           `);
                         }
                         if ( property == 'Prix' ) {
-                            $el.children().last().append( `<input type="button" data-id-equip="${id_equip}" value="${equipement[property]}">` );
+                            $el.children().last().append( `<input class="hvr-pulse-grow" type="button" data-id-equip="${id_equip}" value="${equipement[property]}">` );
                         }
                     }
                 }

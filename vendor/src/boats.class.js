@@ -1,6 +1,6 @@
 export default class Boats
 {
-    constructor(boat = {name: "Bateau", structure: 100, blindage: 50, capacite: 50, poids: 10, stockage: 0, x: 0, y: 0}, id)
+    constructor(boat, id)
     {
         // Boats ici on crée automatiquement les propriétés de notre objet bateau et on vérifie si le type
         // des propriétés doit être un number ou non
@@ -34,7 +34,6 @@ export default class Boats
             let x = data.x;
             let y = data.y;
             let success = data.success;
-            console.log(data);
 
             if(x >= 0 && y >= 0 && success === 1) {
 
@@ -55,7 +54,7 @@ export default class Boats
         // on vérifie qu'il y ait bien de l'or à la position
         if(gold > 0){
 
-            if(this.stockage <= 600){
+            if(this.stockage <= this.capacite){
 
                 let random = Math.random()*100;
                 if (random <= 70) {
@@ -75,9 +74,9 @@ export default class Boats
                     return;
                 }
 
-                if(this.stockage >= 600) {
+                if(this.stockage >= this.capacite) {
 
-                    this.stockage = 600;
+                    this.stockage = this.capacite;
                     this.returnHome();
                 } 
             }
@@ -96,6 +95,7 @@ export default class Boats
         this.parent.actionlist.showInAL(`Votre bateau est retourné à Main Harbor pour vider son stockage `, 0);
 
         this.parent.wallet.gold += this.stockage;
+
         this.parent.wallet.renderWallet();
         this.stockage = 0;
 

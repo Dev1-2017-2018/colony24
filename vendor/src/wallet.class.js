@@ -7,7 +7,6 @@ export default class Wallet
         this.ecu = ecu;
 
         this.renderWallet();
-        console.log( `[[WALLET]] goldValue is ${this.goldValue} \n[[WALLET]] gold is ${this.gold } \n[[WALLET]] ecu is ${this.ecu } \n` );
 
         $(`#popupInventory`).on('click', '#change', {that: this}, function(e)
         {
@@ -25,10 +24,7 @@ export default class Wallet
         if ( this.gold >= goldChange ) {
             this.gold -= goldChange;
             this.ecu += goldChange * this.goldValue;
-            console.log( `[[WALLET convertGoldToEcu()]] You have now ${this.ecu} ecu and ${this.gold} gold\n` );
-        } else {
-            console.log( `[[WALLET convertGoldToEcu()]] you are missing ${goldChange - this.gold} to complete this transaction\n` );
-                }
+        }
     }
 
     // actualise l'affichage des golds et écus dans le DOM

@@ -12,9 +12,13 @@
   </div>
   <!-- inventory -->
   <div id="popupInventory" class="modal" style="display: none;">
-        <button id="change"></button>
+        <button id="change">changer gold</button>
       <ul id="inventory-model"></ul>
   </div>
+    <div id="popupEquipment" class="modal" style="display: none;">
+        <ul id="inventory2-model"></ul>
+        <ul id="boatEquipment-model"></ul>
+    </div>
   <!-- classment -->
   <div id="popupClassement" class="modal" style="display: none;">
       
@@ -23,8 +27,6 @@
 
 <!-- END POP UP -->
 
-
-
 <section class="container">
 
     <!-- ASIDE -->
@@ -32,7 +34,6 @@
         <ul id="listText"></ul>
     </div>
     <div class="aside buttons">
-    <button class="change">Vendre l'or</button>
         <div id="shop">
             <p class="button" id="button-shop">Shop</p>
         </div>

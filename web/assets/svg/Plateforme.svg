@@ -29,19 +29,19 @@
 	.st21{font-size:56px;}
 </style>
 <defs>
-	
-	
+
+
 		<inkscape:perspective  id="perspective4682" inkscape:persp3d-origin="105 : 99 : 1" inkscape:vp_x="0 : 148.5 : 1" inkscape:vp_y="0 : 1000 : 0" inkscape:vp_z="210 : 148.5 : 1" sodipodi:type="inkscape:persp3d">
 		</inkscape:perspective>
 </defs>
 <sodipodi:namedview  bordercolor="#666666" borderopacity="1.0" id="base" inkscape:current-layer="layer1" inkscape:cx="396.85039" inkscape:cy="615.61985" inkscape:document-units="mm" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:window-height="986" inkscape:window-maximized="1" inkscape:window-width="1920" inkscape:window-x="-11" inkscape:window-y="-11" inkscape:zoom="2" pagecolor="#ffffff" showgrid="false">
 	</sodipodi:namedview>
 <g id="layer3" inkscape:groupmode="layer" inkscape:label="Pied">
-	
+
 		<rect id="rect4698-5-9-7" x="58.1" y="126.1" transform="matrix(0.5462 -0.8377 0.8377 0.5462 -86.3371 129.7041)" class="st0" width="36.9" height="36.9"/>
-	
+
 		<rect id="rect4698-5-9-7-7" x="109.3" y="156.5" transform="matrix(0.5462 -0.8377 0.8377 0.5462 -88.5544 186.4053)" class="st1" width="36.9" height="36.9"/>
-	
+
 		<rect id="rect4698-5-9-7-7-4" x="142.7" y="105.4" transform="matrix(0.5462 -0.8377 0.8377 0.5462 -30.566 191.1758)" class="st1" width="36.9" height="36.9"/>
 	<path id="path2535" inkscape:connector-curvature="0" class="st2" d="M166.5,149.3l-11-7.2l11-16.8L166.5,149.3z"/>
 </g>
@@ -51,22 +51,22 @@
 	<path id="path4831" inkscape:connector-curvature="0" class="st3" d="M93.1,143.7v-20.2h63.5l0.1,18.7L93.1,143.7z"/>
 </g>
 <g id="layer1" inkscape:groupmode="layer" inkscape:label="Calque 1">
-	
+
 		<rect id="rect4698" x="69.8" y="52.6" transform="matrix(0.5462 -0.8377 0.8377 0.5462 -31.1752 145.6624)" class="st4" width="98" height="98"/>
-	
+
 		<rect id="rect4698-5" x="69.8" y="59.6" transform="matrix(0.5462 -0.8377 0.8377 0.5462 -37.0538 148.8473)" class="st4" width="98" height="98"/>
 	<path id="path4715" inkscape:connector-curvature="0" class="st5" d="M51,115.9v7l82.1,53.5v-7L51,115.9z"/>
 	<path id="path4717" inkscape:connector-curvature="0" class="st6" d="M133.1,169.4v7l53.5-82.1v-7L133.1,169.4z"/>
 	<ellipse id="path4812-7" class="st3" cx="122.3" cy="98.6" rx="22.4" ry="19.1"/>
 	<ellipse id="path4812-0-9" class="st3" cx="122" cy="78.4" rx="22.4" ry="19.1"/>
 	<path id="path4831-8" inkscape:connector-curvature="0" class="st3" d="M99.9,120.8v-14.2h44.7l0,13.2L99.9,120.8z"/>
-	
+
 		<rect id="rect4698-2" x="83.6" y="47.1" transform="matrix(0.5462 -0.8377 0.8377 0.5462 -14.796 135.9677)" class="st7" width="69" height="69"/>
-	
+
 		<rect id="rect4698-5-9" x="83.6" y="52.1" transform="matrix(0.5462 -0.8377 0.8377 0.5462 -18.9347 138.21)" class="st7" width="69" height="69"/>
 	<path id="path4715-9" inkscape:connector-curvature="0" class="st8" d="M70.3,91.7v4.9l57.8,37.7l0-4.9L70.3,91.7z"/>
 	<path id="path4717-7" inkscape:connector-curvature="0" class="st9" d="M128.1,129.4l0,4.9l37.7-57.8v-4.9L128.1,129.4z"/>
-	
+
 		<rect id="rect4719-4" x="71.9" y="105.6" transform="matrix(0.5471 -0.8371 0.8371 0.5471 -57.3922 113.2332)" class="st10" width="8.1" height="8.1"/>
 	<path id="path4736-3" inkscape:connector-curvature="0" sodipodi:nodetypes="ccccc" class="st8" d="M70.3,96.6l0,14.2l57.8,37.7
 		v-14.2L70.3,96.6z"/>
@@ -98,9 +98,9 @@
 	<path id="path2575" inkscape:connector-curvature="0" class="st13" d="M18.9,8.4l71.8,52.1l-4.4,6.9l-2.5,3.9l-69.3-48v-8L18.9,8.4
 		z"/>
 	<path id="path2577" inkscape:connector-curvature="0" class="st13" d="M14.5,15.3l71.8,52.1l4.4-6.9L18.9,8.4L14.5,15.3z"/>
-	
+
 		<rect id="rect2579" x="17.6" y="60.7" transform="matrix(0.5426 -0.84 0.84 0.5426 -46.8872 56.1122)" class="st14" width="20.9" height="20.9"/>
-	
+
 		<rect id="rect2579-9" x="17.6" y="59.2" transform="matrix(0.5426 -0.84 0.84 0.5426 -45.6272 55.4261)" class="st14" width="20.9" height="20.9"/>
 	<path id="path2596" inkscape:connector-curvature="0" class="st15" d="M13.6,72.7v1.5l17.6,11.3v-1.5L13.6,72.7z"/>
 	<path id="path2598" inkscape:connector-curvature="0" class="st16" d="M42.5,66.5V68L31.2,85.6v-1.5L42.5,66.5z"/>

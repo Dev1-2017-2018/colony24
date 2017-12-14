@@ -24,9 +24,9 @@ export default class Shop
     }
 
     // propriété appelée dans boats.shop.class.js
-    create_button(name){
+    create_button(text){
         let $el = $('#equipement-model');
-        let button = `<input class="hvr-pulse-grow" type='button' data-id='${this.id}' value='${name}'/>`;
+        let button = `<input type='button' data-id='${this.id}' value='Acheter ${text}'/>`;
         $el.append(button);
     }
 }

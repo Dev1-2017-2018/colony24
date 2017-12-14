@@ -5,23 +5,27 @@ export default class Inventory
         // espace qui contient le bouton inventory
         let $el = $("div#button-inventory");
         $('#button-inventory').on("click", function() {
-        	let inventory = document.getElementById("popupInventory");
+        	document.getElementById("popupInventory").style.display = "block";
+          document.getElementById('popUp').style.display = "grid";
 
-        	inventory.style.display = "block";
-
-        	window.onclick = function(event) {
-        		if (event.target === inventory) inventory.style.display = "none";
-        	}
+          window.onclick = function(event) {
+              if (event.target === document.getElementById('background'))
+              {
+                document.getElementById('popupInventory').style.display = 'none';
+                document.getElementById('popUp').style.display = 'none';
+              }
+          }
         });
 
-        $('.close').on('click', function() {
-        	$(this).closest('.modal').css('display', 'none');
+        $('.closeButton').on('click', function() {
+          $(this).closest('.modal').css('display','none');
+          $(this).closest('.popUp').css('display','none');
         });
 
         // Appel la function create_inventory
         this.createButtonInventory($el);
     }
-    
+
     // Création du bouton inventory et de la popup
     createButtonInventory($el)
     {

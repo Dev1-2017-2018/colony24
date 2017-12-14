@@ -33,5 +33,4 @@ export default class Wallet
         $gold().innerHTML = this.gold;
         $ecu().innerHTML = this.ecu;
     }
-
 }

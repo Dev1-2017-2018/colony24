@@ -1,6 +1,5 @@
 export default class Ranking{
     constructor (){
-
     $('#button-classement').on('click',function(){
             //  Affiche la popup
             document.getElementById('popupClassement').style.display = "flex";

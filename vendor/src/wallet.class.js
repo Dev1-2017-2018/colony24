@@ -9,9 +9,12 @@ export default class Wallet
         this.renderWallet();
         console.log( `[[WALLET]] goldValue is ${this.goldValue} \n[[WALLET]] gold is ${this.gold } \n[[WALLET]] ecu is ${this.ecu } \n` );
         $(`.buttons`).on('click', '.change', {that: this}, function(e) {
-            e.data.that.convertGoldEcu(e.data.that.gold);
-            e.data.that.renderWallet();
 
+            let that = e.data.that;
+            let parent = that.parent;
+            that.convertGoldEcu(that.gold);
+            that.renderWallet();
+            parent.saveDataJson(parent);
 
         });
     }

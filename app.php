@@ -7,7 +7,8 @@ define('TOKEN_TIME', 5);
 define("DB_HOST", "127.0.0.1");
 define("DB_USER", "root");
 define("DB_PASSWORD", "root");
-define("DB_DBNAME", "colony24;port=8889"); // A DEFINIR
+define("DB_DBNAME", "colony24"); // A DEFINIR
+// define("DB_DBNAME", "colony24;port=8889"); // A DEFINIR
 
 require __DIR__ . '/library/helpers.php';
 require __DIR__ . '/model/add_user_model.php';

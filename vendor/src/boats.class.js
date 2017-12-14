@@ -1,6 +1,6 @@
 export default class Boats
 {
-    constructor(boat = {name: "Bateau", structure: 100, blindage: 50, capacite: 50, poids: 10, stockage: 0, x: 0, y: 0}, id)
+    constructor(boat, id)
     {
         // Boats ici on crée automatiquement les propriétés de notre objet bateau et on vérifie si le type
         // des propriétés doit être un number ou non
@@ -34,7 +34,6 @@ export default class Boats
             let x = data.x;
             let y = data.y;
             let success = data.success;
-            console.log(data);
 
             if(x >= 0 && y >= 0 && success === 1) {
 
@@ -55,19 +54,70 @@ export default class Boats
         // on vérifie qu'il y ait bien de l'or à la position
         if(gold > 0){
 
-            if(this.stockage <= 600){
+            if(this.stockage <= this.capacite){
 
+                // Désignation par Random du climat
                 let random = Math.random()*100;
+
+                // Climat Positif : Soleil
                 if (random <= 70) {
+                    // Annonce du CLimat
                     this.parent.actionlist.showInAL(`Le beau temps annonce une belle prise : ${gold} gold rajoutés.`, 0);
+                    // Stock les Gold sur le Bateau
                     this.stockage += gold;
-                }else if(random >70 && random <= 85){
+
+                    // Climat Négatif : Tempête (Perte de Santé du Bateau et de 50% de la récolte de Gold)
+                }else if(random > 70 && random <= 85){
+                    // Annonce du CLimat
                     this.parent.actionlist.showInAL(`C'est la tempête, les récoltes sont réduites : ${gold*0.50} gold rajoutés.`, 0);
+                    // Stock les Gold sur le Bateau
                     this.stockage += gold*0.50;
+                    // Dégâts dû à la Météo :
+                    // On diminue d'abord le Blindage du Bateau
+                    if(this.blindage > 0) {
+                        this.blindage -= 10;
+                        // On sauvegarde sa nouvelle valeur
+                        this.parent.saveDataJson(this.parent);
+                        // Si le Blindage passe dans le négatif, on retire ce surplus à la Structure
+                        if(this.blindage < 0) {
+                            this.structure += this.blindage;
+                            this.blindage = "0";
+                            // On sauvegarde...
+                            this.parent.saveDataJson(this.parent);
+                        }
+                        // On diminue maintenant la Structure du Bateau
+                    } else if (this.blindage <= 0) {
+                        this.structure -= 20;
+                        // Le Bateau n'a ni Blindage ni Structure donc il coule
+                    } else if(this.blindage <= 0 && this.structure <= 0) {
+                        $("#li"+this.id).remove();
+                        delete this.parent.boats[this.id];
+                        this.parent.saveDataJson(this.parent);
+                        return;
+                    }
+                    // Climat Négatif : Ouragan (Perte de Santé du Bateau et de retour forcé à Main Harbor)
                 }else if(random >85 && random <= 95){
                     this.parent.actionlist.showInAL(`L'ouragan vous empèche de continuer.`, 0);
                     this.returnHome();
-                }else{
+                    if(this.blindage > 0) {
+                        this.blindage -= 20;
+                        this.parent.saveDataJson(this.parent);
+                        if(this.blindage < 0) {
+                            this.structure += this.blindage;
+                            this.blindage = "0";
+                            this.parent.saveDataJson(this.parent);
+                        }
+                    } else if (this.blindage <= 0) {
+                        this.structure -= 40;
+                        this.parent.saveDataJson(this.parent);
+                    } else if(this.blindage <= 0 && this.structure <= 0) {
+                        $("#li"+this.id).remove();
+                        delete this.parent.boats[this.id];
+                        this.parent.saveDataJson(this.parent);
+                        return;
+                    }
+                    // Climat Négatif : Tsunami (Perte du Bateau et des Gold qu'il contenait)
+                }else if(random > 95) {
                     this.parent.actionlist.showInAL(`ALERTE TSUNAMI, votre bateau chavire et rejoint les poissons.`, 0);
                     $("#li"+this.id).remove();
                     delete this.parent.boats[this.id];
@@ -75,11 +125,11 @@ export default class Boats
                     return;
                 }
 
-                if(this.stockage >= 600) {
+                if(this.stockage >= this.capacite) {
 
-                    this.stockage = 600;
+                    this.stockage = this.capacite;
                     this.returnHome();
-                } 
+                }
             }
         }else {
 
@@ -93,10 +143,12 @@ export default class Boats
         this.x = 0;
         $(`#li${this.id} > div > p`).html(`${this.name} x:${this.x} y:${this.y}`);
 
-        this.parent.actionlist.showInAL(`Votre bateau est retourné à Main Harbor pour vider son stockage `, 0);
+        this.parent.actionlist.showInAL(`Votre ${this.name} est retourné à Main Harbor pour vider son stockage `, 0);
 
         this.parent.wallet.gold += this.stockage;
+
         this.parent.wallet.renderWallet();
+
         this.stockage = 0;
 
         this.parent.actionlist.showInAL(`Vous avez maintenant : ${this.parent.wallet.gold} d'Or`, 1000);

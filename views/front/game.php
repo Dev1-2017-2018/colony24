@@ -2,6 +2,7 @@
 <?php ob_start() ;?>
 <!-- POP UP -->
 <section id="popUp" style="display: none;">
+  <!-- POP UP FOR ASIDE BUTTON-->
   <!-- special -->
   <div id="background"></div>
   <!-- <span class="closeButton">&times;</span> -->
@@ -11,19 +12,10 @@
     </ul>
   </div>
   <!-- inventory -->
-<<<<<<< HEAD
   <div id="popupInventory" class="modal fadeInDown" style="display: none;">
       <button class="hvr-wobble-top" id="change">Change all gold in ecu</button>
-=======
-  <div id="popupInventory" class="modal" style="display: none;">
-        <button id="change">changer gold</button>
->>>>>>> 9c4f1b5fe5bb07516ad98b7b8851d3e43f1748fc
       <ul id="inventory-model"></ul>
   </div>
-    <div id="popupEquipment" class="modal" style="display: none;">
-        <ul id="inventory2-model"></ul>
-        <ul id="boatEquipment-model"></ul>
-    </div>
   <!-- classment -->
   <div id="popupClassement" class="modal fadeInDown" style="display: none;">
       <table>
@@ -55,9 +47,16 @@
       </table>
   </div>
 
+  <!-- POP UP FOR BOAT -->
+  <!-- equipment -->
+  <div id="popupEquipment" class="modal" style="display: none;">
+      <ul id="inventory2-model"></ul>
+      <ul id="boatEquipment-model"></ul>
+  </div>
 
 
-  
+
+
 </section>
 
 <!-- END POP UP -->
@@ -69,11 +68,7 @@
         <ul id="listText"></ul>
     </div>
     <div class="aside buttons">
-<<<<<<< HEAD
         <div id="shop" class="hvr-float">
-=======
-        <div id="shop">
->>>>>>> 9c4f1b5fe5bb07516ad98b7b8851d3e43f1748fc
             <p class="button" id="button-shop">Shop</p>
         </div>
         <div id="inventory" class="hvr-float">

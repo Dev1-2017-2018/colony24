@@ -6,7 +6,7 @@ define('SALT', 'pU1TIYoa6f3Gmqkg0UviAewPvkCLc9mCxKJsVFUX2cU9CiasvsLei');
 define('TOKEN_TIME', 5);
 define("DB_HOST", "localhost");
 define("DB_USER", "root");
-define("DB_PASSWORD", "root");
+define("DB_PASSWORD", "");
 define("DB_DBNAME", "colony24"); // A DEFINIR
 
 require __DIR__ . '/library/helpers.php';

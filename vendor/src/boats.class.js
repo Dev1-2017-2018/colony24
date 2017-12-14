@@ -143,7 +143,7 @@ export default class Boats
         this.x = 0;
         $(`#li${this.id} > div > p`).html(`${this.name} x:${this.x} y:${this.y}`);
 
-        this.parent.actionlist.showInAL(`Votre bateau est retourné à Main Harbor pour vider son stockage `, 0);
+        this.parent.actionlist.showInAL(`Votre ${this.name} est retourné à Main Harbor pour vider son stockage `, 0);
 
         this.parent.wallet.gold += this.stockage;
 

@@ -49,6 +49,7 @@ export default class RenderBoats{
                         let inputY = $(`#li${context.id} > div > input:nth-child(3)`).val();
 
                         if (inputX != 0 || inputY != 0){
+                            console.log()
                             context.movement(inputY, inputX);
                             $(`#li${context.id} > div > p`).html(`${context.name} x:${context.x} y:${context.y}`);
                         }

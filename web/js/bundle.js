@@ -184,7 +184,8 @@
 
 	        this.mainHarbor.shop.equipement.inventoryPush(this);
 
-	        this.ranking = new _ranking2.default();
+	        this.ranking = new _ranking2.default(); /*
+	                                                this.ranking.test(this.wallet);*/
 
 	        // Creation des références au parent dans les enfants
 
@@ -475,17 +476,68 @@
 
 	                if (this.stockage <= 600) {
 
+	                    // Désignation par Random du climat
 	                    var random = Math.random() * 100;
+
+	                    // Climat Positif : Soleil
 	                    if (random <= 70) {
+	                        // Annonce du CLimat
 	                        this.parent.actionlist.showInAL("Le beau temps annonce une belle prise : " + gold + " gold rajout\xE9s.", 0);
+	                        // Stock les Gold sur le Bateau
 	                        this.stockage += gold;
+
+	                        // Climat Négatif : Tempête (Perte de Santé du Bateau et de 50% de la récolte de Gold)
 	                    } else if (random > 70 && random <= 85) {
+	                        // Annonce du CLimat
 	                        this.parent.actionlist.showInAL("C'est la temp\xEAte, les r\xE9coltes sont r\xE9duites : " + gold * 0.50 + " gold rajout\xE9s.", 0);
+	                        // Stock les Gold sur le Bateau
 	                        this.stockage += gold * 0.50;
+	                        // Dégâts dû à la Météo :
+	                        // On diminue d'abord le Blindage du Bateau
+	                        if (this.blindage > 0) {
+	                            this.blindage -= 10;
+	                            // On sauvegarde sa nouvelle valeur
+	                            this.parent.saveDataJson(this.parent);
+	                            // Si le Blindage passe dans le négatif, on retire ce surplus à la Structure
+	                            if (this.blindage < 0) {
+	                                this.structure += this.blindage;
+	                                this.blindage = "0";
+	                                // On sauvegarde...
+	                                this.parent.saveDataJson(this.parent);
+	                            }
+	                            // On diminue maintenant la Structure du Bateau
+	                        } else if (this.blindage <= 0) {
+	                            this.structure -= 20;
+	                            // Le Bateau n'a ni Blindage ni Structure donc il coule
+	                        } else if (this.blindage <= 0 && this.structure <= 0) {
+	                            $("#li" + this.id).remove();
+	                            delete this.parent.boats[this.id];
+	                            this.parent.saveDataJson(this.parent);
+	                            return;
+	                        }
+	                        // Climat Négatif : Ouragan (Perte de Santé du Bateau et de retour forcé à Main Harbor)
 	                    } else if (random > 85 && random <= 95) {
 	                        this.parent.actionlist.showInAL("L'ouragan vous emp\xE8che de continuer.", 0);
 	                        this.returnHome();
-	                    } else {
+	                        if (this.blindage > 0) {
+	                            this.blindage -= 20;
+	                            this.parent.saveDataJson(this.parent);
+	                            if (this.blindage < 0) {
+	                                this.structure += this.blindage;
+	                                this.blindage = "0";
+	                                this.parent.saveDataJson(this.parent);
+	                            }
+	                        } else if (this.blindage <= 0) {
+	                            this.structure -= 40;
+	                            this.parent.saveDataJson(this.parent);
+	                        } else if (this.blindage <= 0 && this.structure <= 0) {
+	                            $("#li" + this.id).remove();
+	                            delete this.parent.boats[this.id];
+	                            this.parent.saveDataJson(this.parent);
+	                            return;
+	                        }
+	                        // Climat Négatif : Tsunami (Perte du Bateau et des Gold qu'il contenait)
+	                    } else if (random > 95) {
 	                        this.parent.actionlist.showInAL("ALERTE TSUNAMI, votre bateau chavire et rejoint les poissons.", 0);
 	                        $("#li" + this.id).remove();
 	                        delete this.parent.boats[this.id];
@@ -494,7 +546,6 @@
 	                    }
 
 	                    if (this.stockage >= 600) {
-
 	                        this.stockage = 600;
 	                        this.returnHome();
 	                    }
@@ -517,6 +568,7 @@
 
 	            this.parent.wallet.gold += this.stockage;
 	            this.parent.wallet.renderWallet();
+
 	            this.stockage = 0;
 
 	            this.parent.actionlist.showInAL("Vous avez maintenant : " + this.parent.wallet.gold + " d'Or", 1000);
@@ -540,29 +592,49 @@
 	    value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var Ranking = function Ranking() {
-	    _classCallCheck(this, Ranking);
+	var Ranking = function () {
+	    function Ranking() {
+	        _classCallCheck(this, Ranking);
 
-	    $('#button-classement').on('click', function () {
-	        //  Affiche la popup
-	        document.getElementById('popupClassement').style.display = "flex";
-	        document.getElementById('popUp').style.display = "grid";
+	        $('#button-classement').on('click', function () {
+	            //  Affiche la popup
+	            document.getElementById('popupClassement').style.display = "flex";
+	            document.getElementById('popUp').style.display = "grid";
 
-	        window.onclick = function (event) {
-	            if (event.target === document.getElementById('background')) {
-	                document.getElementById('popupClassement').style.display = 'none';
-	                document.getElementById('popUp').style.display = 'none';
-	            }
-	        };
-	    });
+	            window.onclick = function (event) {
+	                if (event.target === document.getElementById('background')) {
+	                    document.getElementById('popupClassement').style.display = 'none';
+	                    document.getElementById('popUp').style.display = 'none';
+	                }
+	            };
+	        });
 
-	    $('.closeButton').on('click', function () {
-	        $(this).closest('.modal').css('display', 'none');
-	        $(this).closest('.popUp').css('display', 'none');
-	    });
-	};
+	        $('.closeButton').on('click', function () {
+	            $(this).closest('.modal').css('display', 'none');
+	            $(this).closest('.popUp').css('display', 'none');
+	        });
+	    }
+
+	    _createClass(Ranking, [{
+	        key: 'test',
+	        value: function test() {
+	            setInterval(function () {
+	                $.ajax({
+	                    url: '/update',
+	                    success: function success() {
+	                        console.log('salut');
+	                    }
+	                });
+	            }, 1000);
+	        }
+	    }]);
+
+	    return Ranking;
+	}();
 
 	exports.default = Ranking;
 
@@ -793,7 +865,7 @@
 
 	            // Vérification des Values
 	            for (var value in equipement) {
-	                $ivt.append('<li></li>');
+	                $ivt.append('<li><br></li>');
 	                if (equipement.hasOwnProperty(value)) {
 	                    if (equipement[value] != "id") {
 	                        var ivtProperty = "";
@@ -812,7 +884,7 @@
 	    }, {
 	        key: 'inventoryRender',
 	        value: function inventoryRender($ivt, value, ivtProperty) {
-	            $ivt.children().last().append('\n            <p style="color:black;">\n                ' + value + '\n                ' + ivtProperty + '\n            </p>\n        ');
+	            $ivt.children().last().append('\n            <p>\n                ' + value + '\n                ' + ivtProperty + '\n            </p>\n        ');
 	        }
 	    }]);
 
@@ -840,7 +912,7 @@
 	        _classCallCheck(this, Equipement);
 
 	        if (append) {
-	            $el.append('<li></li>');
+	            $el.append('<li><br></li>');
 	        }
 
 	        var property = null;
@@ -960,7 +1032,7 @@
 	      $('#listText').scrollTop($('#listText')[0].scrollHeight);
 
 	      var nbChild = document.getElementById('listText').childNodes.length;
-	      console.log(nbChild);
+
 	      if (nbChild > 50) {
 	        for (var i = 0; i < 4; i++) {
 	          $('#listText>li:nth-child(' + i + ')').remove();

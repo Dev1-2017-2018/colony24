@@ -33,8 +33,8 @@ $userScore = "
 $shop = "
 	CREATE TABLE `shop` (
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-	`Marque` VARCHAR (100) NOT NULL,
 	`Nom` VARCHAR (100) NOT NULL,
+	`Marque` VARCHAR (100) NOT NULL,
 	`Puissance` INT UNSIGNED NULL DEFAULT NULL,
 	`Propulsion` INT UNSIGNED NULL DEFAULT NULL,
 	`Energie` INT UNSIGNED NULL DEFAULT NULL,
@@ -74,7 +74,7 @@ for ( $i = 0; $i < 150; $i++ ) {
 
 $prepareUserScore = NULL;
 $prepareShop = $pdo->prepare("INSERT INTO `shop`
-								(`id`, `Marque`, `Nom`, `Puissance`, `Propulsion`, `Energie`, `Vitesse`, `Reparation`, `Prix`)
+								(`id`, `Nom`, `Marque`, `Puissance`, `Propulsion`, `Energie`, `Vitesse`, `Reparation`, `Prix`)
 								VALUES
 								(1, 'Arnson', 'Batterie PWR 4', NULL, NULL, 300, NULL, NULL, 600),
 								(2, 'Lukslit', 'Batterie SUH 7', NULL, NULL, 500, NULL, NULL, 800),

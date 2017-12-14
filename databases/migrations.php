@@ -8,7 +8,7 @@ $default = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ];
 
-$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', 'root', $default);
+$pdo = new PDO('mysql:host=localhost;dbname=colony24', 'root', '', $default);
 
 print_r ($pdo);
 
@@ -76,15 +76,15 @@ $prepareUserScore = NULL;
 $prepareShop = $pdo->prepare("INSERT INTO `shop`
 								(`id`, `Nom`, `Marque`, `Puissance`, `Propulsion`, `Energie`, `Vitesse`, `Reparation`, `Prix`)
 								VALUES
-								(1, 'Arnson', 'Batterie PWR 4', NULL, NULL, 300, NULL, NULL, 600),
-								(2, 'Lukslit', 'Batterie SUH 7', NULL, NULL, 500, NULL, NULL, 800),
-								(3, 'Arnson', 'Foreuse A-5', 2, NULL, NULL, 10, NULL, 500),
-								(4, 'Arnson', 'Foreuse \"DeepBlue\"', 3, NULL, NULL, 15, NULL, 1500),
-								(5, 'Lukslit', 'Moteur 032 CV', NULL, 110, NULL, NULL, NULL, 400),
-								(6, 'Inland Marine', 'Moteur 128 CV', NULL, 150, NULL, NULL, NULL, 1600),
-								(7, 'Arnson', 'Sondeuse S1', 2, NULL, NULL, NULL, NULL, 100),
-								(8, 'Yun Capor', 'Sondeuse SD', 3, NULL, NULL, NULL, NULL, 250),
-								(9, 'Arnson', 'Kit reparation blindage', NULL, NULL, NULL, NULL, 20, 300);
+								(1, 'Batterie PWR 4', 'Arnson', NULL, NULL, 300, NULL, NULL, 600),
+								(2, 'Batterie SUH 7', 'Luksli', NULL, NULL, 500, NULL, NULL, 800),
+								(3, 'Foreuse A-5', 'Arnson', 2, NULL, NULL, 10, NULL, 500),
+								(4, 'Foreuse DeepPurple', 'Arnson', 3, NULL, NULL, 15, NULL, 1500),
+								(5, 'Moteur TK78', 'Lukslit', NULL, 110, NULL, NULL, NULL, 400),
+								(6, 'Moteur 128 CV', 'Inland Marine', NULL, 150, NULL, NULL, NULL, 1600),
+								(7, 'Sondeuse S1', 'Arnson', 2, NULL, NULL, NULL, NULL, 100),
+								(8, 'Sondeuse SD', 'Yun Capor', 3, NULL, NULL, NULL, NULL, 250),
+								(9, 'Kit reparation blindage', 'Arnson', NULL, NULL, NULL, NULL, 20, 300);
 							");
 
 $prepareShop->execute();

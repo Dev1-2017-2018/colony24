@@ -4,18 +4,21 @@ export default class Shop
     {
 
         $('#button-shop').on('click',function(){
-            let modal = document.getElementById('popupShop');
-
-            //  Affiche la popup
-            modal.style.display = "block";
+            document.getElementById('popupShop').style.display = "block";
+            document.getElementById('popUp').style.display = "grid";
 
             window.onclick = function(event) {
-                if (event.target === modal) modal.style.display = 'none';
+                if (event.target === document.getElementById('background'))
+                {
+                  document.getElementById('popupShop').style.display = 'none';
+                  document.getElementById('popUp').style.display = 'none';
+                }
             }
         });
 
-        $('.close').on('click',function(){
+        $('.closeButton').on('click',function(){
             $(this).closest('.modal').css('display','none');
+            $(this).closest('.popUp').css('display','none');
         });
 
     }

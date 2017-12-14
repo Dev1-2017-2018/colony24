@@ -1,6 +1,5 @@
 <!-- Affichage de Main Harbor -->
 <?php ob_start() ;?>
-
 <!-- POP UP -->
 <section id="popUp" style="display: none;">
   <!-- special -->
@@ -59,7 +58,7 @@
         <ul id="listText"></ul>
     </div>
     <div class="aside buttons">
-
+    <button class="change">Vendre l'or</button>
         <div id="shop">
             <p class="button" id="button-shop">Shop</p>
         </div>
@@ -124,6 +123,7 @@
 
     <!-- MAIN -->
     <div class="main">
+        <img src="assets/svg/main_harbor.svg" style="position: absolute;z-index: -1; margin-top: 150px;width: 60%; margin-left: 10%;">
         <div id="player-boats">
             <ul id="boats"></ul>
         </div>

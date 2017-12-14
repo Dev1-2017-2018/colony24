@@ -1,28 +1,5 @@
 <?php
 
-function getUserScore( $limit, $offset )
-{
-
-    $pdo = getPDO();
-
-    $prepare = $pdo->prepare("
-    SELECT u.pseudo 
-    AS name, us.score AS score 
-    FROM users AS u 
-    JOIN user_score AS us 
-    ON u.id = us.user_id 
-    ORDER  BY score DESC 
-    LIMIT ?,?
-    ");
-
-    $prepare->bindValue(1, $limit, PDO::PARAM_INT);
-    $prepare->bindValue(2, $offset, PDO::PARAM_INT);
-    $prepare->execute();
-
-    return $prepare->fetchAll();
-
-}
-
 function getIdScore()
 {
 

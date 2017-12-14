@@ -44,7 +44,6 @@ export default class ShopEquipement extends Shop
     inventoryPush(parent)
     {
         let equipement = parent.inventory;
-        console.log(parent.inventory);
         // Liaison Inventaire
         let $ivt = $('ul#inventory-model');
 

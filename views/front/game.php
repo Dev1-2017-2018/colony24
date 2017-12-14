@@ -12,10 +12,10 @@
   </div>
   <!-- inventory -->
   <div id="popupInventory" class="modal" style="display: none;">
-        <button id="change"></button>
+        <button id="change">changer gold</button>
       <ul id="inventory-model"></ul>
   </div>
-    <div id="popupEquipment">
+    <div id="popupEquipment" class="modal" style="display: none;">
         <ul id="inventory2-model"></ul>
         <ul id="boatEquipment-model"></ul>
     </div>
@@ -26,8 +26,6 @@
 </section>
 
 <!-- END POP UP -->
-
-
 
 <section class="container">
 

@@ -1,6 +1,7 @@
 export default class RenderBoats{
     constructor() {
         this.name = 'renderBoats';
+        this.rendered = false;
     }
 
     createBoatsButton(boats){
@@ -52,43 +53,65 @@ export default class RenderBoats{
                     $(`li#li${boats[boat].id}`).on('click', `input[type='button']#boatEquipment`, { that: boats[boat]}, function (e) {
                         let context = e.data.that;
                         let parent = context.parent;
-                        let equipement = parent.inventory;
-                        let $eqt = $('ul#inventory2-model');
-                        let dataId = $(this).data("id");
+                        if (parent.renderBoats.rendered == false) {
+                            parent.renderBoats.rendered = true;
+                            let equipement = parent.inventory;
+                            let boatEquipment = context.equipement;
+                            let $eqt = $('ul#inventory2-model');
+                            let dataId = $(this).data("id");
 
-                        document.getElementById('popupEquipment').style.display = "block";
-                        document.getElementById("popUp").style.display = "grid";
+                            document.getElementById('popupEquipment').style.display = "block";
+                            document.getElementById("popUp").style.display = "grid";
 
-                        window.onclick = function(event) {
-                            if (event.target === document.getElementById('background')) {
-                                document.getElementById('popupEquipment').style.display = "none";
-                                document.getElementById("popUp").style.display = "none";
-                                $('ul#inventory2-model li').remove();
+                            window.onclick = function (event) {
+                                if (event.target === document.getElementById('background')) {
+                                    document.getElementById('popupEquipment').style.display = "none";
+                                    document.getElementById("popUp").style.display = "none";
+                                    parent.renderBoats.rendered = false;
+                                    $('ul#inventory2-model li').remove();
+                                    $('ul#boatEquipment-model li').remove();
+                                }
                             }
-                        }
 
-                        // Vérification des Values
-                        for (let value in equipement) {
-                            $eqt.append(`<li id="${value}" data-id="${dataId}"></li>`);
-                            if (equipement.hasOwnProperty(value)) {
-                                if (equipement[value] != "id") {
-                                    let eqtProperty = "";
-                                    for (let carac in equipement[value]) {
-                                        if(equipement[value][carac] != "") {
-                                            if (carac != 'id' && carac != 'Nom'  && carac != 'Prix') {
-                                                eqtProperty += `<br/> ${carac} : ${equipement[value][carac]}`;
+                            // Vérification des Values
+                            for (let value in equipement) {
+                                $eqt.append(`<li id="${value}" data-id="${dataId}"></li>`);
+                                if (equipement.hasOwnProperty(value)) {
+                                    if (equipement[value] != "id") {
+                                        let eqtProperty = "";
+                                        for (let carac in equipement[value]) {
+                                            if (equipement[value][carac] != "" && equipement[value][carac] != null) {
+                                                if (carac != 'id' && carac != 'Nom' && carac != 'Prix') {
+                                                    eqtProperty += `<br/> ${carac} : ${equipement[value][carac]}`;
+                                                }
                                             }
                                         }
+                                        inventoryRender($eqt, value, eqtProperty);
                                     }
-                                    inventoryRender($eqt, value, eqtProperty);
+                                }
+                            }
+
+                            $eqt = $('ul#boatEquipment-model');
+
+                            // Vérification des Values
+                            for (let value in boatEquipment) {
+                                $eqt.append(`<li id="${value}" data-id="${dataId}"></li>`);
+                                if (boatEquipment.hasOwnProperty(value)) {
+                                    if (boatEquipment[value] != "id") {
+                                        let eqtProperty = "";
+                                        for (let carac in boatEquipment[value]) {
+                                            if (boatEquipment[value][carac] != "") {
+                                                if (carac != 'id' && carac != 'Nom' && carac != 'Prix') {
+                                                    eqtProperty += `<br/> ${carac} : ${boatEquipment[value][carac]}`;
+                                                }
+                                            }
+                                        }
+                                        inventoryRender($eqt, value, eqtProperty);
+                                    }
                                 }
                             }
                         }
                     });
-                    // $('.closeButton').on('click', function() {
-                    //   $(this).closest('.modal').css('display','none');
-                    //   $(this).closest('.popUp').css('display','none');
-                    // });
 
                     function inventoryRender($eqt, value, eqtProperty){
                         $eqt.children().last().append(`
@@ -102,7 +125,6 @@ export default class RenderBoats{
             }
             // Click sur un équipement de l'inventaire
             $(`ul#inventory2-model`).on('click', 'li',{ that: boats[0]}, function (e) {
-                console.log(e.data.that);
                 let context = e.data.that;
                 let parent = context.parent;
                 let equipement = parent.inventory;
@@ -131,6 +153,8 @@ export default class RenderBoats{
                     parent.boats[dataId].equipement = {};
                     parent.boats[dataId].equipement[liId] = equipement;
                 }
+
+                parent.actionlist.showInAL(`Vous avez retiré ${liId} de votre inventaire`);
 
                 delete parent.inventory[liId];
                 parent.saveDataJson(parent);
@@ -164,11 +188,12 @@ export default class RenderBoats{
                 }
                 $(this).remove();
 
+                parent.actionlist.showInAL(`Vous avez retiré ${liId} de l'inventaire de votre ${parent.boats[dataId].name}`);
+
                 parent.inventory[liId] = equipement;
                 delete equipements[liId];
                 parent.saveDataJson(parent);
                 inventoryRender($eqt, liId, eqtProperty);
-                // console.log(parent.inventory);
             });
             function inventoryRender($eqt, value, eqtProperty){
                 $eqt.children().last().append(`

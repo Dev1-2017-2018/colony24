@@ -34,7 +34,7 @@ function create_json($user){
                          'Nom' => 'Batterie PWR 4',
                          'Prix' => 600
                      ),
-                     'Foreuse \"DeepBlue\"' => array(
+                     'Foreuse DeepBlue' => array(
                          'Marque' => 'Arnson',
                          'Nom' => 'Foreuse \"DeepBlue\"',
                          'Puissance' => 3,

@@ -70,7 +70,6 @@ function moveBoat () {
     echo json_encode($data);
 }
 
-
 function main ()
 {
     $datas = getShop();

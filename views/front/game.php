@@ -8,11 +8,12 @@
   <span class="closeButton">&times;</span>
   <!-- shop -->
   <div id="popupShop" class="modal" style="display: none;">
-          <ul id="equipement-model">
-          </ul>
+    <ul id="equipement-model">
+    </ul>
   </div>
   <!-- inventory -->
   <div id="popupInventory" class="modal" style="display: none;">
+        <button id="change"></button>
       <ul id="inventory-model"></ul>
   </div>
   <!-- classment -->
@@ -58,7 +59,7 @@
         <ul id="listText"></ul>
     </div>
     <div class="aside buttons">
-    <button class="change"></button>
+
         <div id="shop">
             <p class="button" id="button-shop">Shop</p>
         </div>

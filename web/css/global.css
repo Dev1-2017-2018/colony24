@@ -553,7 +553,7 @@ div#popupBoat div#boatList {
   align-items: flex-start;
 }
 div#popupBoat div#boatList li {
-  height: 230px;
+  height: 247px;
   width: 305px;
   border: 5px solid #f6f7ff;
   text-align: center;
@@ -594,10 +594,30 @@ div#popupBoat div#boatList li div div{
   align-items: center;
   margin: 15px 0 5px 0;
 }
-
+div#popupBoat div#boatList li input[type=number] {
+  width: 94%;
+  padding: 1.5px 0px;
+  border-radius: 12px;
+  font-weight: 400;
+  /* color: #fff; */
+  /* text-shadow: 1.5px 1.5px 1px #00000099; */
+  /* font-size: 1em; */
+  line-height: 0;
+  letter-spacing: .025em;
+  background: #ffffff;
+  cursor: pointer;
+  border: none;
+  border: 2px solid #db587c;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 12px;
+  margin: 10px 0 5px 0;
+}
 div#popupBoat div#boatList li input[type=button] {
   width: 48%;
-  padding: 27.5px 0px;
+  padding: 27.5px 8px;
   border-radius: 12px;
   font-weight: 400;
   color: #fff;
@@ -623,13 +643,15 @@ div#popupBoat div#boatList li input[type=button]:nth-child(2) {
 div#popupEquipment {
   position: fixed;
   width: 550px;
-  height: 405px;
-  margin: 17% auto;
-  left: 0;
-  right: 0;
+  height: 385px;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
   z-index: 1000;
   box-shadow: 0px 0px 20px 6px #0000001f;
-  background: #2d59b9;
+  background: #38579a;
+  border: 5px solid #fff;
+  padding: 30px 10px;
 }
 
 /* display: flex;
@@ -645,13 +667,49 @@ div#popupEquipment > ul{
   height: 50%;
 }
 div#popupEquipment > ul:nth-child(1){
-  border-bottom: 2px solid black;
+  /* border-bottom: 2px solid black; */
 }
 
 div#popupEquipment > ul > li {
-  display: inline-block;
+  /* display: inline-block; */
 }
 
+div#popupEquipment ul {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+div#popupEquipment ul li {
+  color: #fff;;
+  height: 180px;
+  width: 215px;
+  border: 5px solid #f6f7ff;
+  text-align: center;
+  margin: 0 1.42% 5% 1.42%;
+  border-radius: 15px;
+  background: linear-gradient(to bottom, rgb(71, 91, 130) 0%, rgb(77, 90, 145) 49%,#394a6b 100%);
+  box-shadow: 4px 4px 10px 5px #00000014;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: -webkit-grab;
+}
+div#popupEquipment ul li p{
+  text-transform: capitalize;
+  color: #fff;
+  text-shadow: 1.5px 1.5px 1px #00000042;
+  font-size: 1em;
+  line-height: 1.7;
+  letter-spacing: 0.12em;
+  margin-top: 5px;
+}
 
 
 

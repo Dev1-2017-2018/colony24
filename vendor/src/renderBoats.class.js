@@ -116,7 +116,7 @@ export default class RenderBoats{
 
                             // Vérification des Values
                             for (let value in boatEquipment) {
-                                $eqt.append(`<li id="${value}" data-id="${dataId}"></li>`);
+                                $eqt.append(`<li class="hvr-grow-shadow" id="${value}" data-id="${dataId}"></li>`);
                                 if (boatEquipment.hasOwnProperty(value)) {
                                     if (boatEquipment[value] != "id") {
                                         let eqtProperty = "";
@@ -136,7 +136,7 @@ export default class RenderBoats{
 
                     function inventoryRender($eqt, value, eqtProperty){
                         $eqt.children().last().append(`
-                            <p">
+                            <p>
                                 ${value}
                                 ${eqtProperty}
                             </p>

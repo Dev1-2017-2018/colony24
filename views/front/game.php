@@ -6,11 +6,7 @@
 
 
 
-<!-- equipment -->
-<div id="popupEquipment" class="modal zoomIn" style="display: none;">
-    <ul id="inventory2-model"></ul>
-    <ul id="boatEquipment-model"></ul>
-</div>
+
 <!-- POP UP -->
 <section id="popUp" style="display: none;">
   <!-- POP UP FOR ASIDE BUTTON-->
@@ -61,7 +57,11 @@
   <!-- POP UP FOR BOAT -->
   <div id="popupBoat" class="modal flipInX" style="display: none;">
   </div>
-
+  <!-- equipment -->
+  <div id="popupEquipment" class="modal zoomIn" style="display: none;">
+      <ul id="inventory2-model"></ul>
+      <ul id="boatEquipment-model"></ul>
+  </div>
 
 </section>
 

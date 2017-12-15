@@ -27,6 +27,7 @@ function create_json($user){
                  'stockage' => 0,
                  'x' => 0,
                  'y' => 0
+                 
              ),
          ),
          'wallet' => array(

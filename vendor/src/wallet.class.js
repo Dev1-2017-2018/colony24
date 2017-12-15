@@ -24,6 +24,7 @@ export default class Wallet
         if ( this.gold >= goldChange ) {
             this.gold -= goldChange;
             this.ecu += goldChange * this.goldValue;
+            this.ecu = Math.round(this.ecu);
         }
     }
 

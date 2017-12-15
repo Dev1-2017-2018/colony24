@@ -18,21 +18,25 @@ export default class Boat extends Boats
                     Nom: "Foreuse DeepBlue",
                     Puissance: 3,
                     Vitesse: 15,
+                    Type: 'Foreuse'
                 },
                 "Sondeuse S1": {
                     Marque: "Arnson",
                     Nom: "Sondeuse S1",
-                    Puissance: 2,
+                    Type: 'Sondeuse',
+                    Puissance: 2
                 },
                 "Moteur 032 CV": {
                     id: 5,
                     Marque: "Lukslit",
                     Nom: "Moteur 032 CV",
-                    Propulsion: 110,
+                    Type: 'Moteur',
+                    Propulsion: 110
                 },
                 'Batterie PWR 4': {
                     Energie: 300,
                     Marque: 'Arnson',
+                    Type: 'Batterie',
                     Nom: 'Batterie PWR 4'
                 }
             }

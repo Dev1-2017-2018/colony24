@@ -49,8 +49,8 @@ export default class RenderBoats{
                         <div>
                             <p>${boats[boat].name}</p>
                             <p>x:${boats[boat].x} y:${boats[boat].y}</p>
-                            <input type="number" placeholder="x"/>
-                            <input type="number" placeholder="y"/>
+                            <input type="number" placeholder="x" min="0" max="500"/>
+                            <input type="number" placeholder="y" min="0" max="500"/>
                             <div>
                             <input class="hvr-pulse-grow" type="button" id="move" value="Se déplacer"/>
                             <input class="hvr-pulse-grow" type="button" id="boatEquipment" value="Equipement" data-id="${boats[boat].id}"/>
@@ -66,7 +66,6 @@ export default class RenderBoats{
 
                         if (inputX != 0 || inputY != 0){
                             context.movement(inputY, inputX);
-                            $(`#li${context.id} > div > p:nth-child(2)`).html(`x:${inputX} y:${inputY}`);
                         }
                     });
 
@@ -90,6 +89,7 @@ export default class RenderBoats{
                                     document.getElementById('popupBoat').style.display = "none";
                                     document.getElementById('popUp').style.display = "none";
                                     parent.renderBoats.rendered = false;
+                                    $('#boatList').remove();
                                     $('ul#inventory2-model li').remove();
                                     $('ul#boatEquipment-model li').remove();
                                 } else if (event.target === document.getElementById('popupBoat') || event.target === document.getElementById('boatList')){
@@ -162,32 +162,53 @@ export default class RenderBoats{
                 let liId = $(this).attr('id');
                 let dataId = $(this).data('id');
 
+                let boatEquipment = parent.boats[dataId];
+
                 // Vérification des Values
                 equipement = equipement[liId];
+                if (!parent.boats[dataId].equipement){
+                    parent.boats[dataId].equipement = {};
+                }
+                if(!parent.boats[dataId].equipement[liId]) {
 
-                $eqt.append(`<li id="${liId}" data-id="${dataId}"></li>`);
-                let eqtProperty = "";
-                for (let carac in equipement) {
-                    if(equipement[carac] != "") {
-                        if (carac != 'id' && carac != 'Nom'  && carac != 'Prix') {
-                            eqtProperty += `<br/> ${carac} : ${equipement[carac]}`;
+                    $eqt.append( `<li id="${liId}" data-id="${dataId}"></li>` );
+                    let eqtProperty = "";
+                    for ( let carac in equipement ) {
+                        if (carac == "Type" && boatEquipment.equipement){
+                            boatEquipment = boatEquipment.equipement;
+                            for(let value in boatEquipment){
+                                if (boatEquipment[value].Type == equipement.Type){
+                                    console.log(boatEquipment[value]);
+                                    console.log(equipement);
+                                    return parent.actionlist.showInAL(`Vous avez déjà un équipement de ce type sur votre ${parent.boats[dataId].name}`);
+                                }
+                            }
+                        }
+                        if ( equipement[carac] != "" ) {
+                            if ( carac != 'id' && carac != 'Nom' && carac != 'Prix' ) {
+                                eqtProperty += `<br/> ${carac} : ${equipement[carac]}`;
+                            }
                         }
                     }
-                }
-                $(this).remove();
-                if (parent.boats[dataId].equipement) {
-                    parent.boats[dataId].equipement[liId] = equipement;
-                } else{
-                    parent.boats[dataId].equipement = {};
-                    parent.boats[dataId].equipement[liId] = equipement;
-                }
+                    $( this ).remove();
+                    console.log(this);
+                    if ( parent.boats[dataId].equipement ) {
+                        parent.boats[dataId].equipement[liId] = {};
+                        Object.assign(parent.boats[dataId].equipement[liId], equipement);
+                    } else {
+                        parent.boats[dataId].equipement = {};
+                        parent.boats[dataId].equipement[liId] = {};
+                        Object.assign(parent.boats[dataId].equipement[liId], equipement);
+                    }
 
-                parent.actionlist.showInAL(`Vous avez retiré ${liId} de votre inventaire`);
+                    parent.actionlist.showInAL( `Vous avez retiré ${liId} de votre inventaire` );
 
-                delete parent.inventory[liId];
-                parent.saveDataJson(parent);
-                inventoryRender($eqt, liId, eqtProperty);
-                // console.log(parent.inventory);
+                    delete parent.inventory[liId];
+                    parent.saveDataJson( parent );
+                    inventoryRender( $eqt, liId, eqtProperty );
+                } else {
+                    parent.actionlist.showInAL("Votre bateau contient déjà cet équipement");
+                }
             });
 
             // Click sur un équipement équipé à notre bateau
@@ -218,7 +239,8 @@ export default class RenderBoats{
 
                 parent.actionlist.showInAL(`Vous avez retiré ${liId} de l'inventaire de votre ${parent.boats[dataId].name}`);
 
-                parent.inventory[liId] = equipement;
+                parent.inventory[liId] = {};
+                Object.assign(parent.inventory[liId], equipement);
                 delete equipements[liId];
                 parent.saveDataJson(parent);
                 inventoryRender($eqt, liId, eqtProperty);
@@ -226,7 +248,7 @@ export default class RenderBoats{
 
             function inventoryRender($eqt, value, eqtProperty){
                 $eqt.children().last().append(`
-                    <p">
+                    <p>
                         ${value}
                         ${eqtProperty}
                     </p>

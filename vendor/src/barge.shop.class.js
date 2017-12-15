@@ -10,7 +10,7 @@ export default class BuyBarge extends Shop
         this.$el = $("#equipement-model");
 
         // On lance la propriété crée dans le parent shop.class.js
-        this.create_button("une barge");
+        this.create_button("400", "une barge");
 
         // On accroche un événement on click sur la div button-shop en passant en paramètre Boat,
         // le context de la class BuyBoat et l'id du constructor

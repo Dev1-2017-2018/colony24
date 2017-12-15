@@ -29,6 +29,11 @@ export default class Submarine extends Boats
                     Marque: "Lukslit",
                     Nom: "Moteur 032 CV",
                     Propulsion: 110,
+                },
+                'Batterie PWR 4': {
+                    Energie: 300,
+                    Marque: 'Arnson',
+                    Nom: 'Batterie PWR 4'
                 }
             }
         },

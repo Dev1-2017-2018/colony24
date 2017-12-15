@@ -47,7 +47,6 @@ export default class Game
 
         for (let boat in config.boats) {
             if (config.boats.hasOwnProperty(boat)) {
-                console.log(config.boats[boat]);
                 switch (config.boats[boat].name){
                     case "Bateau":
                         this.boats[this.id] = new Boat(config.boats[boat], this.id);
@@ -101,6 +100,19 @@ export default class Game
 
         this.mainHarbor.shop.equipement.inventoryPush(this);
 
+        let ostChill = new Audio("../assets/audio/Ambient1.wav");
+
+        let ostPop = new Audio("../assets/audio/Ambient2.wav");
+
+        ostChill.play();
+
+        ostChill.onended = function () {
+            ostPop.play();
+        };
+
+        ostPop.onended = function () {
+            ostChill.play();
+        };
 
         this.ranking = new Ranking();/*
         this.ranking.test(this.wallet);*/

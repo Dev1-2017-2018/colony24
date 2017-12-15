@@ -16,17 +16,17 @@ export default class Shop
             }
         });
 
-        $('.closeButton').on('click',function(){
-            $(this).closest('.modal').css('display','none');
-            $(this).closest('.popUp').css('display','none');
-        });
+        // $('.closeButton').on('click',function(){
+        //     $(this).closest('.modal').css('display','none');
+        //     $(this).closest('.popUp').css('display','none');
+        // });
 
     }
 
     // propriété appelée dans boats.shop.class.js
-    create_button(name){
+    create_button(text){
         let $el = $('#equipement-model');
-        let button = `<input type='button' data-id='${this.id}' value='Acheter un ${name}'/>`;
+        let button = `<input class="hvr-pulse-grow" type='button' data-id='${this.id}' value='${text}'/>`;
         $el.append(button);
     }
 }

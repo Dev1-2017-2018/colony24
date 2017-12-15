@@ -44,14 +44,13 @@ export default class ShopEquipement extends Shop
     inventoryPush(parent)
     {
         let equipement = parent.inventory;
-        console.log(parent.inventory);
         // Liaison Inventaire
         let $ivt = $('ul#inventory-model');
 
 
         // Vérification des Values
         for (let value in equipement) {
-            $ivt.append('<li><br></li>');
+            $ivt.append('<li class="hvr-grow-shadow "></li>');
             if (equipement.hasOwnProperty(value)) {
                 if (equipement[value] != "id") {
                     let ivtProperty = "";

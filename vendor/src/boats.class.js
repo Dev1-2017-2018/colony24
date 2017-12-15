@@ -162,6 +162,10 @@ export default class Boats
 
         this.parent.wallet.renderWallet();
 
+        $.get( `update?gold=${this.stockage}`).done(function(data){
+            console.log(this);
+        });
+
         this.stockage = 0;
 
         this.parent.actionlist.showInAL(`Vous avez maintenant : ${this.parent.wallet.gold} d'Or`, 1000);

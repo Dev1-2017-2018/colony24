@@ -20,7 +20,7 @@
     </div>
     <!-- inventory -->
     <div id="popupInventory" class="modal fadeInDown" style="display: none;">
-        <button class="hvr-wobble-top" id="change">Change all gold in ecu</button>
+        <button class="hvr-wobble-top" id="change">Changer gold en écus</button>
         <ul id="inventory-model"></ul>
     </div>
     <!-- classment -->

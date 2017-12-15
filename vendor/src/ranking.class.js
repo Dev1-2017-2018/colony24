@@ -2,7 +2,7 @@ export default class Ranking{
     constructor (){
     $('#button-classement').on('click',function(){
       $( "#popupClassement" ).load( "/getClassement", function() {
-        
+
         document.getElementById('popupClassement').style.display = "flex";
         document.getElementById('popUp').style.display = "grid";
 
@@ -16,9 +16,9 @@ export default class Ranking{
       });
     });
 
-        $('.closeButton').on('click',function(){
-            $(this).closest('.modal').css('display','none');
-            $(this).closest('.popUp').css('display','none');
-        });
+        // $('.closeButton').on('click',function(){
+        //     $(this).closest('.modal').css('display','none');
+        //     $(this).closest('.popUp').css('display','none');
+        // });
     }
 }

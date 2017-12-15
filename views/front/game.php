@@ -1,5 +1,12 @@
 <!-- Affichage de Main Harbor -->
 <?php ob_start() ;?>
+
+
+
+
+
+
+
 <!-- POP UP -->
 <section id="popUp" style="display: none;">
   <!-- POP UP FOR ASIDE BUTTON-->
@@ -48,14 +55,13 @@
   </div>
 
   <!-- POP UP FOR BOAT -->
+  <div id="popupBoat" class="modal flipInX" style="display: none;">
+  </div>
   <!-- equipment -->
-  <div id="popupEquipment" class="modal" style="display: none;">
+  <div id="popupEquipment" class="modal zoomIn" style="display: none;">
       <ul id="inventory2-model"></ul>
       <ul id="boatEquipment-model"></ul>
   </div>
-
-
-
 
 </section>
 

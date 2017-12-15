@@ -454,7 +454,7 @@ div#popupInventory ul#inventory-model li {
   justify-content: center;
   align-items: center;
   position: relative;
-    cursor: grab;
+  cursor: -webkit-grab;
 }
 div#popupInventory ul#inventory-model li p{
   text-transform: capitalize;
@@ -536,21 +536,188 @@ div#popupClassement table td{
   line-height: 0;
 }
 
+
+
+/* POP UP BOAT */
+div#popupBoat {
+  padding: 5% 5%;
+}
+
+div#popupBoat div#boatList {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+div#popupBoat div#boatList li {
+  height: 247px;
+  width: 305px;
+  border: 5px solid #f6f7ff;
+  text-align: center;
+  margin: 0 1.42% 5% 1.42%;
+  border-radius: 15px;
+  background: #38579a;
+  box-shadow: 4px 4px 10px 5px #00000014;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+div#popupBoat div#boatList li p:nth-child(1){
+  color: #FC5C7D;
+  text-shadow: 1.5px 1.5px 1px #00000036;
+  font-size: 1.4em;
+  line-height: 1.1;
+  letter-spacing: 0.225em;
+  margin-top: 15px;
+}
+
+div#popupBoat div#boatList li p:nth-child(2){
+  text-transform: capitalize;
+  color: #6A82FB;
+  text-shadow: 1.5px 1.5px 0px #00000042;
+  font-size: 1.03141592653532384626em;
+  line-height: 1.1;
+  letter-spacing: .025em;
+  margin-bottom: 15px;
+}
+
+
+div#popupBoat div#boatList li div div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0 5px 0;
+}
+div#popupBoat div#boatList li input[type=number] {
+  width: 94%;
+  padding: 1.5px 0px;
+  border-radius: 12px;
+  font-weight: 400;
+  /* color: #fff; */
+  /* text-shadow: 1.5px 1.5px 1px #00000099; */
+  /* font-size: 1em; */
+  line-height: 0;
+  letter-spacing: .025em;
+  background: #ffffff;
+  cursor: pointer;
+  border: none;
+  border: 2px solid #db587c;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 12px;
+  margin: 10px 0 5px 0;
+}
+div#popupBoat div#boatList li input[type=button] {
+  width: 48%;
+  padding: 27.5px 8px;
+  border-radius: 12px;
+  font-weight: 400;
+  color: #fff;
+  text-shadow: 1.5px 1.5px 1px #00000099;
+  font-size: 1em;
+  line-height: 0;
+  letter-spacing: .025em;
+  background: #FC466B;
+  cursor: pointer;
+  border: none;
+  border: 4px solid #fff;
+}
+div#popupBoat div#boatList li input[type=button]:nth-child(2) {
+  background: #3F5EFB;
+}
+
+div#popupBoat div#boatList li input[type=button]:nth-child(2) {
+  margin-left: 10px;
+}
+
+
+
+div#popupEquipment {
+  position: fixed;
+  width: 550px;
+  height: 385px;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  z-index: 1000;
+  box-shadow: 0px 0px 20px 6px #0000001f;
+  background: #38579a;
+  border: 5px solid #fff;
+  padding: 30px 10px;
+}
+
+/* display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+align-items: flex-start; */
+
+
+
 /* popup boat equipment*/
 div#popupEquipment > ul{
   height: 50%;
 }
 div#popupEquipment > ul:nth-child(1){
-  border-bottom: 2px solid black;
+  /* border-bottom: 2px solid black; */
 }
 
 div#popupEquipment > ul > li {
-  display: inline-block;
+  /* display: inline-block; */
+}
+
+div#popupEquipment ul {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+div#popupEquipment ul li {
+  color: #fff;;
+  height: 180px;
+  width: 215px;
+  border: 5px solid #f6f7ff;
+  text-align: center;
+  margin: 0 1.42% 5% 1.42%;
+  border-radius: 15px;
+  background: linear-gradient(to bottom, rgb(71, 91, 130) 0%, rgb(77, 90, 145) 49%,#394a6b 100%);
+  box-shadow: 4px 4px 10px 5px #00000014;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: -webkit-grab;
+}
+div#popupEquipment ul li p{
+  text-transform: capitalize;
+  color: #fff;
+  text-shadow: 1.5px 1.5px 1px #00000042;
+  font-size: 1em;
+  line-height: 1.7;
+  letter-spacing: 0.12em;
+  margin-top: 5px;
 }
 
 
+
+
+
+
 /* The Close Button */
-.closeButton {
+/* .closeButton {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
@@ -561,7 +728,7 @@ div#popupEquipment > ul > li {
   color: #000;
   text-decoration: none;
   cursor: pointer;
-}
+} */
 
 
 /********************** MAIN *************************/
@@ -732,21 +899,69 @@ ul#boats{
   animation-iteration-count: 1;
 }
 
+@keyframes flipInX {
+  from {
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  to {
+    transform: perspective(400px);
+  }
+}
+
+.flipInX {
+  animation-name: flipInX;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+}
+
 
 /* Grow Shadow */
 .hvr-grow-shadow {
   display: inline-block;
   vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px transparent;
-  -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
-  -webkit-transition-property: box-shadow, transform;
   transition-property: box-shadow, transform;
 }
 .hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {
   box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
-  -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.zoomIn {
+  animation-name: zoomIn;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
 }

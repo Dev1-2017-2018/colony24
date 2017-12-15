@@ -21,19 +21,40 @@ export default class RenderBoats{
         svgBoat += '</svg>';
         $('#player-boats').prepend(svgBoat);
 
+        // Click sur un bateau
         $('#svgBoats').find('image').on('click',function(){
-            let list = '<div id="boatList" style="background-color: rgba(0,250,125,0.5); position: absolute;width: 90%;height: 90%;left: 5%;top: 5%"><h1 id="echapBoat" style="position:absolute;right:2%;top:0px;">X</h1></div>';
-            $('body').append(list);
+            // DISPLAY THE POP UP
+            $('#popupBoat').append('<div id="boatList"></div>');
+            document.getElementById('popupBoat').style.display = "block";
+            document.getElementById('popUp').style.display = "grid";
+
+            // CLOSE THE POP UP
+            window.onclick = function(event) {
+                if (event.target === document.getElementById('background'))
+                {
+                  document.getElementById('popupBoat').style.display = 'none';
+                  document.getElementById('popUp').style.display = 'none';
+                  $('#boatList').remove();
+                }
+                if (event.target === document.getElementById('closeEquipment'))
+                {
+                  $('#popupEquipment').remove();
+                }
+            }
+
             let id = this.id;
             for (let boat in boats) {
                 if(boats[boat].name == id){
-                    $('#boatList').append(`<li id="li${boats[boat].id}" style="display: inline-block">
+                    $('#boatList').append(`<li id="li${boats[boat].id}">
                         <div>
-                            <p style="width: 30%; margin: 0 auto">${boats[boat].name} x:${boats[boat].x} y:${boats[boat].y}</p>
-                            <input style="width: 45%; margin: 0 auto" type="number" placeholder="x"/>
-                            <input style="width: 45%; margin: 0 auto" type="number" placeholder="y"/>
-                            <input type="button" id="move" value="Se déplacer"/>
-                            <input type="button" id="boatEquipment" value="Equipement" data-id="${boats[boat].id}"/>
+                            <p>${boats[boat].name}</p>
+                            <p>x:${boats[boat].x} y:${boats[boat].y}</p>
+                            <input type="number" placeholder="x"/>
+                            <input type="number" placeholder="y"/>
+                            <div>
+                            <input class="hvr-pulse-grow" type="button" id="move" value="Se déplacer"/>
+                            <input class="hvr-pulse-grow" type="button" id="boatEquipment" value="Equipement" data-id="${boats[boat].id}"/>
+                            </div>
                         </div>
                     </li>`);
                     $(`li#li${boats[boat].id}`).on('click', `input[type='button']#move`, { that: boats[boat]}, function (e) {
@@ -95,7 +116,7 @@ export default class RenderBoats{
 
                             // Vérification des Values
                             for (let value in boatEquipment) {
-                                $eqt.append(`<li id="${value}" data-id="${dataId}"></li>`);
+                                $eqt.append(`<li class="hvr-grow-shadow" id="${value}" data-id="${dataId}"></li>`);
                                 if (boatEquipment.hasOwnProperty(value)) {
                                     if (boatEquipment[value] != "id") {
                                         let eqtProperty = "";
@@ -115,7 +136,7 @@ export default class RenderBoats{
 
                     function inventoryRender($eqt, value, eqtProperty){
                         $eqt.children().last().append(`
-                            <p style="color:black;">
+                            <p>
                                 ${value}
                                 ${eqtProperty}
                             </p>
@@ -123,6 +144,7 @@ export default class RenderBoats{
                     }
                 }
             }
+
             // Click sur un équipement de l'inventaire
             $(`ul#inventory2-model`).on('click', 'li',{ that: boats[0]}, function (e) {
                 let context = e.data.that;
@@ -195,18 +217,19 @@ export default class RenderBoats{
                 parent.saveDataJson(parent);
                 inventoryRender($eqt, liId, eqtProperty);
             });
+
             function inventoryRender($eqt, value, eqtProperty){
                 $eqt.children().last().append(`
-                    <p style="color:black;">
+                    <p">
                         ${value}
                         ${eqtProperty}
                     </p>
                 `);
             }
 
-            $('#echapBoat').on('click', function(){
-                this.closest('div').remove();
-            })
+
         });
+
+      // end function
     }
 }

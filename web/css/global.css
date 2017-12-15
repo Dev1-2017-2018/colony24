@@ -454,7 +454,7 @@ div#popupInventory ul#inventory-model li {
   justify-content: center;
   align-items: center;
   position: relative;
-    cursor: grab;
+  cursor: -webkit-grab;
 }
 div#popupInventory ul#inventory-model li p{
   text-transform: capitalize;

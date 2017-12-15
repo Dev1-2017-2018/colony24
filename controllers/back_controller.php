@@ -44,8 +44,6 @@ function moveBoat () {
     $x = $_GET['x'];
     $y = $_GET['y'];
 
-    echo $x, $y;
-
     $im = imagecreatefrompng("../databases/map.png");
     $rgb = imagecolorat($im, $x, $y);
     $r = ($rgb >> 16) & 0xFF;

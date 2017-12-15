@@ -8,23 +8,23 @@ export default class RenderBoats{
         if ($('#svgBoats').length) {$('#svgBoats').remove()}
         let boatType = [];
 
-        let boatCoordinate = {x:window.innerWidth/100,y:window.innerHeight/100};
+        let boatCoordinate = {x:window.innerWidth/120,y:window.innerHeight/140};
         let boatSVGXY = [{x:boatCoordinate.x*27,y:boatCoordinate.y*75.5},{x:boatCoordinate.x*34.5,y:boatCoordinate.y*81},{x:boatCoordinate.x*41,y:boatCoordinate.y*80},{x:boatCoordinate.x*48,y:boatCoordinate.y*77}]
-        let svgBoat = '<svg width="100%" height="'+window.innerHeight+'" id="svgBoats"">';
+        let svgBoat = '';
+            //'<svg width="100%" height="'+window.innerHeight+'" id="svgBoats"">';
 
         for (let boat in boats) {
             if (boatType.indexOf(boats[boat].name) == -1) {
                 boatType.push(boats[boat].name);
-                svgBoat += '<image x="'+boatSVGXY[boatType.length-1].x+'px" y="'+boatSVGXY[boatType.length-1].y+'px" width="9%" height="9%" xlink:href="assets/svg/'+boats[boat].name+'.svg";" id="'+boats[boat].name+'"/>';
+                svgBoat += `<img id="${boats[boat].name}" class="iconeBoats" src="assets/svg/${boats[boat].name}.svg" style="left:${boatSVGXY[boatType.length-1].x}px; top:${boatSVGXY[boatType.length-1].y}px"/>`;
             }
         }
-        svgBoat += '</svg>';
-        $('#player-boats').prepend(svgBoat);
+        $('#player-boats').html(svgBoat);
 
         // Click sur un bateau
-        $('#svgBoats').find('image').on('click',function(){
+        $('#player-boats').on('click', 'img',function(){
             // DISPLAY THE POP UP
-            $('#popupBoat').append('<div id="boatList"></div>');
+            $('#popupBoat').html('<div id="boatList"></div>');
             document.getElementById('popupBoat').style.display = "block";
             document.getElementById('popUp').style.display = "grid";
 
@@ -34,7 +34,6 @@ export default class RenderBoats{
                 {
                     document.getElementById('popupBoat').style.display = 'none';
                     document.getElementById('popUp').style.display = 'none';
-                    $('#boatList').remove();
                 }
                 if (event.target === document.getElementById('closeEquipment'))
                 {
@@ -42,9 +41,10 @@ export default class RenderBoats{
                 }
             }
 
-            let id = this.id;
+            let name = this.id;
+            console.log(this);
             for (let boat in boats) {
-                if(boats[boat].name == id){
+                if(boats[boat].name == name){
                     $('#boatList').append(`<li id="li${boats[boat].id}">
                         <div>
                             <p>${boats[boat].name}</p>
@@ -151,8 +151,10 @@ export default class RenderBoats{
                 }
             }
 
+            let firstBoat = boats[Object.keys(boats)[0]];
+
             // Click sur un équipement de l'inventaire
-            $(`ul#inventory2-model`).on('click', 'li',{ that: boats[0]}, function (e) {
+            $(`ul#inventory2-model`).on('click', 'li',{ that: firstBoat}, function (e) {
                 let context = e.data.that;
                 let parent = context.parent;
                 let equipement = parent.inventory;
@@ -212,11 +214,10 @@ export default class RenderBoats{
             });
 
             // Click sur un équipement équipé à notre bateau
-            $(`ul#boatEquipment-model`).on('click', 'li',{ that: boats[0]}, function (e) {
+            $(`ul#boatEquipment-model`).on('click', 'li',{ that: firstBoat}, function (e) {
 
                 let liId = $(this).attr('id');
                 let dataId = $(this).data('id');
-
                 let context = e.data.that;
                 let parent = context.parent;
                 let equipements = parent.boats[dataId].equipement;

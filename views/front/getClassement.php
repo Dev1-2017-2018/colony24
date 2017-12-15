@@ -1,8 +1,8 @@
 <table>
         <thead>
           <tr>
-              <th>Rank</th>
-              <th>Name</th>
+              <th>Rang</th>
+              <th>Nom</th>
               <th>Score</th>
           </tr>
         </thead>

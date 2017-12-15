@@ -23,7 +23,7 @@ function create_json($user){
                  'name' => "Bateau",
                  'structure' => 100,
                  'blindage' => 50,
-                 'capacite' => 50,
+                 'capacite' => 300,
                  'stockage' => 0,
                  'x' => 0,
                  'y' => 0,
@@ -32,25 +32,29 @@ function create_json($user){
                          'Energie' => 300,
                          'Marque' => 'Arnson',
                          'Nom' => 'Batterie PWR 4',
+                         'Type' => 'Batterie',
                          'Prix' => 600
                      ),
                      'Foreuse DeepBlue' => array(
                          'Marque' => 'Arnson',
-                         'Nom' => 'Foreuse \"DeepBlue\"',
+                         'Nom' => 'Foreuse DeepBlue',
                          'Puissance' => 3,
                          'Vitesse' => 15,
+                         'Type' => 'Foreuse',
                          'Prix' => 1500
                      ),
                      'Sondeuse S1' => array(
                          'Marque' => 'Arnson',
                          'Nom' => 'Sondeuse S1',
                          'Puissance' => 2,
+                         'Type' => 'Sondeuse',
                          'Prix' => 100
                      ),
                      'Moteur 032 CV' => array(
                          'Marque' => 'Lukslit',
                          'Nom' => 'Moteur 032 CV',
                          'Propulsion' => 110,
+                         'Type' => 'Moteur',
                          'Prix' => 400
                      )
                  )

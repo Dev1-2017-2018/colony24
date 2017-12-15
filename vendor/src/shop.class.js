@@ -16,10 +16,10 @@ export default class Shop
             }
         });
 
-        $('.closeButton').on('click',function(){
-            $(this).closest('.modal').css('display','none');
-            $(this).closest('.popUp').css('display','none');
-        });
+        // $('.closeButton').on('click',function(){
+        //     $(this).closest('.modal').css('display','none');
+        //     $(this).closest('.popUp').css('display','none');
+        // });
 
     }
 

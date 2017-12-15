@@ -711,7 +711,12 @@ div#popupEquipment ul li p{
   margin-top: 5px;
 }
 
-
+img.iconeBoats{
+  width: 9%;
+  height: 9%;
+  display: block;
+  position : relative;
+}
 
 
 

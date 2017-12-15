@@ -22,7 +22,6 @@ export default class Boats
 
     movement(positionY = 0, positionX = 0) {
 
-
         function foo(callback, that){
             $.getJSON( `moveboat?x=${positionX}&y=${positionY}`).done(function (data) {
                 callback(data, that);
@@ -33,6 +32,7 @@ export default class Boats
         foo(function(data, that){
             let x = data.x;
             let y = data.y;
+
             let success = data.success;
 
             if(x >= 0 && y >= 0 && success === 1) {
@@ -47,14 +47,12 @@ export default class Boats
                     if (that.equipement[n].hasOwnProperty('Energie')) {
                         if (that.equipement[n]['Energie'] > 10) {
                             that.equipement[n]['Energie'] -= 10;
-                            $(`#li${that.id} > div > p`).html(`${that.name} x:${x} y:${y}`);
                             console.log("Votre bateau est maintenant en " + x + " - " + y);
                         } else if (that.equipement[n]['Energie'] < 10) {
                             return console.log("Vous n'avez pas assez de batterie");
                         }
-                    } else { console.log('Moteur non trouvé :/'); }
+                    } else { console.log('Batterie non trouvé :/'); }
                 }
-                console.log(that.equipement);
                 that.goldMining(data.gold);
             }else{
                 return console.log("Une île se trouve à cette position");
@@ -146,7 +144,7 @@ export default class Boats
             }
         }else {
 
-            this.parent.actionlist.showInAL(`Il n'y a pas d'Or en : ${this.y} - ${this.x}`);
+            this.parent.actionlist.showInAL(`Il n'y a pas d'Or en : ${this.x} - ${this.y}`);
             this.parent.saveDataJson(this.parent);
         }
     }
@@ -154,7 +152,7 @@ export default class Boats
 
         this.y = 0;
         this.x = 0;
-        $(`#li${this.id} > div > p`).html(`${this.name} x:${this.x} y:${this.y}`);
+        $(`#li${this.id} > div > p:nth-child(2)`).html(`x:${this.x} y:${this.y}`);
 
         this.parent.actionlist.showInAL(`Votre ${this.name} est retourné à Main Harbor pour vider son stockage `, 0);
 

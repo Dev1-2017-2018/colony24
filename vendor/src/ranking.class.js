@@ -15,10 +15,5 @@ export default class Ranking{
         }
       });
     });
-
-        // $('.closeButton').on('click',function(){
-        //     $(this).closest('.modal').css('display','none');
-        //     $(this).closest('.popUp').css('display','none');
-        // });
     }
 }

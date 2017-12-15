@@ -32,13 +32,13 @@ export default class RenderBoats{
             window.onclick = function(event) {
                 if (event.target === document.getElementById('background'))
                 {
-                  document.getElementById('popupBoat').style.display = 'none';
-                  document.getElementById('popUp').style.display = 'none';
-                  $('#boatList').remove();
+                    document.getElementById('popupBoat').style.display = 'none';
+                    document.getElementById('popUp').style.display = 'none';
+                    $('#boatList').remove();
                 }
                 if (event.target === document.getElementById('closeEquipment'))
                 {
-                  $('#popupEquipment').remove();
+                    $('#popupEquipment').remove();
                 }
             }
 
@@ -61,12 +61,12 @@ export default class RenderBoats{
 
                         let context = e.data.that;
 
-                        let inputX = $(`#li${context.id} > div > input:nth-child(2)`).val();
-                        let inputY = $(`#li${context.id} > div > input:nth-child(3)`).val();
+                        let inputX = $(`#li${context.id} > div > input:nth-child(3)`).val();
+                        let inputY = $(`#li${context.id} > div > input:nth-child(4)`).val();
 
                         if (inputX != 0 || inputY != 0){
                             context.movement(inputY, inputX);
-                            $(`#li${context.id} > div > p`).html(`${context.name} x:${context.x} y:${context.y}`);
+                            $(`#li${context.id} > div > p:nth-child(2)`).html(`x:${inputX} y:${inputY}`);
                         }
                     });
 
@@ -87,7 +87,13 @@ export default class RenderBoats{
                             window.onclick = function (event) {
                                 if (event.target === document.getElementById('background')) {
                                     document.getElementById('popupEquipment').style.display = "none";
-                                    document.getElementById("popUp").style.display = "none";
+                                    document.getElementById('popupBoat').style.display = "none";
+                                    document.getElementById('popUp').style.display = "none";
+                                    parent.renderBoats.rendered = false;
+                                    $('ul#inventory2-model li').remove();
+                                    $('ul#boatEquipment-model li').remove();
+                                } else if (event.target === document.getElementById('popupBoat') || event.target === document.getElementById('boatList')){
+                                    document.getElementById('popupEquipment').style.display = "none";
                                     parent.renderBoats.rendered = false;
                                     $('ul#inventory2-model li').remove();
                                     $('ul#boatEquipment-model li').remove();
@@ -226,7 +232,6 @@ export default class RenderBoats{
                     </p>
                 `);
             }
-
 
         });
 

@@ -15,12 +15,6 @@ export default class Shop
                 }
             }
         });
-
-        // $('.closeButton').on('click',function(){
-        //     $(this).closest('.modal').css('display','none');
-        //     $(this).closest('.popUp').css('display','none');
-        // });
-
     }
 
     // propriété appelée dans boats.shop.class.js
